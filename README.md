@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collectible Code System</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -396,8 +397,8 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign In</h2>
                     <div class="space-y-4">
                         <div>
-                            <label for="loginUsername" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
-                            <input type="text" id="loginUsername" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-gray-700 dark:text-white text-base focus:outline-none focus:ring-primary-500 focus:border-primary-500">
+                            <label for="loginEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" id="loginEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-gray-700 dark:text-white text-base focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                         </div>
                         <div>
                             <label for="loginPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
@@ -407,6 +408,9 @@
                     </div>
                     <div class="mt-4 text-center text-sm">
                         <a href="#" id="showRegisterForm" class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">Don't have an account? Register</a>
+                    </div>
+                    <div class="mt-4 text-center text-sm">
+                        <p class="text-gray-500 dark:text-gray-400">Demo: admin@example.com / admin123</p>
                     </div>
                 </div>
                 
@@ -464,18 +468,18 @@
                         </button>
                         <div class="ml-3 relative">
                             <div>
-                                <button id="userMenuButton" class="bg-white dark:bg-gray-700 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                <button id="userMenuButton" class="bg-white dark:bg-gray-700 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800">
                                     <span class="sr-only">Open user menu</span>
                                     <div class="h-8 w-8 rounded-full bg-primary-200 dark:bg-primary-800 flex items-center justify-center">
-                                        <span id="userInitial" class="text-primary-700 dark:text-primary-300 font-medium">J</span>
+                                        <span id="userInitial" class="text-primary-700 dark:text-primary-300 font-medium">U</span>
                                     </div>
                                 </button>
                             </div>
-                            <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                <a href="#" id="menu-profile" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Your Profile</a>
-                                <a href="#" id="menu-settings" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Settings</a>
-                                <a href="#" id="menu-admin-panel" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Admin Panel</a>
-                                <a href="#" id="menu-sign-out" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Sign out</a>
+                            <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-10">
+                                <a href="#" id="menu-profile" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Your Profile</a>
+                                <a href="#" id="menu-settings" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
+                                <a href="#" id="menu-admin-panel" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Admin Panel</a>
+                                <a href="#" id="menu-sign-out" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Sign out</a>
                             </div>
                         </div>
                     </div>
@@ -502,12 +506,12 @@
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
                             <div class="h-10 w-10 rounded-full bg-primary-200 dark:bg-primary-800 flex items-center justify-center">
-                                <span id="mobileUserInitial" class="text-primary-700 dark:text-primary-300 font-medium">J</span>
+                                <span id="mobileUserInitial" class="text-primary-700 dark:text-primary-300 font-medium">U</span>
                             </div>
                         </div>
                         <div class="ml-3">
-                            <div id="mobileUsername" class="text-base font-medium text-gray-800 dark:text-white">John Doe</div>
-                            <div id="mobileUserEmail" class="text-sm font-medium text-gray-500 dark:text-gray-400">johndoe@example.com</div>
+                            <div id="mobileUsername" class="text-base font-medium text-gray-800 dark:text-white">Loading...</div>
+                            <div id="mobileUserEmail" class="text-sm font-medium text-gray-500 dark:text-gray-400">Loading...</div>
                         </div>
                         <button id="mobileDarkModeToggle" class="ml-auto bg-gray-100 dark:bg-gray-700 flex-shrink-0 p-1 rounded-full text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -521,7 +525,7 @@
                     <div class="mt-3 space-y-1">
                         <a href="#" id="mobile-menu-profile" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Your Profile</a>
                         <a href="#" id="mobile-menu-settings" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
-                        <a href="#" id="mobile-menu-admin-panel" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Admin Panel</a>
+                        <a href="#" id="mobile-menu-admin-panel" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hidden">Admin Panel</a>
                         <a href="#" id="mobile-menu-sign-out" class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Sign out</a>
                     </div>
                 </div>
@@ -598,7 +602,7 @@
                         <h2 class="text-lg font-medium text-gray-900 dark:text-white">Recent Activity</h2>
                         <div class="mt-2 bg-white dark:bg-gray-800 shadow overflow-hidden rounded-lg">
                             <ul id="activityFeed" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <li class="px-4 py-4 flex text-gray-500 dark:text-gray-400 italic">No recent activity to display</li>
+                                <li class="px-4 py-4 flex text-gray-500 dark:text-gray-400 italic">Loading activities...</li>
                             </ul>
                         </div>
                     </div>
@@ -607,7 +611,7 @@
                         <h2 class="text-lg font-medium text-gray-900 dark:text-white">Featured Collectibles</h2>
                         <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             <div id="featuredCollectibles" class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
-                                No featured collectibles to display
+                                Loading featured collectibles...
                             </div>
                         </div>
                     </div>
@@ -680,7 +684,7 @@
 
                         <div id="collectionGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                             <div class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
-                                Your collection is empty. Redeem a code to get started!
+                                Loading your collection...
                             </div>
                         </div>
                     </div>
@@ -726,7 +730,7 @@
                                     </thead>
                                     <tbody id="redemptionHistory" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                         <tr>
-                                            <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">No redemption history</td>
+                                            <td colspan="3" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">Loading redemption history...</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -772,7 +776,7 @@
                                         </thead>
                                         <tbody id="codesTable" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                             <tr>
-                                                <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">No codes created yet</td>
+                                                <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">Loading codes...</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -801,7 +805,7 @@
                                         </thead>
                                         <tbody id="usersTable" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                             <tr>
-                                                <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">No users found</td>
+                                                <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">Loading users...</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -824,7 +828,7 @@
                                 <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Personal details and preferences</p>
                             </div>
                             <div class="h-16 w-16 rounded-full bg-primary-200 dark:bg-primary-800 flex items-center justify-center">
-                                <span id="profileUserInitial" class="text-primary-700 dark:text-primary-300 text-2xl font-medium">J</span>
+                                <span id="profileUserInitial" class="text-primary-700 dark:text-primary-300 text-2xl font-medium">U</span>
                             </div>
                         </div>
                         <div class="border-t border-gray-200 dark:border-gray-700">
@@ -919,31 +923,6 @@
 
                     <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
                         <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Notification Preferences</h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Decide what notifications you want to receive</p>
-                        </div>
-                        <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:px-6">
-                            <div class="space-y-6">
-                                <div class="flex items-center justify-between">
-                                    <span class="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">New Collectibles Available</span>
-                                    <button id="notifyCollectiblesToggle" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                        <span class="sr-only">Get notifications about new collectibles</span>
-                                        <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white dark:bg-gray-300 shadow transform ring-0 transition ease-in-out duration-200"></span>
-                                    </button>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">Code Expiration Reminders</span>
-                                    <button id="notifyExpirationToggle" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                        <span class="sr-only">Get reminders about expiring codes</span>
-                                        <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white dark:bg-gray-300 shadow transform ring-0 transition ease-in-out duration-200"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
                             <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Data Management</h3>
                             <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Manage your account data</p>
                         </div>
@@ -966,7 +945,7 @@
             </div>
         </main>
 
-        <!-- Modals -->
+        <!-- Modal Components -->
         <div id="createCodeModal" class="fixed inset-0 overflow-y-auto hidden z-50">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -1138,7 +1117,37 @@
     </div>
 
     <script>
-        // Emoji categories and options for collectibles
+        // ===============================
+        // Supabase Configuration
+        // ===============================
+        
+        // REPLACE THESE WITH YOUR SUPABASE PROJECT CREDENTIALS
+        const SUPABASE_URL = 'https://brkljzrjhznxtrdeshme.supabase.coL'; // Get from Supabase dashboard > Settings > API
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJya2xqenJqaHpueHRyZGVzaG1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkyNzgzNzMsImV4cCI6MjA2NDg1NDM3M30.RP5i8T8iqiiUwTMOCWJa8_IhfseK-_weoBaW1qzl_2U'; // Get from Supabase dashboard > Settings > API
+        
+        // Initialize Supabase client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // ===============================
+        // Application State
+        // ===============================
+        
+        const appState = {
+            currentUser: null,
+            profile: null,
+            collectibles: [],
+            codes: [],
+            activities: [],
+            redemptionHistory: [],
+            profiles: [],
+            isAdmin: false,
+            currentView: 'dashboard'
+        };
+
+        // ===============================
+        // Emoji System (unchanged)
+        // ===============================
+        
         const emojiCategories = {
             "Weapons & Combat": [
                 { name: "Sword", emoji: "⚔️", value: "sword" },
@@ -1171,6 +1180,7 @@
                 { name: "Boots", emoji: "👢", value: "boots" },
                 { name: "Gloves", emoji: "🧤", value: "gloves" },
                 { name: "Pendant", emoji: "📿", value: "pendant" },
+                { name: "Smiley", emoji: "😊", value: "smiley" },
                 { name: "Amulet", emoji: "🧿", value: "amulet" }
             ],
             "Artifacts & Items": [
@@ -1178,7 +1188,7 @@
                 { name: "Treasure Chest", emoji: "🧰", value: "chest" },
                 { name: "Key", emoji: "🔑", value: "key" },
                 { name: "Hourglass", emoji: "⌛", value: "hourglass" },
-                { name: "Compass", emoji: "", value: "compass" },
+                { name: "Compass", emoji: "🧭", value: "compass" },
                 { name: "Torch", emoji: "🔦", value: "torch" }
             ],
             "Creatures & Mythical": [
@@ -1207,149 +1217,18 @@
             ]
         };
         
-        // Helper function to get emoji by value
         function getEmojiByValue(value) {
             for (const category in emojiCategories) {
                 const emoji = emojiCategories[category].find(e => e.value === value);
                 if (emoji) return emoji.emoji;
             }
-            return "❓"; // Default fallback emoji
+            return "❓";
         }
+
+        // ===============================
+        // Utility Functions
+        // ===============================
         
-        // Function to render emoji as HTML
-        function renderEmoji(value, size = 'text-3xl') {
-            return `<span class="${size} emoji-icon">${getEmojiByValue(value)}</span>`;
-        }
-
-        // LocalStorage Management
-        const STORAGE_KEYS = {
-            USERS: 'collectibles_users',
-            CODES: 'collectibles_codes',
-            COLLECTIBLES: 'collectibles_items',
-            ACTIVITIES: 'collectibles_activities',
-            REDEMPTION_HISTORY: 'collectibles_redemptions',
-            CURRENT_USER: 'collectibles_current_user',
-            SETTINGS: 'collectibles_settings',
-            THEME: 'collectibles_theme'
-        };
-
-        function saveToLocalStorage(key, data) {
-            try {
-                localStorage.setItem(key, JSON.stringify(data));
-                return true;
-            } catch (error) {
-                console.error(`Error saving to localStorage (${key}):`, error);
-                return false;
-            }
-        }
-
-        function loadFromLocalStorage(key, defaultValue = null) {
-            try {
-                const data = localStorage.getItem(key);
-                return data ? JSON.parse(data) : defaultValue;
-            } catch (error) {
-                console.error(`Error loading from localStorage (${key}):`, error);
-                return defaultValue;
-            }
-        }
-
-        function saveAppState() {
-            saveToLocalStorage(STORAGE_KEYS.USERS, appState.users);
-            saveToLocalStorage(STORAGE_KEYS.CODES, appState.codes);
-            saveToLocalStorage(STORAGE_KEYS.COLLECTIBLES, appState.collectibles);
-            saveToLocalStorage(STORAGE_KEYS.ACTIVITIES, appState.activities);
-            saveToLocalStorage(STORAGE_KEYS.REDEMPTION_HISTORY, appState.redemptionHistory);
-            
-            // Save current user ID instead of the full user object
-            if (appState.currentUser) {
-                saveToLocalStorage(STORAGE_KEYS.CURRENT_USER, appState.currentUser.id);
-            }
-        }
-
-        function loadAppState() {
-            appState.users = loadFromLocalStorage(STORAGE_KEYS.USERS, []);
-            appState.codes = loadFromLocalStorage(STORAGE_KEYS.CODES, []);
-            appState.collectibles = loadFromLocalStorage(STORAGE_KEYS.COLLECTIBLES, []);
-            appState.activities = loadFromLocalStorage(STORAGE_KEYS.ACTIVITIES, []);
-            appState.redemptionHistory = loadFromLocalStorage(STORAGE_KEYS.REDEMPTION_HISTORY, []);
-
-            // Load current user
-            const currentUserId = loadFromLocalStorage(STORAGE_KEYS.CURRENT_USER);
-            if (currentUserId) {
-                appState.currentUser = appState.users.find(u => u.id === currentUserId);
-                if (appState.currentUser) {
-                    appState.isAdmin = appState.currentUser.role === 'admin';
-                }
-            }
-
-            // Load settings
-            const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {
-                darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
-                animations: true,
-                notifyNewCollectibles: true,
-                notifyExpirations: true
-            });
-
-            // Apply settings
-            if (settings.darkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-
-            return appState.users.length > 0;
-        }
-
-        function clearAllData() {
-            Object.values(STORAGE_KEYS).forEach(key => {
-                localStorage.removeItem(key);
-            });
-            
-            // Reset application state
-            appState.currentUser = null;
-            appState.users = [];
-            appState.codes = [];
-            appState.collectibles = [];
-            appState.activities = [];
-            appState.redemptionHistory = [];
-            appState.isAdmin = false;
-        }
-
-        // Initialize dark mode
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-
-        // Main application state
-        const appState = {
-            currentUser: null,
-            users: [],
-            codes: [],
-            collectibles: [],
-            currentView: 'dashboard',
-            isAdmin: false,
-            activities: [],
-            redemptionHistory: [],
-            settings: {
-                darkMode: false,
-                animations: true,
-                notifyNewCollectibles: true,
-                notifyExpirationReminders: true
-            }
-        };
-
-        // Utility functions
-        function generateUniqueId() {
-            return Date.now().toString(36) + Math.random().toString(36).substring(2);
-        }
-
         function formatDate(date) {
             return new Date(date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -1359,7 +1238,7 @@
         }
 
         function showNotification(message, type = 'success') {
-            const id = generateUniqueId();
+            const id = Date.now().toString();
             const colors = type === 'success' ? 
                 'bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-100' : 
                 'bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
@@ -1399,12 +1278,10 @@
             const container = document.getElementById('notificationContainer');
             container.appendChild(notification);
             
-            // Animate in
             setTimeout(() => {
                 notification.classList.remove('translate-y-2', 'opacity-0');
             }, 10);
             
-            // Remove after duration
             setTimeout(() => {
                 notification.classList.add('translate-y-2', 'opacity-0');
                 setTimeout(() => {
@@ -1412,7 +1289,6 @@
                 }, 300);
             }, 5000);
             
-            // Handle close button
             notification.querySelector('button').addEventListener('click', () => {
                 notification.classList.add('translate-y-2', 'opacity-0');
                 setTimeout(() => {
@@ -1446,301 +1322,340 @@
             }, { once: true });
         }
 
-        // Mock data generation
-        function generateMockData() {
-            // Create sample users
-            appState.users = [
-                {
-                    id: 'user1',
-                    username: 'admin',
-                    email: 'admin@example.com',
-                    password: 'admin123',
-                    role: 'admin',
-                    createdAt: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString()
-                },
-                {
-                    id: 'user2',
-                    username: 'user',
-                    email: 'user@example.com',
-                    password: 'user123',
-                    role: 'user',
-                    createdAt: new Date(new Date().setDate(new Date().getDate() - 15)).toISOString()
-                }
-            ];
+        // ===============================
+        // Database Functions
+        // ===============================
+        
+        async function loadUserProfile() {
+            if (!appState.currentUser) return null;
             
-            // Create sample redemption codes
-            appState.codes = [
-                {
-                    id: 'code1',
-                    code: 'WELCOME2023',
-                    itemName: 'Starter Shield',
-                    itemGraphic: 'shield',
-                    rarity: 'common',
-                    expirationDate: new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0],
-                    isActive: true,
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'code2',
-                    code: 'EPIC-SWORD',
-                    itemName: 'Dragon Slayer',
-                    itemGraphic: 'sword',
-                    rarity: 'epic',
-                    expirationDate: new Date(new Date().setDate(new Date().getDate() + 15)).toISOString().split('T')[0],
-                    isActive: true,
-                    createdAt: new Date().toISOString()
-                },
-                {
-                    id: 'code3',
-                    code: 'LEGENDARY-CROWN',
-                    itemName: 'Crown of Kings',
-                    itemGraphic: 'crown',
-                    rarity: 'legendary',
-                    expirationDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString().split('T')[0],
-                    isActive: true,
-                    createdAt: new Date().toISOString()
-                }
-            ];
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', appState.currentUser.id)
+                .single();
             
-            // Create sample collectibles for the demo user
-            appState.collectibles = [
-                {
-                    id: 'collectible1',
-                    userId: 'user2',
-                    itemName: 'Magic Wand',
-                    itemGraphic: 'wand',
-                    rarity: 'rare',
-                    acquiredDate: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString(),
-                    codeId: 'code-old'
-                },
-                {
-                    id: 'collectible2',
-                    userId: 'user2',
-                    itemName: 'Health Potion',
-                    itemGraphic: 'potion',
-                    rarity: 'uncommon',
-                    acquiredDate: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(),
-                    codeId: 'code-old2'
-                },
-                {
-                    id: 'collectible3',
-                    userId: 'user2',
-                    itemName: 'Ancient Scroll',
-                    itemGraphic: 'scroll',
-                    rarity: 'epic',
-                    acquiredDate: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(),
-                    codeId: 'code-old3'
-                }
-            ];
-            
-            // Create sample activities
-            appState.activities = [
-                {
-                    id: 'activity1',
-                    userId: 'user2',
-                    action: 'redeemed',
-                    itemName: 'Magic Wand',
-                    itemRarity: 'rare',
-                    date: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString()
-                },
-                {
-                    id: 'activity2',
-                    userId: 'user2',
-                    action: 'redeemed',
-                    itemName: 'Health Potion',
-                    itemRarity: 'uncommon',
-                    date: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString()
-                },
-                {
-                    id: 'activity3',
-                    userId: 'user2',
-                    action: 'redeemed',
-                    itemName: 'Ancient Scroll',
-                    itemRarity: 'epic',
-                    date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString()
-                }
-            ];
-            
-            // Create redemption history
-            appState.redemptionHistory = [
-                {
-                    id: 'redeem1',
-                    userId: 'user2',
-                    code: 'MAGIC-WAND',
-                    items: ['Magic Wand'],
-                    rarity: 'rare',
-                    date: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString()
-                },
-                {
-                    id: 'redeem2',
-                    userId: 'user2',
-                    code: 'HEALTH-KIT',
-                    items: ['Health Potion'],
-                    rarity: 'uncommon',
-                    date: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString()
-                },
-                {
-                    id: 'redeem3',
-                    userId: 'user2',
-                    code: 'SCROLL-123',
-                    items: ['Ancient Scroll'],
-                    rarity: 'epic',
-                    date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString()
-                }
-            ];
-
-            // Save to localStorage
-            saveAppState();
-        }
-
-        // UI Rendering Functions
-        function renderUserCollectionStats() {
-            if (!appState.currentUser) return;
-            
-            const collectibles = appState.collectibles.filter(c => c.userId === appState.currentUser.id);
-            const statsContainer = document.getElementById('collectionStats');
-            const statsRows = statsContainer.querySelectorAll('div.bg-white');
-            
-            const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
-            const counts = {};
-            
-            rarities.forEach(rarity => {
-                counts[rarity] = collectibles.filter(c => c.rarity === rarity).length;
-            });
-            
-            rarities.forEach((rarity, index) => {
-                statsRows[index].querySelector('div.text-lg').textContent = counts[rarity];
-            });
-        }
-
-        function renderCollection(filter = 'all') {
-            if (!appState.currentUser) return;
-            
-            const collectibles = appState.collectibles.filter(c => c.userId === appState.currentUser.id);
-            const filteredCollectibles = filter === 'all' ? collectibles : collectibles.filter(c => c.rarity === filter);
-            const collectionGrid = document.getElementById('collectionGrid');
-            
-            if (filteredCollectibles.length === 0) {
-                if (filter === 'all') {
-                    collectionGrid.innerHTML = `
-                        <div class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
-                            Your collection is empty. Redeem a code to get started!
-                        </div>
-                    `;
-                } else {
-                    collectionGrid.innerHTML = `
-                        <div class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
-                            You don't have any ${filter} items in your collection.
-                        </div>
-                    `;
-                }
-                return;
+            if (error) {
+                console.error('Error loading profile:', error);
+                return null;
             }
             
-            collectionGrid.innerHTML = '';
+            appState.profile = data;
+            appState.isAdmin = data.role === 'admin';
+            return data;
+        }
+
+        async function loadUserCollectibles() {
+            if (!appState.currentUser) return [];
             
-            filteredCollectibles.forEach(item => {
-                // Create glitter elements for legendary and mythic items
-                let glitterHtml = '';
-                if (item.rarity === 'legendary' || item.rarity === 'mythic') {
-                    // Add several glitter dots
-                    for (let i = 0; i < 5; i++) {
-                        const top = Math.floor(Math.random() * 80) + 10;
-                        const left = Math.floor(Math.random() * 80) + 10;
-                        const delay = Math.random() * 2;
-                        glitterHtml += `<div class="collectible-glitter" style="top: ${top}%; left: ${left}%; animation-delay: ${delay}s"></div>`;
-                    }
+            const { data, error } = await supabase
+                .from('collectibles')
+                .select('*')
+                .eq('user_id', appState.currentUser.id)
+                .order('acquired_date', { ascending: false });
+            
+            if (error) {
+                console.error('Error loading collectibles:', error);
+                return [];
+            }
+            
+            appState.collectibles = data || [];
+            return data || [];
+        }
+
+        async function loadUserActivities() {
+            if (!appState.currentUser) return [];
+            
+            const { data, error } = await supabase
+                .from('activities')
+                .select('*')
+                .eq('user_id', appState.currentUser.id)
+                .order('created_at', { ascending: false })
+                .limit(10);
+            
+            if (error) {
+                console.error('Error loading activities:', error);
+                return [];
+            }
+            
+            appState.activities = data || [];
+            return data || [];
+        }
+
+        async function loadUserRedemptionHistory() {
+            if (!appState.currentUser) return [];
+            
+            const { data, error } = await supabase
+                .from('redemption_history')
+                .select('*')
+                .eq('user_id', appState.currentUser.id)
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                console.error('Error loading redemption history:', error);
+                return [];
+            }
+            
+            appState.redemptionHistory = data || [];
+            return data || [];
+        }
+
+        async function loadCodes() {
+            const { data, error } = await supabase
+                .from('codes')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                console.error('Error loading codes:', error);
+                return [];
+            }
+            
+            appState.codes = data || [];
+            return data || [];
+        }
+
+        async function loadAllProfiles() {
+            if (!appState.isAdmin) return [];
+            
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                console.error('Error loading profiles:', error);
+                return [];
+            }
+            
+            appState.profiles = data || [];
+            return data || [];
+        }
+
+        async function redeemCode(codeValue) {
+            try {
+                // First, check if the code exists and is valid
+                const { data: codeData, error: codeError } = await supabase
+                    .from('codes')
+                    .select('*')
+                    .eq('code', codeValue)
+                    .eq('is_active', true)
+                    .single();
+                
+                if (codeError || !codeData) {
+                    throw new Error('Invalid or inactive code');
                 }
                 
-                const div = document.createElement('div');
-                div.className = 'collectible-card relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105 cursor-pointer';
-                div.setAttribute('data-item-id', item.id);
+                // Check if code is expired
+                if (codeData.expiration_date && new Date(codeData.expiration_date) < new Date()) {
+                    throw new Error('Code has expired');
+                }
                 
-                div.innerHTML = `
-                    <div class="absolute inset-0 rarity-${item.rarity}"></div>
-                    <div class="card-shine"></div>
-                    <div class="card-border"></div>
-                    ${glitterHtml}
-                    <div class="relative p-4 flex flex-col items-center">
-                        <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                            <div class="collectible-icon text-center text-4xl">
-                                ${getEmojiByValue(item.itemGraphic)}
-                            </div>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">${item.itemName}</h3>
-                        <div class="mb-3">
-                            <span class="badge-${item.rarity} rarity-badge">${item.rarity}</span>
-                        </div>
-                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">Acquired: ${formatDate(item.acquiredDate)}</p>
-                    </div>
-                `;
+                // Check if user already redeemed this code
+                const { data: existingCollectible, error: existingError } = await supabase
+                    .from('collectibles')
+                    .select('id')
+                    .eq('user_id', appState.currentUser.id)
+                    .eq('code_id', codeData.id);
                 
-                collectionGrid.appendChild(div);
+                if (existingError) {
+                    throw new Error('Error checking existing collectibles');
+                }
                 
-                div.addEventListener('click', () => {
-                    showCollectibleDetail(item);
+                if (existingCollectible && existingCollectible.length > 0) {
+                    throw new Error('You have already redeemed this code');
+                }
+                
+                // Create the collectible
+                const { data: collectibleData, error: collectibleError } = await supabase
+                    .from('collectibles')
+                    .insert([
+                        {
+                            user_id: appState.currentUser.id,
+                            item_name: codeData.item_name,
+                            item_graphic: codeData.item_graphic,
+                            rarity: codeData.rarity,
+                            code_id: codeData.id
+                        }
+                    ])
+                    .select()
+                    .single();
+                
+                if (collectibleError) {
+                    throw new Error('Error creating collectible');
+                }
+                
+                // Add to redemption history
+                await supabase
+                    .from('redemption_history')
+                    .insert([
+                        {
+                            user_id: appState.currentUser.id,
+                            code: codeData.code,
+                            items: [codeData.item_name],
+                            rarity: codeData.rarity
+                        }
+                    ]);
+                
+                // Add to activities
+                await supabase
+                    .from('activities')
+                    .insert([
+                        {
+                            user_id: appState.currentUser.id,
+                            action: 'redeemed',
+                            item_name: codeData.item_name,
+                            item_rarity: codeData.rarity
+                        }
+                    ]);
+                
+                return { success: true, collectible: collectibleData, code: codeData };
+                
+            } catch (error) {
+                console.error('Redemption error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function createCode(codeData) {
+            try {
+                const { data, error } = await supabase
+                    .from('codes')
+                    .insert([
+                        {
+                            code: codeData.code,
+                            item_name: codeData.itemName,
+                            item_graphic: codeData.itemGraphic,
+                            rarity: codeData.rarity,
+                            expiration_date: codeData.expirationDate || null,
+                            created_by: appState.currentUser.id
+                        }
+                    ])
+                    .select()
+                    .single();
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                return { success: true, data };
+            } catch (error) {
+                console.error('Error creating code:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function updateCode(codeId, updates) {
+            try {
+                const { data, error } = await supabase
+                    .from('codes')
+                    .update(updates)
+                    .eq('id', codeId)
+                    .select()
+                    .single();
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                return { success: true, data };
+            } catch (error) {
+                console.error('Error updating code:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function deleteCode(codeId) {
+            try {
+                const { error } = await supabase
+                    .from('codes')
+                    .delete()
+                    .eq('id', codeId);
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                return { success: true };
+            } catch (error) {
+                console.error('Error deleting code:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // ===============================
+        // Authentication Functions
+        // ===============================
+        
+        async function signIn(email, password) {
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
                 });
-            });
-        }
-
-        function showCollectibleDetail(item) {
-            const detailContent = document.getElementById('collectibleDetailContent');
-            
-            // Create glitter elements for legendary and mythic items
-            let glitterHtml = '';
-            if (item.rarity === 'legendary' || item.rarity === 'mythic') {
-                // Add several glitter dots
-                for (let i = 0; i < 8; i++) {
-                    const top = Math.floor(Math.random() * 80) + 10;
-                    const left = Math.floor(Math.random() * 80) + 10;
-                    const delay = Math.random() * 2;
-                    glitterHtml += `<div class="collectible-glitter" style="top: ${top}%; left: ${left}%; animation-delay: ${delay}s"></div>`;
+                
+                if (error) {
+                    throw new Error(error.message);
                 }
+                
+                appState.currentUser = data.user;
+                return { success: true, user: data.user };
+            } catch (error) {
+                console.error('Sign in error:', error);
+                return { success: false, error: error.message };
             }
-            
-            detailContent.innerHTML = `
-                <div class="w-full max-w-xs mx-auto">
-                    <div class="collectible-card relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                        <div class="absolute inset-0 rarity-${item.rarity}"></div>
-                        <div class="card-shine"></div>
-                        <div class="card-border"></div>
-                        ${glitterHtml}
-                        <div class="relative p-6 flex flex-col items-center">
-                            <div class="w-32 h-32 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                                <div class="collectible-icon text-center text-5xl">
-                                    ${getEmojiByValue(item.itemGraphic)}
-                                </div>
-                            </div>
-                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${item.itemName}</h2>
-                            <div class="mb-4">
-                                <span class="badge-${item.rarity} rarity-badge px-3 py-1">${item.rarity}</span>
-                            </div>
-                            <div class="w-full mt-4">
-                                <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                                    <span class="text-gray-500 dark:text-gray-400">Acquired</span>
-                                    <span class="text-gray-900 dark:text-white">${formatDate(item.acquiredDate)}</span>
-                                </div>
-                                <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                                    <span class="text-gray-500 dark:text-gray-400">Type</span>
-                                    <span class="text-gray-900 dark:text-white capitalize">${item.itemGraphic.replace('_', ' ')}</span>
-                                </div>
-                                <div class="flex justify-between py-2">
-                                    <span class="text-gray-500 dark:text-gray-400">Collection ID</span>
-                                    <span class="text-gray-900 dark:text-white">#${item.id.substring(item.id.length - 6).toUpperCase()}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('collectibleDetailModal').classList.remove('hidden');
         }
 
+        async function signUp(email, password, username) {
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            username: username
+                        }
+                    }
+                });
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                appState.currentUser = data.user;
+                return { success: true, user: data.user };
+            } catch (error) {
+                console.error('Sign up error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        async function signOut() {
+            try {
+                const { error } = await supabase.auth.signOut();
+                
+                if (error) {
+                    throw new Error(error.message);
+                }
+                
+                appState.currentUser = null;
+                appState.profile = null;
+                appState.isAdmin = false;
+                return { success: true };
+            } catch (error) {
+                console.error('Sign out error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // ===============================
+        // UI Rendering Functions
+        // ===============================
+        
         function updateDashboardStats() {
             if (!appState.currentUser) return;
             
-            const collectibles = appState.collectibles.filter(c => c.userId === appState.currentUser.id);
+            const collectibles = appState.collectibles;
             document.getElementById('totalCollectibles').textContent = collectibles.length;
             document.getElementById('redeemedCollectibles').textContent = collectibles.length;
             
@@ -1765,19 +1680,16 @@
             });
             
             if (rarestCollectible) {
-                document.getElementById('rarestCollectible').textContent = `${rarestCollectible.itemName} (${rarestCollectible.rarity})`;
+                document.getElementById('rarestCollectible').textContent = `${rarestCollectible.item_name} (${rarestCollectible.rarity})`;
             } else {
                 document.getElementById('rarestCollectible').textContent = 'None';
             }
         }
 
         function renderActivityFeed() {
-            if (!appState.currentUser) return;
-            
-            const userActivities = appState.activities.filter(a => a.userId === appState.currentUser.id);
             const activityFeed = document.getElementById('activityFeed');
             
-            if (userActivities.length === 0) {
+            if (appState.activities.length === 0) {
                 activityFeed.innerHTML = `
                     <li class="px-4 py-4 flex text-gray-500 dark:text-gray-400 italic">No recent activity to display</li>
                 `;
@@ -1786,22 +1698,9 @@
             
             activityFeed.innerHTML = '';
             
-            // Sort by date descending
-            userActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            // Take only the 5 most recent
-            const recentActivities = userActivities.slice(0, 5);
-            
-            recentActivities.forEach(activity => {
+            appState.activities.forEach(activity => {
                 const li = document.createElement('li');
                 li.className = 'px-4 py-3 sm:px-6 transition-colors duration-150 hover:bg-gray-50 dark:hover:bg-gray-700';
-                
-                const rarityClass = activity.itemRarity === 'common' ? 'text-gray-800 dark:text-gray-200' :
-                                  activity.itemRarity === 'uncommon' ? 'text-green-800 dark:text-green-200' :
-                                  activity.itemRarity === 'rare' ? 'text-blue-800 dark:text-blue-200' :
-                                  activity.itemRarity === 'epic' ? 'text-purple-800 dark:text-purple-200' :
-                                  activity.itemRarity === 'legendary' ? 'text-yellow-800 dark:text-yellow-200' :
-                                  'text-red-800 dark:text-red-200';
                 
                 li.innerHTML = `
                     <div class="flex items-center justify-between">
@@ -1815,12 +1714,12 @@
                             </div>
                             <div class="ml-4">
                                 <p class="text-sm text-gray-700 dark:text-gray-300">
-                                    You ${activity.action} a <span class="badge-${activity.itemRarity} rarity-badge">${activity.itemRarity}</span> item: <span class="font-medium text-gray-900 dark:text-white">${activity.itemName}</span>
+                                    You ${activity.action} a <span class="badge-${activity.item_rarity} rarity-badge">${activity.item_rarity}</span> item: <span class="font-medium text-gray-900 dark:text-white">${activity.item_name}</span>
                                 </p>
                             </div>
                         </div>
                         <div class="ml-4 flex-shrink-0">
-                            <span class="text-sm text-gray-500 dark:text-gray-400">${formatDate(activity.date)}</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">${formatDate(activity.created_at)}</span>
                         </div>
                     </div>
                 `;
@@ -1830,13 +1729,9 @@
         }
 
         function renderFeaturedCollectibles() {
-            // Only show generic "redeem code" boxes for regular users
-            // but allow admins to see the actual collectibles
             const featuredContainer = document.getElementById('featuredCollectibles');
             
             if (!appState.isAdmin) {
-                // For regular users, we don't show the actual featured items
-                // Instead, show a prompt to enter redemption codes
                 featuredContainer.innerHTML = `
                     <div class="col-span-full flex flex-col sm:flex-row gap-6 justify-center">
                         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:scale-105">
@@ -1885,8 +1780,7 @@
             
             featuredContainer.innerHTML = '';
             
-            // Get active codes only
-            const activeCodes = appState.codes.filter(code => code.isActive);
+            const activeCodes = appState.codes.filter(code => code.is_active);
             
             if (activeCodes.length === 0) {
                 featuredContainer.innerHTML = `
@@ -1897,14 +1791,11 @@
                 return;
             }
             
-            // Take up to 3 features to display for admins
             const featuresToShow = activeCodes.slice(0, 3);
             
             featuresToShow.forEach(item => {
-                // Create glitter elements for legendary and mythic items
                 let glitterHtml = '';
                 if (item.rarity === 'legendary' || item.rarity === 'mythic') {
-                    // Add several glitter dots
                     for (let i = 0; i < 5; i++) {
                         const top = Math.floor(Math.random() * 80) + 10;
                         const left = Math.floor(Math.random() * 80) + 10;
@@ -1925,10 +1816,10 @@
                         <div class="absolute top-4 right-4 bg-primary-500 text-white text-xs px-2 py-1 rounded-full shadow-sm">Admin View</div>
                         <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
                             <div class="collectible-icon text-center text-4xl">
-                                ${getEmojiByValue(item.itemGraphic)}
+                                ${getEmojiByValue(item.item_graphic)}
                             </div>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">${item.itemName}</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">${item.item_name}</h3>
                         <div class="mb-2">
                             <span class="badge-${item.rarity} rarity-badge">${item.rarity}</span>
                         </div>
@@ -1943,33 +1834,147 @@
                 
                 featuredContainer.appendChild(div);
             });
+        }
+
+        function renderUserCollectionStats() {
+            const collectibles = appState.collectibles;
+            const statsContainer = document.getElementById('collectionStats');
+            const statsRows = statsContainer.querySelectorAll('div.bg-white');
             
-            // Add event listeners after adding elements to the DOM
-            document.querySelectorAll('.redeemFeaturedButton').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const codeId = e.target.getAttribute('data-code-id');
-                    // For admin, clicking should take them to edit the code
-                    switchView('adminPanel');
-                    
-                    // Find the edit button for this code and simulate a click
-                    setTimeout(() => {
-                        const editButtons = document.querySelectorAll('.editCodeButton');
-                        for (const button of editButtons) {
-                            const buttonCodeId = button.getAttribute('data-code-id');
-                            if (buttonCodeId === codeId) {
-                                button.click();
-                                break;
-                            }
-                        }
-                    }, 100);
+            const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
+            const counts = {};
+            
+            rarities.forEach(rarity => {
+                counts[rarity] = collectibles.filter(c => c.rarity === rarity).length;
+            });
+            
+            rarities.forEach((rarity, index) => {
+                if (statsRows[index]) {
+                    statsRows[index].querySelector('div.text-lg').textContent = counts[rarity];
+                }
+            });
+        }
+
+        function renderCollection(filter = 'all') {
+            const collectibles = appState.collectibles;
+            const filteredCollectibles = filter === 'all' ? collectibles : collectibles.filter(c => c.rarity === filter);
+            const collectionGrid = document.getElementById('collectionGrid');
+            
+            if (filteredCollectibles.length === 0) {
+                if (filter === 'all') {
+                    collectionGrid.innerHTML = `
+                        <div class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
+                            Your collection is empty. Redeem a code to get started!
+                        </div>
+                    `;
+                } else {
+                    collectionGrid.innerHTML = `
+                        <div class="col-span-full text-center p-8 text-gray-500 dark:text-gray-400 italic">
+                            You don't have any ${filter} items in your collection.
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            collectionGrid.innerHTML = '';
+            
+            filteredCollectibles.forEach(item => {
+                let glitterHtml = '';
+                if (item.rarity === 'legendary' || item.rarity === 'mythic') {
+                    for (let i = 0; i < 5; i++) {
+                        const top = Math.floor(Math.random() * 80) + 10;
+                        const left = Math.floor(Math.random() * 80) + 10;
+                        const delay = Math.random() * 2;
+                        glitterHtml += `<div class="collectible-glitter" style="top: ${top}%; left: ${left}%; animation-delay: ${delay}s"></div>`;
+                    }
+                }
+                
+                const div = document.createElement('div');
+                div.className = 'collectible-card relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105 cursor-pointer';
+                div.setAttribute('data-item-id', item.id);
+                
+                div.innerHTML = `
+                    <div class="absolute inset-0 rarity-${item.rarity}"></div>
+                    <div class="card-shine"></div>
+                    <div class="card-border"></div>
+                    ${glitterHtml}
+                    <div class="relative p-4 flex flex-col items-center">
+                        <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                            <div class="collectible-icon text-center text-4xl">
+                                ${getEmojiByValue(item.item_graphic)}
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">${item.item_name}</h3>
+                        <div class="mb-3">
+                            <span class="badge-${item.rarity} rarity-badge">${item.rarity}</span>
+                        </div>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-2">Acquired: ${formatDate(item.acquired_date)}</p>
+                    </div>
+                `;
+                
+                collectionGrid.appendChild(div);
+                
+                div.addEventListener('click', () => {
+                    showCollectibleDetail(item);
                 });
             });
         }
 
-        function renderRedemptionHistory() {
-            if (!appState.currentUser) return;
+        function showCollectibleDetail(item) {
+            const detailContent = document.getElementById('collectibleDetailContent');
             
-            const history = appState.redemptionHistory.filter(h => h.userId === appState.currentUser.id);
+            let glitterHtml = '';
+            if (item.rarity === 'legendary' || item.rarity === 'mythic') {
+                for (let i = 0; i < 8; i++) {
+                    const top = Math.floor(Math.random() * 80) + 10;
+                    const left = Math.floor(Math.random() * 80) + 10;
+                    const delay = Math.random() * 2;
+                    glitterHtml += `<div class="collectible-glitter" style="top: ${top}%; left: ${left}%; animation-delay: ${delay}s"></div>`;
+                }
+            }
+            
+            detailContent.innerHTML = `
+                <div class="w-full max-w-xs mx-auto">
+                    <div class="collectible-card relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                        <div class="absolute inset-0 rarity-${item.rarity}"></div>
+                        <div class="card-shine"></div>
+                        <div class="card-border"></div>
+                        ${glitterHtml}
+                        <div class="relative p-6 flex flex-col items-center">
+                            <div class="w-32 h-32 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                                <div class="collectible-icon text-center text-5xl">
+                                    ${getEmojiByValue(item.item_graphic)}
+                                </div>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${item.item_name}</h2>
+                            <div class="mb-4">
+                                <span class="badge-${item.rarity} rarity-badge px-3 py-1">${item.rarity}</span>
+                            </div>
+                            <div class="w-full mt-4">
+                                <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
+                                    <span class="text-gray-500 dark:text-gray-400">Acquired</span>
+                                    <span class="text-gray-900 dark:text-white">${formatDate(item.acquired_date)}</span>
+                                </div>
+                                <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
+                                    <span class="text-gray-500 dark:text-gray-400">Type</span>
+                                    <span class="text-gray-900 dark:text-white capitalize">${item.item_graphic.replace('_', ' ')}</span>
+                                </div>
+                                <div class="flex justify-between py-2">
+                                    <span class="text-gray-500 dark:text-gray-400">Collection ID</span>
+                                    <span class="text-gray-900 dark:text-white">#${item.id.substring(0, 8).toUpperCase()}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('collectibleDetailModal').classList.remove('hidden');
+        }
+
+        function renderRedemptionHistory() {
+            const history = appState.redemptionHistory;
             const historyTable = document.getElementById('redemptionHistory');
             
             if (history.length === 0) {
@@ -1983,15 +1988,12 @@
             
             historyTable.innerHTML = '';
             
-            // Sort by date descending
-            history.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
             history.forEach(item => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors';
                 
                 tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${formatDate(item.date)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${formatDate(item.created_at)}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">${item.items.join(', ')}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         <span class="badge-${item.rarity} rarity-badge">${item.rarity}</span>
@@ -2016,29 +2018,26 @@
             
             codesTable.innerHTML = '';
             
-            // Sort by date created, newest first
-            appState.codes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            
             appState.codes.forEach(code => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors';
                 
-                const isExpired = code.expirationDate && new Date(code.expirationDate) < new Date();
-                const statusClass = !code.isActive ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200' : 
+                const isExpired = code.expiration_date && new Date(code.expiration_date) < new Date();
+                const statusClass = !code.is_active ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200' : 
                                     isExpired ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' : 
                                     'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
                 
-                const statusText = !code.isActive ? 'Inactive' : 
+                const statusText = !code.is_active ? 'Inactive' : 
                                 isExpired ? 'Expired' : 
                                 'Active';
                 
                 tr.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">${code.code}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${code.itemName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${code.item_name}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         <span class="badge-${code.rarity} rarity-badge">${code.rarity}</span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${code.expirationDate ? formatDate(code.expirationDate) : 'Never'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${code.expiration_date ? formatDate(code.expiration_date) : 'Never'}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
                             ${statusText}
@@ -2046,152 +2045,19 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button data-code-id="${code.id}" class="editCodeButton text-primary-600 dark:text-primary-400 hover:text-primary-900 dark:hover:text-primary-300 mr-3">Edit</button>
-                        <button data-code-id="${code.id}" class="toggleCodeButton ${code.isActive ? 'text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300' : 'text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300'} mr-3">${code.isActive ? 'Deactivate' : 'Activate'}</button>
+                        <button data-code-id="${code.id}" class="toggleCodeButton ${code.is_active ? 'text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300' : 'text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300'} mr-3">${code.is_active ? 'Deactivate' : 'Activate'}</button>
                         <button data-code-id="${code.id}" class="deleteCodeButton text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Delete</button>
                     </td>
                 `;
                 
                 codesTable.appendChild(tr);
             });
-            
-            // Add event listeners for code actions
-            document.querySelectorAll('.toggleCodeButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeId = button.getAttribute('data-code-id');
-                    const code = appState.codes.find(c => c.id === codeId);
-                    
-                    if (code) {
-                        code.isActive = !code.isActive;
-                        saveAppState();
-                        renderAdminCodes();
-                        showNotification(`Code ${code.code} ${code.isActive ? 'activated' : 'deactivated'} successfully`);
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.deleteCodeButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeId = button.getAttribute('data-code-id');
-                    const code = appState.codes.find(c => c.id === codeId);
-                    
-                    if (code) {
-                        showConfirmation(
-                            'Delete Code',
-                            `Are you sure you want to delete the code "${code.code}"? This action cannot be undone.`,
-                            'Delete',
-                            () => {
-                                appState.codes = appState.codes.filter(c => c.id !== codeId);
-                                saveAppState();
-                                renderAdminCodes();
-                                showNotification(`Code ${code.code} deleted successfully`);
-                            }
-                        );
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.editCodeButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const codeId = button.getAttribute('data-code-id');
-                    const code = appState.codes.find(c => c.id === codeId);
-                    
-                    if (code) {
-                        // Populate the modal with code data
-                        document.getElementById('codeInput').value = code.code;
-                        document.getElementById('itemNameInput').value = code.itemName;
-                        
-                        // Populate the emoji category dropdown
-                        populateEmojiCategories();
-                        
-                        // Select the appropriate category for this item
-                        selectAppropriateCategory(code.itemGraphic);
-                        
-                        document.getElementById('itemRaritySelect').value = code.rarity;
-                        document.getElementById('expirationDateInput').value = code.expirationDate || '';
-                        
-                        // Update preview
-                        updateItemPreview();
-                        
-                        // Show modal
-                        document.getElementById('createCodeModal').classList.remove('hidden');
-                        document.getElementById('modal-title').textContent = 'Edit Redemption Code';
-                        document.getElementById('createCodeConfirmButton').textContent = 'Save Changes';
-                        
-                        // Update the confirm button to update instead of create
-                        const confirmButton = document.getElementById('createCodeConfirmButton');
-                        
-                        // Remove previous event listeners (if any)
-                        const newButton = confirmButton.cloneNode(true);
-                        confirmButton.parentNode.replaceChild(newButton, confirmButton);
-                        
-                        newButton.addEventListener('click', () => {
-                            const updatedCode = {
-                                ...code,
-                                code: document.getElementById('codeInput').value.trim(),
-                                itemName: document.getElementById('itemNameInput').value.trim(),
-                                itemGraphic: document.querySelector('.emoji-item.selected')?.getAttribute('data-value') || code.itemGraphic,
-                                rarity: document.getElementById('itemRaritySelect').value,
-                                expirationDate: document.getElementById('expirationDateInput').value || null
-                            };
-                            
-                            // Validate inputs
-                            if (!updatedCode.code || !updatedCode.itemName) {
-                                showNotification('Please fill in all required fields', 'error');
-                                return;
-                            }
-                            
-                            // Update the code in the state
-                            const index = appState.codes.findIndex(c => c.id === codeId);
-                            if (index !== -1) {
-                                appState.codes[index] = updatedCode;
-                                saveAppState();
-                            }
-                            
-                            // Close modal and refresh the table
-                            document.getElementById('createCodeModal').classList.add('hidden');
-                            renderAdminCodes();
-                            showNotification(`Code ${updatedCode.code} updated successfully`);
-                        });
-                    }
-                });
-            });
-        }
-
-        function selectAppropriateCategory(itemGraphic) {
-            // Find which category contains this item graphic
-            let foundCategory = null;
-            let foundEmoji = null;
-            
-            for (const category in emojiCategories) {
-                const emoji = emojiCategories[category].find(e => e.value === itemGraphic);
-                if (emoji) {
-                    foundCategory = category;
-                    foundEmoji = emoji;
-                    break;
-                }
-            }
-            
-            if (foundCategory && foundEmoji) {
-                // Select the category
-                document.getElementById('itemCategorySelect').value = foundCategory;
-                
-                // Update emoji grid
-                updateEmojiGrid(foundCategory);
-                
-                // Select the emoji
-                const emojiItems = document.querySelectorAll('.emoji-item');
-                emojiItems.forEach(item => {
-                    if (item.getAttribute('data-value') === itemGraphic) {
-                        item.classList.add('selected', 'bg-primary-100', 'dark:bg-primary-900');
-                    }
-                });
-            }
         }
 
         function renderAdminUsers() {
             const usersTable = document.getElementById('usersTable');
             
-            if (appState.users.length === 0) {
+            if (appState.profiles.length === 0) {
                 usersTable.innerHTML = `
                     <tr>
                         <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center text-gray-500 dark:text-gray-400 italic">No users found</td>
@@ -2202,12 +2068,12 @@
             
             usersTable.innerHTML = '';
             
-            appState.users.forEach(user => {
+            appState.profiles.forEach(user => {
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors';
                 
-                // Count user's collectibles
-                const collectiblesCount = appState.collectibles.filter(c => c.userId === user.id).length;
+                // This would require additional query to count collectibles per user
+                const collectiblesCount = 0; // Placeholder
                 
                 tr.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -2231,175 +2097,61 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${collectiblesCount}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button data-user-id="${user.id}" class="viewUserButton text-primary-600 dark:text-primary-400 hover:text-primary-900 dark:hover:text-primary-300 mr-3">View</button>
-                        <button data-user-id="${user.id}" class="toggleRoleButton ${user.role === 'admin' ? 'text-yellow-600 dark:text-yellow-400 hover:text-yellow-900 dark:hover:text-yellow-300' : 'text-purple-600 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-300'} mr-3">${user.role === 'admin' ? 'Remove Admin' : 'Make Admin'}</button>
-                        <button data-user-id="${user.id}" class="deleteUserButton text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Delete</button>
                     </td>
                 `;
                 
                 usersTable.appendChild(tr);
             });
-            
-            // Add event listeners for user actions
-            document.querySelectorAll('.toggleRoleButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const userId = button.getAttribute('data-user-id');
-                    const user = appState.users.find(u => u.id === userId);
-                    
-                    if (user) {
-                        // Don't allow changing your own role
-                        if (user.id === appState.currentUser.id) {
-                            showNotification('You cannot change your own role', 'error');
-                            return;
-                        }
-                        
-                        user.role = user.role === 'admin' ? 'user' : 'admin';
-                        saveAppState();
-                        renderAdminUsers();
-                        showNotification(`User ${user.username} is now ${user.role}`);
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.deleteUserButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const userId = button.getAttribute('data-user-id');
-                    const user = appState.users.find(u => u.id === userId);
-                    
-                    if (user) {
-                        // Don't allow deleting yourself
-                        if (user.id === appState.currentUser.id) {
-                            showNotification('You cannot delete your own account', 'error');
-                            return;
-                        }
-                        
-                        showConfirmation(
-                            'Delete User',
-                            `Are you sure you want to delete user "${user.username}"? This will remove all their collectibles as well. This action cannot be undone.`,
-                            'Delete',
-                            () => {
-                                appState.users = appState.users.filter(u => u.id !== userId);
-                                // Remove their collectibles
-                                appState.collectibles = appState.collectibles.filter(c => c.userId !== userId);
-                                saveAppState();
-                                renderAdminUsers();
-                                showNotification(`User ${user.username} deleted successfully`);
-                            }
-                        );
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.viewUserButton').forEach(button => {
-                button.addEventListener('click', () => {
-                    const userId = button.getAttribute('data-user-id');
-                    const user = appState.users.find(u => u.id === userId);
-                    
-                    if (user) {
-                        // Show collectibles for this user
-                        const userCollectibles = appState.collectibles.filter(c => c.userId === userId);
-                        const collectiblesCount = userCollectibles.length;
-                        
-                        // Create a stats object to count by rarity
-                        const rarityCounts = { common: 0, uncommon: 0, rare: 0, epic: 0, legendary: 0, mythic: 0 };
-                        userCollectibles.forEach(c => {
-                            if (rarityCounts[c.rarity] !== undefined) {
-                                rarityCounts[c.rarity]++;
-                            }
-                        });
-                        
-                        // Show user details in a dialog or modal
-                        showConfirmation(
-                            `User Details: ${user.username}`,
-                            `Email: ${user.email}
-                            Role: ${user.role}
-                            Created: ${formatDate(user.createdAt || new Date())}
-                            Total Collectibles: ${collectiblesCount}
-                            
-                            Collection Summary:
-                            • Common: ${rarityCounts.common}
-                            • Uncommon: ${rarityCounts.uncommon}
-                            • Rare: ${rarityCounts.rare}
-                            • Epic: ${rarityCounts.epic}
-                            • Legendary: ${rarityCounts.legendary}
-                            • Mythic: ${rarityCounts.mythic}`,
-                            'Close',
-                            () => {}
-                        );
-                    }
-                });
-            });
         }
 
-        // Settings & Profile functions
         function renderProfileView() {
-            if (!appState.currentUser) return;
+            if (!appState.profile) return;
             
-            // Update profile information
-            document.getElementById('profileUserInitial').textContent = appState.currentUser.username.charAt(0).toUpperCase();
-            document.getElementById('profileUsername').textContent = appState.currentUser.username;
-            document.getElementById('profileEmail').textContent = appState.currentUser.email;
-            document.getElementById('profileRole').textContent = appState.currentUser.role.charAt(0).toUpperCase() + appState.currentUser.role.slice(1);
+            document.getElementById('profileUserInitial').textContent = appState.profile.username.charAt(0).toUpperCase();
+            document.getElementById('profileUsername').textContent = appState.profile.username;
+            document.getElementById('profileEmail').textContent = appState.profile.email;
+            document.getElementById('profileRole').textContent = appState.profile.role.charAt(0).toUpperCase() + appState.profile.role.slice(1);
             
-            // Count collectibles
-            const collectiblesCount = appState.collectibles.filter(c => c.userId === appState.currentUser.id).length;
+            const collectiblesCount = appState.collectibles.length;
             document.getElementById('profileCollectibles').textContent = collectiblesCount;
             
-            // Show account creation date
-            document.getElementById('profileCreatedAt').textContent = formatDate(appState.currentUser.createdAt || new Date());
+            document.getElementById('profileCreatedAt').textContent = formatDate(appState.profile.created_at);
             
-            // Populate the update form
-            document.getElementById('updateUsername').value = appState.currentUser.username;
-            document.getElementById('updateEmail').value = appState.currentUser.email;
+            document.getElementById('updateUsername').value = appState.profile.username;
+            document.getElementById('updateEmail').value = appState.profile.email;
             document.getElementById('currentPassword').value = '';
             document.getElementById('newPassword').value = '';
         }
 
         function renderSettingsView() {
-            // Set toggle states based on current settings
             const settingsDarkModeToggle = document.getElementById('settingsDarkModeToggle');
             const animationToggle = document.getElementById('animationToggle');
-            const notifyCollectiblesToggle = document.getElementById('notifyCollectiblesToggle');
-            const notifyExpirationToggle = document.getElementById('notifyExpirationToggle');
             
-            // Load settings from localStorage or use defaults
-            const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {
-                darkMode: document.documentElement.classList.contains('dark'),
-                animations: true,
-                notifyNewCollectibles: true,
-                notifyExpirations: true
-            });
+            const isDarkMode = document.documentElement.classList.contains('dark');
             
-            // Apply toggle states
-            settingsDarkModeToggle.classList.toggle('bg-primary-500', settings.darkMode);
-            settingsDarkModeToggle.classList.toggle('bg-gray-200', !settings.darkMode);
-            settingsDarkModeToggle.querySelector('span').classList.toggle('translate-x-5', settings.darkMode);
+            settingsDarkModeToggle.classList.toggle('bg-primary-500', isDarkMode);
+            settingsDarkModeToggle.classList.toggle('bg-gray-200', !isDarkMode);
+            settingsDarkModeToggle.querySelector('span').classList.toggle('translate-x-5', isDarkMode);
             
-            animationToggle.classList.toggle('bg-primary-500', settings.animations);
-            animationToggle.classList.toggle('bg-gray-200', !settings.animations);
-            animationToggle.querySelector('span').classList.toggle('translate-x-5', settings.animations);
-            
-            notifyCollectiblesToggle.classList.toggle('bg-primary-500', settings.notifyNewCollectibles);
-            notifyCollectiblesToggle.classList.toggle('bg-gray-200', !settings.notifyNewCollectibles);
-            notifyCollectiblesToggle.querySelector('span').classList.toggle('translate-x-5', settings.notifyNewCollectibles);
-            
-            notifyExpirationToggle.classList.toggle('bg-primary-500', settings.notifyExpirations);
-            notifyExpirationToggle.classList.toggle('bg-gray-200', !settings.notifyExpirations);
-            notifyExpirationToggle.querySelector('span').classList.toggle('translate-x-5', settings.notifyExpirations);
+            // Default animation toggle to enabled
+            animationToggle.classList.add('bg-primary-500');
+            animationToggle.querySelector('span').classList.add('translate-x-5');
         }
 
+        // ===============================
+        // Modal and UI Helper Functions
+        // ===============================
+        
         function updateItemPreview() {
             const itemName = document.getElementById('itemNameInput').value || 'Item Name';
-            // Get the selected emoji's value
             const selectedEmoji = document.querySelector('.emoji-item.selected');
             const itemGraphic = selectedEmoji ? selectedEmoji.getAttribute('data-value') : 'shield';
             const itemRarity = document.getElementById('itemRaritySelect').value;
             
             const previewContainer = document.getElementById('itemPreview');
             
-            // Create glitter elements for legendary and mythic items
             let glitterHtml = '';
             if (itemRarity === 'legendary' || itemRarity === 'mythic') {
-                // Add several glitter dots
                 for (let i = 0; i < 5; i++) {
                     const top = Math.floor(Math.random() * 80) + 10;
                     const left = Math.floor(Math.random() * 80) + 10;
@@ -2451,7 +2203,6 @@
             const categorySelect = document.getElementById('itemCategorySelect');
             categorySelect.innerHTML = '';
             
-            // Add options for each category
             for (const category in emojiCategories) {
                 const option = document.createElement('option');
                 option.value = category;
@@ -2459,25 +2210,20 @@
                 categorySelect.appendChild(option);
             }
             
-            // Set up the emoji grid for the first category
             const firstCategory = Object.keys(emojiCategories)[0];
             updateEmojiGrid(firstCategory);
             
-            // Add event listener for category change
             categorySelect.addEventListener('change', (e) => {
                 const selectedCategory = e.target.value;
                 updateEmojiGrid(selectedCategory);
             });
             
-            // Set up search functionality
             const searchInput = document.getElementById('emojiSearch');
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
                 if (searchTerm.length === 0) {
-                    // If search is cleared, show the selected category
                     updateEmojiGrid(categorySelect.value);
                 } else {
-                    // Search across all categories
                     searchEmojis(searchTerm);
                 }
             });
@@ -2487,14 +2233,11 @@
             const emojiPicker = document.getElementById('emojiPicker');
             emojiPicker.innerHTML = '';
             
-            // Create emoji grid for the selected category
             const emojis = emojiCategories[category];
             
-            // Create a div for the category
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'emoji-category';
             
-            // Create the emoji grid
             const emojiGrid = document.createElement('div');
             emojiGrid.className = 'emoji-grid';
             
@@ -2507,17 +2250,12 @@
                     <div class="emoji-name">${emoji.name}</div>
                 `;
                 
-                // Add click event to select the emoji
                 emojiItem.addEventListener('click', () => {
-                    // Remove selected class from all emojis
                     document.querySelectorAll('.emoji-item').forEach(item => {
                         item.classList.remove('selected', 'bg-primary-100', 'dark:bg-primary-900');
                     });
                     
-                    // Add selected class to clicked emoji
                     emojiItem.classList.add('selected', 'bg-primary-100', 'dark:bg-primary-900');
-                    
-                    // Update the preview
                     updateItemPreview();
                 });
                 
@@ -2532,7 +2270,6 @@
             const emojiPicker = document.getElementById('emojiPicker');
             emojiPicker.innerHTML = '';
             
-            // Search through all categories
             const searchResults = [];
             
             for (const category in emojiCategories) {
@@ -2550,7 +2287,6 @@
                 return;
             }
             
-            // Group results by category
             const groupedResults = {};
             searchResults.forEach(result => {
                 if (!groupedResults[result.category]) {
@@ -2559,7 +2295,6 @@
                 groupedResults[result.category].push(result);
             });
             
-            // Display results by category
             for (const category in groupedResults) {
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'emoji-category mb-4';
@@ -2580,17 +2315,12 @@
                         <div class="emoji-name">${emoji.name}</div>
                     `;
                     
-                    // Add click event to select the emoji
                     emojiItem.addEventListener('click', () => {
-                        // Remove selected class from all emojis
                         document.querySelectorAll('.emoji-item').forEach(item => {
                             item.classList.remove('selected', 'bg-primary-100', 'dark:bg-primary-900');
                         });
                         
-                        // Add selected class to clicked emoji
                         emojiItem.classList.add('selected', 'bg-primary-100', 'dark:bg-primary-900');
-                        
-                        // Update the preview
                         updateItemPreview();
                     });
                     
@@ -2603,6 +2333,10 @@
             }
         }
 
+        // ===============================
+        // Navigation and View Switching
+        // ===============================
+        
         function switchView(view) {
             // Hide all views
             document.getElementById('dashboardView').classList.add('hidden');
@@ -2621,10 +2355,12 @@
                 link.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-300');
             });
             
-            // Only highlight the nav items we have
             if (['dashboard', 'collection', 'redeem'].includes(view)) {
-                document.getElementById(`nav-${view}`).classList.remove('border-transparent', 'text-gray-500', 'dark:text-gray-300');
-                document.getElementById(`nav-${view}`).classList.add('border-primary-500', 'text-gray-900', 'dark:text-white');
+                const navLink = document.getElementById(`nav-${view}`);
+                if (navLink) {
+                    navLink.classList.remove('border-transparent', 'text-gray-500', 'dark:text-gray-300');
+                    navLink.classList.add('border-primary-500', 'text-gray-900', 'dark:text-white');
+                }
             }
             
             // Update navigation styling - mobile
@@ -2633,10 +2369,12 @@
                 link.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-300');
             });
             
-            // Only highlight the mobile nav items we have
             if (['dashboard', 'collection', 'redeem'].includes(view)) {
-                document.getElementById(`mobile-nav-${view}`).classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-300');
-                document.getElementById(`mobile-nav-${view}`).classList.add('bg-primary-50', 'dark:bg-primary-900', 'border-primary-500', 'text-primary-700', 'dark:text-primary-300');
+                const mobileNavLink = document.getElementById(`mobile-nav-${view}`);
+                if (mobileNavLink) {
+                    mobileNavLink.classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-300');
+                    mobileNavLink.classList.add('bg-primary-50', 'dark:bg-primary-900', 'border-primary-500', 'text-primary-700', 'dark:text-primary-300');
+                }
             }
             
             appState.currentView = view;
@@ -2652,8 +2390,10 @@
             } else if (view === 'redeemCode') {
                 renderRedemptionHistory();
             } else if (view === 'adminPanel') {
-                renderAdminCodes();
-                renderAdminUsers();
+                if (appState.isAdmin) {
+                    renderAdminCodes();
+                    renderAdminUsers();
+                }
             } else if (view === 'profile') {
                 renderProfileView();
             } else if (view === 'settings') {
@@ -2661,7 +2401,10 @@
             }
         }
 
-        // Event bindings
+        // ===============================
+        // Event Listeners Setup
+        // ===============================
+        
         function setupEventListeners() {
             // Dark mode toggle
             const darkModeToggles = [
@@ -2674,12 +2417,6 @@
                 if (toggle) {
                     toggle.addEventListener('click', () => {
                         document.documentElement.classList.toggle('dark');
-                        const isDarkMode = document.documentElement.classList.contains('dark');
-                        
-                        // Save setting to localStorage
-                        const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {});
-                        settings.darkMode = isDarkMode;
-                        saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings);
                     });
                 }
             });
@@ -2727,7 +2464,6 @@
                 const isExpanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
                 document.getElementById('mobileMenuButton').setAttribute('aria-expanded', isExpanded);
                 
-                // Toggle icon
                 const openIcon = document.getElementById('mobileMenuButton').querySelector('svg.block');
                 const closeIcon = document.getElementById('mobileMenuButton').querySelector('svg.hidden');
                 
@@ -2760,7 +2496,7 @@
             });
             
             // Redeem code button
-            document.getElementById('redeemCodeButton').addEventListener('click', () => {
+            document.getElementById('redeemCodeButton').addEventListener('click', async () => {
                 const codeInput = document.getElementById('redeemCode').value.trim();
                 const resultDiv = document.getElementById('redeemResult');
                 
@@ -2771,82 +2507,19 @@
                     return;
                 }
                 
-                // Check if code exists and is valid
-                const code = appState.codes.find(c => c.code === codeInput);
+                const result = await redeemCode(codeInput);
                 
-                if (!code) {
-                    resultDiv.innerHTML = 'Invalid code. Please check and try again.';
+                if (!result.success) {
+                    resultDiv.innerHTML = result.error;
                     resultDiv.className = 'mt-4 p-4 rounded-md bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
                     resultDiv.classList.remove('hidden');
                     return;
                 }
                 
-                if (!code.isActive) {
-                    resultDiv.innerHTML = 'This code is no longer active.';
-                    resultDiv.className = 'mt-4 p-4 rounded-md bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
-                    resultDiv.classList.remove('hidden');
-                    return;
-                }
-                
-                if (code.expirationDate && new Date(code.expirationDate) < new Date()) {
-                    resultDiv.innerHTML = 'This code has expired.';
-                    resultDiv.className = 'mt-4 p-4 rounded-md bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
-                    resultDiv.classList.remove('hidden');
-                    return;
-                }
-                
-                // Check if user already redeemed this code
-                const alreadyRedeemed = appState.collectibles.some(c => 
-                    c.userId === appState.currentUser.id && c.codeId === code.id
-                );
-                
-                if (alreadyRedeemed) {
-                    resultDiv.innerHTML = 'You have already redeemed this code.';
-                    resultDiv.className = 'mt-4 p-4 rounded-md bg-yellow-50 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100';
-                    resultDiv.classList.remove('hidden');
-                    return;
-                }
-                
-                // Redeem the code
-                const newCollectible = {
-                    id: generateUniqueId(),
-                    userId: appState.currentUser.id,
-                    itemName: code.itemName,
-                    itemGraphic: code.itemGraphic,
-                    rarity: code.rarity,
-                    acquiredDate: new Date().toISOString(),
-                    codeId: code.id
-                };
-                
-                appState.collectibles.push(newCollectible);
-                
-                // Add to redemption history
-                appState.redemptionHistory.push({
-                    id: generateUniqueId(),
-                    userId: appState.currentUser.id,
-                    code: code.code,
-                    items: [code.itemName],
-                    rarity: code.rarity,
-                    date: new Date().toISOString()
-                });
-                
-                // Add to activity feed
-                appState.activities.push({
-                    id: generateUniqueId(),
-                    userId: appState.currentUser.id,
-                    action: 'redeemed',
-                    itemName: code.itemName,
-                    itemRarity: code.rarity,
-                    date: new Date().toISOString()
-                });
-                
-                // Save to localStorage
-                saveAppState();
-                
-                // Create glitter elements for legendary and mythic items
+                // Success - show the collectible
+                const code = result.code;
                 let glitterHtml = '';
                 if (code.rarity === 'legendary' || code.rarity === 'mythic') {
-                    // Add several glitter dots
                     for (let i = 0; i < 8; i++) {
                         const top = Math.floor(Math.random() * 80) + 10;
                         const left = Math.floor(Math.random() * 80) + 10;
@@ -2855,7 +2528,6 @@
                     }
                 }
                 
-                // Update UI with an enhanced and animated redemption result
                 resultDiv.innerHTML = `
                     <div class="flex flex-col items-center">
                         <div class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -2874,10 +2546,10 @@
                             <div class="relative flex flex-col items-center justify-center h-full p-3">
                                 <div class="w-24 h-24 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center mb-3 shadow-lg">
                                     <div class="collectible-icon text-center text-4xl">
-                                        ${getEmojiByValue(code.itemGraphic)}
+                                        ${getEmojiByValue(code.item_graphic)}
                                     </div>
                                 </div>
-                                <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1">${code.itemName}</h3>
+                                <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-1">${code.item_name}</h3>
                                 <div class="mb-1">
                                     <span class="badge-${code.rarity} rarity-badge">${code.rarity}</span>
                                 </div>
@@ -2899,7 +2571,12 @@
                 // Clear the input
                 document.getElementById('redeemCode').value = '';
                 
-                // Update redemption history
+                // Reload data
+                await loadUserCollectibles();
+                await loadUserRedemptionHistory();
+                await loadUserActivities();
+                
+                // Update views
                 renderRedemptionHistory();
                 
                 // Add event listener to "Redeem Another" button
@@ -2908,120 +2585,9 @@
                     document.getElementById('redeemCode').focus();
                 });
                 
-                // Show notification
-                showNotification(`You've successfully redeemed ${code.itemName}!`);
+                showNotification(`You've successfully redeemed ${code.item_name}!`);
             });
             
-            // Admin panel - create code button
-            document.getElementById('createCodeButton').addEventListener('click', () => {
-                // Reset form
-                document.getElementById('codeInput').value = '';
-                document.getElementById('itemNameInput').value = '';
-                document.getElementById('itemRaritySelect').value = 'common';
-                document.getElementById('expirationDateInput').value = '';
-                
-                // Populate emoji categories and grid
-                populateEmojiCategories();
-                
-                // Update preview
-                updateItemPreview();
-                
-                // Reset modal title and button
-                document.getElementById('modal-title').textContent = 'Create New Redemption Code';
-                document.getElementById('createCodeConfirmButton').textContent = 'Create';
-                
-                // Show modal
-                document.getElementById('createCodeModal').classList.remove('hidden');
-                
-                // Update confirm button event handler
-                const confirmButton = document.getElementById('createCodeConfirmButton');
-                
-                // Remove previous event listeners (if any)
-                const newButton = confirmButton.cloneNode(true);
-                confirmButton.parentNode.replaceChild(newButton, confirmButton);
-                
-                newButton.addEventListener('click', () => {
-                    const code = document.getElementById('codeInput').value.trim();
-                    const itemName = document.getElementById('itemNameInput').value.trim();
-                    const selectedEmoji = document.querySelector('.emoji-item.selected');
-                    const itemGraphic = selectedEmoji ? selectedEmoji.getAttribute('data-value') : 'shield';
-                    const itemRarity = document.getElementById('itemRaritySelect').value;
-                    const expirationDate = document.getElementById('expirationDateInput').value || null;
-                    
-                    // Validate inputs
-                    if (!code || !itemName) {
-                        showNotification('Please fill in all required fields', 'error');
-                        return;
-                    }
-                    
-                    // Check if code already exists
-                    if (appState.codes.some(c => c.code === code)) {
-                        showNotification('This code already exists', 'error');
-                        return;
-                    }
-                    
-                    // Create new code
-                    const newCode = {
-                        id: generateUniqueId(),
-                        code,
-                        itemName,
-                        itemGraphic,
-                        rarity: itemRarity,
-                        expirationDate,
-                        isActive: true,
-                        createdAt: new Date().toISOString()
-                    };
-                    
-                    appState.codes.push(newCode);
-                    saveAppState();
-                    
-                    // Close modal and refresh the table
-                    document.getElementById('createCodeModal').classList.add('hidden');
-                    renderAdminCodes();
-                    showNotification(`Code ${code} created successfully`);
-                });
-            });
-            
-            // Generate random code
-            document.getElementById('generateCodeButton').addEventListener('click', () => {
-                document.getElementById('codeInput').value = generateCode();
-            });
-            
-            // Admin panel modal close button
-            document.getElementById('createCodeCancelButton').addEventListener('click', () => {
-                document.getElementById('createCodeModal').classList.add('hidden');
-            });
-            
-            // Collectible detail modal close button
-            document.getElementById('collectibleDetailCloseButton').addEventListener('click', () => {
-                document.getElementById('collectibleDetailModal').classList.add('hidden');
-            });
-            
-            // Item preview live update
-            document.getElementById('itemNameInput').addEventListener('input', updateItemPreview);
-            document.getElementById('itemRaritySelect').addEventListener('change', updateItemPreview);
-            
-            // Admin panel link
-            document.getElementById('menu-admin-panel').addEventListener('click', (e) => {
-                e.preventDefault();
-                if (appState.isAdmin) {
-                    switchView('adminPanel');
-                    document.getElementById('userMenu').classList.add('hidden');
-                } else {
-                    showNotification('You do not have admin privileges', 'error');
-                }
-            });
-            
-            document.getElementById('mobile-menu-admin-panel').addEventListener('click', (e) => {
-                e.preventDefault();
-                if (appState.isAdmin) {
-                    switchView('adminPanel');
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                } else {
-                    showNotification('You do not have admin privileges', 'error');
-                }
-            });
-
             // Login/register toggle
             document.getElementById('showRegisterForm').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -3036,55 +2602,26 @@
             });
             
             // Login form
-            document.getElementById('loginButton').addEventListener('click', () => {
-                const username = document.getElementById('loginUsername').value.trim();
+            document.getElementById('loginButton').addEventListener('click', async () => {
+                const email = document.getElementById('loginEmail').value.trim();
                 const password = document.getElementById('loginPassword').value;
                 
-                if (!username || !password) {
-                    showNotification('Please enter both username and password', 'error');
+                if (!email || !password) {
+                    showNotification('Please enter both email and password', 'error');
                     return;
                 }
                 
-                const user = appState.users.find(u => 
-                    (u.username.toLowerCase() === username.toLowerCase() || u.email.toLowerCase() === username.toLowerCase()) && 
-                    u.password === password
-                );
+                const result = await signIn(email, password);
                 
-                if (user) {
-                    // Login successful
-                    appState.currentUser = user;
-                    appState.isAdmin = user.role === 'admin';
-                    
-                    // Save current user to localStorage
-                    saveToLocalStorage(STORAGE_KEYS.CURRENT_USER, user.id);
-                    
-                    // Update UI for logged in user
-                    document.getElementById('authScreen').classList.add('hidden');
-                    document.getElementById('userInitial').textContent = user.username.charAt(0).toUpperCase();
-                    document.getElementById('mobileUserInitial').textContent = user.username.charAt(0).toUpperCase();
-                    document.getElementById('mobileUsername').textContent = user.username;
-                    document.getElementById('mobileUserEmail').textContent = user.email;
-                    
-                    // Show admin panel link if user is admin
-                    if (appState.isAdmin) {
-                        document.getElementById('menu-admin-panel').classList.remove('hidden');
-                        document.getElementById('mobile-menu-admin-panel').classList.remove('hidden');
-                    } else {
-                        document.getElementById('menu-admin-panel').classList.add('hidden');
-                        document.getElementById('mobile-menu-admin-panel').classList.add('hidden');
-                    }
-                    
-                    // Initialize dashboard
-                    switchView('dashboard');
-                    
-                    showNotification(`Welcome back, ${user.username}!`);
+                if (result.success) {
+                    await initializeUserSession();
                 } else {
-                    showNotification('Invalid username or password', 'error');
+                    showNotification(result.error, 'error');
                 }
             });
             
             // Register form
-            document.getElementById('registerButton').addEventListener('click', () => {
+            document.getElementById('registerButton').addEventListener('click', async () => {
                 const username = document.getElementById('registerUsername').value.trim();
                 const email = document.getElementById('registerEmail').value.trim();
                 const password = document.getElementById('registerPassword').value;
@@ -3094,61 +2631,22 @@
                     return;
                 }
                 
-                // Validate email format
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
                     showNotification('Please enter a valid email address', 'error');
                     return;
                 }
                 
-                // Check if username or email already exists
-                if (appState.users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
-                    showNotification('Username already taken', 'error');
-                    return;
+                const result = await signUp(email, password, username);
+                
+                if (result.success) {
+                    showNotification(`Welcome to Collectible Realm, ${username}!`);
+                    await initializeUserSession();
+                } else {
+                    showNotification(result.error, 'error');
                 }
-                
-                if (appState.users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
-                    showNotification('Email already registered', 'error');
-                    return;
-                }
-                
-                // Create new user
-                const newUser = {
-                    id: generateUniqueId(),
-                    username,
-                    email,
-                    password,
-                    role: 'user',
-                    createdAt: new Date().toISOString()
-                };
-                
-                appState.users.push(newUser);
-                saveAppState();
-                
-                // Login the new user
-                appState.currentUser = newUser;
-                appState.isAdmin = false;
-                
-                // Save current user to localStorage
-                saveToLocalStorage(STORAGE_KEYS.CURRENT_USER, newUser.id);
-                
-                // Update UI for logged in user
-                document.getElementById('authScreen').classList.add('hidden');
-                document.getElementById('userInitial').textContent = newUser.username.charAt(0).toUpperCase();
-                document.getElementById('mobileUserInitial').textContent = newUser.username.charAt(0).toUpperCase();
-                document.getElementById('mobileUsername').textContent = newUser.username;
-                document.getElementById('mobileUserEmail').textContent = newUser.email;
-                
-                // Hide admin panel link
-                document.getElementById('menu-admin-panel').classList.add('hidden');
-                document.getElementById('mobile-menu-admin-panel').classList.add('hidden');
-                
-                // Initialize dashboard
-                switchView('dashboard');
-                
-                showNotification(`Welcome to Collectible Realm, ${newUser.username}!`);
             });
-
+            
             // Profile menu items
             document.getElementById('menu-profile').addEventListener('click', (e) => {
                 e.preventDefault();
@@ -3175,73 +2673,45 @@
                 document.getElementById('mobileMenu').classList.add('hidden');
             });
             
-            // Update profile button
-            document.getElementById('updateProfileButton').addEventListener('click', () => {
-                const newUsername = document.getElementById('updateUsername').value.trim();
-                const newEmail = document.getElementById('updateEmail').value.trim();
-                const currentPassword = document.getElementById('currentPassword').value;
-                const newPassword = document.getElementById('newPassword').value;
-                
-                // Validate inputs
-                if (!newUsername || !newEmail) {
-                    showNotification('Username and email are required', 'error');
-                    return;
+            // Admin panel links
+            document.getElementById('menu-admin-panel').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (appState.isAdmin) {
+                    switchView('adminPanel');
+                    document.getElementById('userMenu').classList.add('hidden');
+                } else {
+                    showNotification('You do not have admin privileges', 'error');
                 }
-                
-                // Validate current password
-                if (currentPassword !== appState.currentUser.password) {
-                    showNotification('Current password is incorrect', 'error');
-                    return;
+            });
+            
+            document.getElementById('mobile-menu-admin-panel').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (appState.isAdmin) {
+                    switchView('adminPanel');
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                } else {
+                    showNotification('You do not have admin privileges', 'error');
                 }
-                
-                // Check if username is taken by another user
-                const usernameExists = appState.users.some(u => 
-                    u.id !== appState.currentUser.id && 
-                    u.username.toLowerCase() === newUsername.toLowerCase()
-                );
-                
-                if (usernameExists) {
-                    showNotification('Username is already taken', 'error');
-                    return;
-                }
-                
-                // Check if email is taken by another user
-                const emailExists = appState.users.some(u => 
-                    u.id !== appState.currentUser.id && 
-                    u.email.toLowerCase() === newEmail.toLowerCase()
-                );
-                
-                if (emailExists) {
-                    showNotification('Email is already registered', 'error');
-                    return;
-                }
-                
-                // Update the user
-                appState.currentUser.username = newUsername;
-                appState.currentUser.email = newEmail;
-                
-                // Update password if provided
-                if (newPassword) {
-                    appState.currentUser.password = newPassword;
-                }
-                
-                // Update the UI
-                document.getElementById('userInitial').textContent = newUsername.charAt(0).toUpperCase();
-                document.getElementById('mobileUserInitial').textContent = newUsername.charAt(0).toUpperCase();
-                document.getElementById('mobileUsername').textContent = newUsername;
-                document.getElementById('mobileUserEmail').textContent = newEmail;
-                
-                // Save changes to localStorage
-                saveAppState();
-                
-                // Update profile view
-                renderProfileView();
-                
-                // Clear password fields
-                document.getElementById('currentPassword').value = '';
-                document.getElementById('newPassword').value = '';
-                
-                showNotification('Profile updated successfully');
+            });
+            
+            // Logout
+            document.getElementById('menu-sign-out').addEventListener('click', async (e) => {
+                e.preventDefault();
+                await logout();
+            });
+            
+            document.getElementById('mobile-menu-sign-out').addEventListener('click', async (e) => {
+                e.preventDefault();
+                await logout();
+            });
+            
+            // Modal close buttons
+            document.getElementById('createCodeCancelButton').addEventListener('click', () => {
+                document.getElementById('createCodeModal').classList.add('hidden');
+            });
+            
+            document.getElementById('collectibleDetailCloseButton').addEventListener('click', () => {
+                document.getElementById('collectibleDetailModal').classList.add('hidden');
             });
             
             // Settings toggles
@@ -3249,94 +2719,36 @@
                 document.documentElement.classList.toggle('dark');
                 const isDarkMode = document.documentElement.classList.contains('dark');
                 
-                // Update toggle appearance
                 document.getElementById('settingsDarkModeToggle').classList.toggle('bg-primary-500', isDarkMode);
                 document.getElementById('settingsDarkModeToggle').classList.toggle('bg-gray-200', !isDarkMode);
                 document.getElementById('settingsDarkModeToggle').querySelector('span').classList.toggle('translate-x-5', isDarkMode);
-                
-                // Save setting
-                const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {});
-                settings.darkMode = isDarkMode;
-                saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings);
             });
             
             document.getElementById('animationToggle').addEventListener('click', () => {
-                // Get current state
                 const toggle = document.getElementById('animationToggle');
                 const isEnabled = toggle.classList.contains('bg-primary-500');
                 
-                // Toggle state
                 toggle.classList.toggle('bg-primary-500', !isEnabled);
                 toggle.classList.toggle('bg-gray-200', isEnabled);
                 toggle.querySelector('span').classList.toggle('translate-x-5', !isEnabled);
                 
-                // Save setting
-                const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {});
-                settings.animations = !isEnabled;
-                saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings);
-                
-                // Implement animation toggling (beyond scope for this example)
                 if (isEnabled) {
-                    // Disable animations
                     showNotification('Animations disabled');
                 } else {
-                    // Enable animations
                     showNotification('Animations enabled');
                 }
             });
             
-            document.getElementById('notifyCollectiblesToggle').addEventListener('click', () => {
-                // Get current state
-                const toggle = document.getElementById('notifyCollectiblesToggle');
-                const isEnabled = toggle.classList.contains('bg-primary-500');
-                
-                // Toggle state
-                toggle.classList.toggle('bg-primary-500', !isEnabled);
-                toggle.classList.toggle('bg-gray-200', isEnabled);
-                toggle.querySelector('span').classList.toggle('translate-x-5', !isEnabled);
-                
-                // Save setting
-                const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {});
-                settings.notifyNewCollectibles = !isEnabled;
-                saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings);
-            });
-            
-            document.getElementById('notifyExpirationToggle').addEventListener('click', () => {
-                // Get current state
-                const toggle = document.getElementById('notifyExpirationToggle');
-                const isEnabled = toggle.classList.contains('bg-primary-500');
-                
-                // Toggle state
-                toggle.classList.toggle('bg-primary-500', !isEnabled);
-                toggle.classList.toggle('bg-gray-200', isEnabled);
-                toggle.querySelector('span').classList.toggle('translate-x-5', !isEnabled);
-                
-                // Save setting
-                const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {});
-                settings.notifyExpirations = !isEnabled;
-                saveToLocalStorage(STORAGE_KEYS.SETTINGS, settings);
-            });
-            
             // Data management
             document.getElementById('exportDataButton').addEventListener('click', () => {
-                // Create data export
                 const exportData = {
-                    user: {
-                        username: appState.currentUser.username,
-                        email: appState.currentUser.email,
-                        createdAt: appState.currentUser.createdAt
-                    },
-                    collectibles: appState.collectibles.filter(c => c.userId === appState.currentUser.id),
-                    redemptionHistory: appState.redemptionHistory.filter(h => h.userId === appState.currentUser.id),
-                    activities: appState.activities.filter(a => a.userId === appState.currentUser.id),
+                    profile: appState.profile,
+                    collectibles: appState.collectibles,
+                    redemptionHistory: appState.redemptionHistory,
+                    activities: appState.activities,
                     exportDate: new Date().toISOString()
                 };
                 
-                // Create data URL for the export
-                const dataStr = JSON.stringify(exportData, null, 2);
-                const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-                
-                // Show confirmation with export data
                 showConfirmation(
                     'Export Data',
                     'Your data is ready for export. In a real application, you would be able to download this as a file.',
@@ -3350,82 +2762,91 @@
                     'Clear All Data',
                     'Are you sure you want to clear all your data? This will remove all your collectibles, redemption history, and activities. This action cannot be undone.',
                     'Clear Data',
-                    () => {
-                        // Only clear the current user's data
-                        appState.collectibles = appState.collectibles.filter(c => c.userId !== appState.currentUser.id);
-                        appState.redemptionHistory = appState.redemptionHistory.filter(h => h.userId !== appState.currentUser.id);
-                        appState.activities = appState.activities.filter(a => a.userId !== appState.currentUser.id);
-                        
-                        // Save changes
-                        saveAppState();
-                        
-                        // Update the UI
-                        switchView('dashboard');
-                        showNotification('All your data has been cleared');
+                    async () => {
+                        // In a real implementation, you would delete the user's data from the database
+                        showNotification('Data clearing is not implemented in this demo');
                     }
                 );
             });
-
-            // Logout
-            document.getElementById('menu-sign-out').addEventListener('click', (e) => {
-                e.preventDefault();
-                logout();
+            
+            // Admin panel - create code button
+            document.getElementById('createCodeButton').addEventListener('click', () => {
+                document.getElementById('codeInput').value = '';
+                document.getElementById('itemNameInput').value = '';
+                document.getElementById('itemRaritySelect').value = 'common';
+                document.getElementById('expirationDateInput').value = '';
+                
+                populateEmojiCategories();
+                updateItemPreview();
+                
+                document.getElementById('modal-title').textContent = 'Create New Redemption Code';
+                document.getElementById('createCodeConfirmButton').textContent = 'Create';
+                
+                document.getElementById('createCodeModal').classList.remove('hidden');
+                
+                const confirmButton = document.getElementById('createCodeConfirmButton');
+                const newButton = confirmButton.cloneNode(true);
+                confirmButton.parentNode.replaceChild(newButton, confirmButton);
+                
+                newButton.addEventListener('click', async () => {
+                    const code = document.getElementById('codeInput').value.trim();
+                    const itemName = document.getElementById('itemNameInput').value.trim();
+                    const selectedEmoji = document.querySelector('.emoji-item.selected');
+                    const itemGraphic = selectedEmoji ? selectedEmoji.getAttribute('data-value') : 'shield';
+                    const itemRarity = document.getElementById('itemRaritySelect').value;
+                    const expirationDate = document.getElementById('expirationDateInput').value || null;
+                    
+                    if (!code || !itemName) {
+                        showNotification('Please fill in all required fields', 'error');
+                        return;
+                    }
+                    
+                    const result = await createCode({
+                        code,
+                        itemName,
+                        itemGraphic,
+                        rarity: itemRarity,
+                        expirationDate
+                    });
+                    
+                    if (result.success) {
+                        document.getElementById('createCodeModal').classList.add('hidden');
+                        await loadCodes();
+                        renderAdminCodes();
+                        showNotification(`Code ${code} created successfully`);
+                    } else {
+                        showNotification(result.error, 'error');
+                    }
+                });
             });
             
-            document.getElementById('mobile-menu-sign-out').addEventListener('click', (e) => {
-                e.preventDefault();
-                logout();
+            // Generate random code
+            document.getElementById('generateCodeButton').addEventListener('click', () => {
+                document.getElementById('codeInput').value = generateCode();
             });
+            
+            // Item preview live update
+            document.getElementById('itemNameInput').addEventListener('input', updateItemPreview);
+            document.getElementById('itemRaritySelect').addEventListener('change', updateItemPreview);
         }
 
-        function logout() {
-            appState.currentUser = null;
-            appState.isAdmin = false;
+        // ===============================
+        // Session Management
+        // ===============================
+        
+        async function initializeUserSession() {
+            if (!appState.currentUser) return;
             
-            // Remove current user from localStorage
-            localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+            // Load user profile and data
+            await loadUserProfile();
             
-            document.getElementById('authScreen').classList.remove('hidden');
-            document.getElementById('authScreen').classList.add('flex');
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
-            document.getElementById('userMenu').classList.add('hidden');
-            document.getElementById('loginUsername').value = '';
-            document.getElementById('loginPassword').value = '';
-            showNotification('You have been signed out');
-        }
-
-        // Initialize the application
-        function initApp() {
-            // Check if data exists in localStorage
-            const dataExists = loadAppState();
-            
-            // Generate mock data if no data exists
-            if (!dataExists) {
-                generateMockData();
-            }
-            
-            // Setup event listeners
-            setupEventListeners();
-            
-            // Load any saved dark mode preference
-            const settings = loadFromLocalStorage(STORAGE_KEYS.SETTINGS, {
-                darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches
-            });
-            
-            if (settings.darkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-            
-            // Show auth screen or dashboard based on login state
-            if (appState.currentUser) {
-                // User is logged in
-                document.getElementById('userInitial').textContent = appState.currentUser.username.charAt(0).toUpperCase();
-                document.getElementById('mobileUserInitial').textContent = appState.currentUser.username.charAt(0).toUpperCase();
-                document.getElementById('mobileUsername').textContent = appState.currentUser.username;
-                document.getElementById('mobileUserEmail').textContent = appState.currentUser.email;
+            if (appState.profile) {
+                // Update UI for logged in user
+                document.getElementById('authScreen').classList.add('hidden');
+                document.getElementById('userInitial').textContent = appState.profile.username.charAt(0).toUpperCase();
+                document.getElementById('mobileUserInitial').textContent = appState.profile.username.charAt(0).toUpperCase();
+                document.getElementById('mobileUsername').textContent = appState.profile.username;
+                document.getElementById('mobileUserEmail').textContent = appState.profile.email;
                 
                 // Show admin panel link if user is admin
                 if (appState.isAdmin) {
@@ -3436,18 +2857,102 @@
                     document.getElementById('mobile-menu-admin-panel').classList.add('hidden');
                 }
                 
-                // Show dashboard
-                document.getElementById('loadingScreen').classList.add('hidden');
+                // Load user data
+                await Promise.all([
+                    loadUserCollectibles(),
+                    loadUserActivities(),
+                    loadUserRedemptionHistory(),
+                    loadCodes()
+                ]);
+                
+                if (appState.isAdmin) {
+                    await loadAllProfiles();
+                }
+                
+                // Initialize dashboard
                 switchView('dashboard');
+                
+                showNotification(`Welcome back, ${appState.profile.username}!`);
+            }
+        }
+
+        async function logout() {
+            const result = await signOut();
+            
+            if (result.success) {
+                // Reset state
+                appState.currentUser = null;
+                appState.profile = null;
+                appState.isAdmin = false;
+                appState.collectibles = [];
+                appState.codes = [];
+                appState.activities = [];
+                appState.redemptionHistory = [];
+                appState.profiles = [];
+                
+                // Show auth screen
+                document.getElementById('authScreen').classList.remove('hidden');
+                document.getElementById('authScreen').classList.add('flex');
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registerForm').classList.add('hidden');
+                document.getElementById('userMenu').classList.add('hidden');
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                
+                showNotification('You have been signed out');
             } else {
-                // No user is logged in
+                showNotification('Error signing out', 'error');
+            }
+        }
+
+        // ===============================
+        // App Initialization
+        // ===============================
+        
+        async function initApp() {
+            // Initialize dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (event.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Check authentication state
+            const { data: { user } } = await supabase.auth.getUser();
+            
+            if (user) {
+                appState.currentUser = user;
+                await initializeUserSession();
+            } else {
+                // Show auth screen
                 document.getElementById('loadingScreen').classList.add('hidden');
                 document.getElementById('authScreen').classList.remove('hidden');
                 document.getElementById('authScreen').classList.add('flex');
             }
+            
+            // Hide loading screen
+            document.getElementById('loadingScreen').classList.add('hidden');
         }
 
-        // Start the app after a short delay to simulate loading
+        // Listen for auth state changes
+        supabase.auth.onAuthStateChange(async (event, session) => {
+            if (event === 'SIGNED_IN' && session) {
+                appState.currentUser = session.user;
+                await initializeUserSession();
+            } else if (event === 'SIGNED_OUT') {
+                await logout();
+            }
+        });
+
+        // Start the app
         setTimeout(initApp, 1000);
     </script>
 </body>
