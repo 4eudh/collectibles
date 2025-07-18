@@ -2713,21 +2713,16 @@
                 buttonText.textContent = 'Creating account...';
                 document.getElementById('registerButton').disabled = true;
                 
-               try {
-    const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-                username: username
-            },
-            // Add the emailRedirectTo property here
-            emailRedirectTo: 'https://4eudh.github.io/collectibles/' 
-        }
-    });
-    // ... rest of your code
-}
-
+                try {
+                    const { data, error } = await supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            data: {
+                                username: username
+                            }
+                        }
+                    });
                     
                     if (error) throw error;
                     
