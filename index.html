@@ -2055,6 +2055,248 @@ const emojiCategories = {
 
         const { showNotification, showConfirmation } = Notifications;
 
+        // ==================== Module: Supabase Bridge ====================
+        const SupabaseBridge = AppModules.define('supabaseBridge', () => {
+            const bridge = {};
+
+            function normalizeError(scope, error) {
+                if (!error) return null;
+                console.error(`[SupabaseBridge] ${scope} failed`, error);
+                showNotification(`${scope} failed: ${error.message || 'Unknown error'}`, 'error');
+                return error;
+            }
+
+            async function fetchWallet(userId) {
+                try {
+                    const { data, error } = await supabase
+                        .from('user_wallets')
+                        .select('*')
+                        .eq('user_id', userId)
+                        .maybeSingle();
+
+                    if (error && error.code !== 'PGRST116') {
+                        throw error;
+                    }
+
+                    return data || null;
+                } catch (error) {
+                    normalizeError('Loading wallet', error);
+                    return null;
+                }
+            }
+
+            async function upsertWallet(userId, wallet) {
+                try {
+                    const payload = {
+                        user_id: userId,
+                        gold: wallet.gold ?? 0,
+                        gems: wallet.gems ?? 0,
+                        dust: wallet.dust ?? 0,
+                        cap: wallet.cap ?? 250000,
+                        last_stipend_at: wallet.last_stipend_at ?? null,
+                        metadata: wallet.metadata || null,
+                        updated_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase
+                        .from('user_wallets')
+                        .upsert(payload, { onConflict: 'user_id' });
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Saving wallet', error);
+                    return false;
+                }
+            }
+
+            async function fetchLedger(userId) {
+                try {
+                    const { data, error } = await supabase
+                        .from('wallet_ledger')
+                        .select('*')
+                        .eq('user_id', userId)
+                        .order('created_at', { ascending: false })
+                        .limit(50);
+
+                    if (error) throw error;
+                    return data || [];
+                } catch (error) {
+                    normalizeError('Loading wallet ledger', error);
+                    return [];
+                }
+            }
+
+            async function appendLedgerEntry(userId, entry) {
+                try {
+                    const { error } = await supabase
+                        .from('wallet_ledger')
+                        .insert([{
+                            user_id: userId,
+                            entry_type: entry.type,
+                            description: entry.description,
+                            delta_gold: entry.delta.gold ?? 0,
+                            delta_gems: entry.delta.gems ?? 0,
+                            delta_dust: entry.delta.dust ?? 0,
+                            metadata: entry.metadata || null,
+                            created_at: entry.created_at || new Date().toISOString()
+                        }]);
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Recording ledger entry', error);
+                    return false;
+                }
+            }
+
+            async function fetchMarketplaceListings({ userId, includeGlobal = true }) {
+                try {
+                    let playerListings = [];
+                    let globalListings = [];
+
+                    if (userId) {
+                        const { data, error } = await supabase
+                            .from('marketplace_listings')
+                            .select('*')
+                            .eq('seller_id', userId)
+                            .order('created_at', { ascending: false })
+                            .limit(50);
+
+                        if (error) throw error;
+                        playerListings = data || [];
+                    }
+
+                    if (includeGlobal) {
+                        const { data, error } = await supabase
+                            .from('marketplace_listings')
+                            .select('*')
+                            .eq('origin', 'global')
+                            .order('created_at', { ascending: false })
+                            .limit(50);
+
+                        if (error) throw error;
+                        globalListings = data || [];
+                    }
+
+                    return { playerListings, globalListings };
+                } catch (error) {
+                    normalizeError('Loading marketplace listings', error);
+                    return { playerListings: [], globalListings: [] };
+                }
+            }
+
+            async function upsertMarketplaceListing(listing) {
+                try {
+                    const payload = {
+                        id: listing.id,
+                        seller_id: listing.seller_id || listing.seller,
+                        seller_display_name: listing.seller_display_name || listing.seller || null,
+                        item_name: listing.item_name,
+                        item_graphic: listing.item_graphic,
+                        rarity: listing.rarity,
+                        price_gold: listing.currency === 'gold' ? listing.price : listing.altPrice || 0,
+                        price_gems: listing.currency === 'gems' ? listing.price : listing.altPrice || 0,
+                        currency_primary: listing.currency,
+                        currency_secondary: listing.currency === 'gold' ? 'gems' : 'gold',
+                        demand: listing.demand || null,
+                        status: listing.status || 'available',
+                        origin: listing.origin || 'player',
+                        metadata: listing.metadata || null,
+                        updated_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase
+                        .from('marketplace_listings')
+                        .upsert(payload);
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Saving marketplace listing', error);
+                    return false;
+                }
+            }
+
+            async function removeMarketplaceListing(listingId) {
+                try {
+                    const { error } = await supabase
+                        .from('marketplace_listings')
+                        .delete()
+                        .eq('id', listingId);
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Removing marketplace listing', error);
+                    return false;
+                }
+            }
+
+            async function markListingStatus(listingId, status) {
+                try {
+                    const { error } = await supabase
+                        .from('marketplace_listings')
+                        .update({ status, updated_at: new Date().toISOString() })
+                        .eq('id', listingId);
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Updating listing status', error);
+                    return false;
+                }
+            }
+
+            async function recordMarketplaceTransaction(transaction) {
+                try {
+                    const { error } = await supabase
+                        .from('marketplace_transactions')
+                        .insert([transaction]);
+
+                    if (error) throw error;
+                    return true;
+                } catch (error) {
+                    normalizeError('Recording marketplace transaction', error);
+                    return false;
+                }
+            }
+
+            async function fetchMarketplaceStats() {
+                try {
+                    const { data, error } = await supabase
+                        .from('marketplace_transactions_view')
+                        .select('*')
+                        .limit(1)
+                        .maybeSingle();
+
+                    if (error && error.code !== 'PGRST116') {
+                        throw error;
+                    }
+
+                    return data || null;
+                } catch (error) {
+                    normalizeError('Loading marketplace stats', error);
+                    return null;
+                }
+            }
+
+            Object.assign(bridge, {
+                fetchWallet,
+                upsertWallet,
+                fetchLedger,
+                appendLedgerEntry,
+                fetchMarketplaceListings,
+                upsertMarketplaceListing,
+                removeMarketplaceListing,
+                markListingStatus,
+                recordMarketplaceTransaction,
+                fetchMarketplaceStats
+            });
+
+            return bridge;
+        });
+
         // ==================== Module: Engagement Systems ====================
         const Engagement = AppModules.define('engagement', () => {
             const QUEST_STORAGE_PREFIX = 'collectibleRealm::quests::';
@@ -2852,20 +3094,22 @@ const emojiCategories = {
 
         // ==================== Module: Economy Systems ====================
         const Economy = AppModules.define('economy', () => {
-            const LEDGER_STORAGE_KEY = 'collectibleRealm::ledger::';
-            const STIPEND_STORAGE_KEY = 'collectibleRealm::stipend::';
-            const REFORGE_STORAGE_KEY = 'collectibleRealm::reforge::';
-
             const rarityValues = {
-                common: { gold: 45, gems: 0, dust: 6 },
-                uncommon: { gold: 70, gems: 1, dust: 10 },
-                rare: { gold: 120, gems: 2, dust: 18 },
-                epic: { gold: 220, gems: 4, dust: 30 },
-                legendary: { gold: 360, gems: 7, dust: 48 },
-                mythic: { gold: 520, gems: 11, dust: 70 }
+                common: { gold: 80, gems: 0, dust: 6 },
+                uncommon: { gold: 150, gems: 0, dust: 12 },
+                rare: { gold: 380, gems: 1, dust: 24 },
+                epic: { gold: 790, gems: 2, dust: 46 },
+                legendary: { gold: 1525, gems: 4, dust: 80 },
+                mythic: { gold: 2480, gems: 7, dust: 140 }
             };
 
-            function ensureWallet() {
+            let hydratePromise = null;
+
+            function getBridge() {
+                return AppModules.use('supabaseBridge');
+            }
+
+            function ensureWalletState() {
                 if (!appState.wallet) {
                     stateStore.setState({
                         wallet: {
@@ -2873,77 +3117,51 @@ const emojiCategories = {
                             gems: 0,
                             dust: 0,
                             cap: 250000,
-                            ledger: []
+                            ledger: [],
+                            metadata: {},
+                            last_stipend_at: null,
+                            synced: false
                         }
                     }, 'economy:init');
-                }
-            }
-
-            function ledgerKey() {
-                return `${LEDGER_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
-            }
-
-            function stipendKey() {
-                return `${STIPEND_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
-            }
-
-            function reforgeKey() {
-                return `${REFORGE_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
-            }
-
-            function loadLedger() {
-                if (typeof window === 'undefined' || !window.localStorage) {
-                    return (appState.wallet?.ledger || []).slice(0, 30);
-                }
-                try {
-                    const raw = window.localStorage.getItem(ledgerKey());
-                    if (!raw) return (appState.wallet?.ledger || []).slice(0, 30);
-                    const parsed = JSON.parse(raw);
-                    return Array.isArray(parsed) ? parsed.slice(0, 30) : [];
-                } catch (error) {
-                    console.warn('[Economy] Failed to parse ledger cache', error);
-                    return (appState.wallet?.ledger || []).slice(0, 30);
-                }
-            }
-
-            function persistLedger(entries) {
-                if (typeof window === 'undefined' || !window.localStorage) return;
-                try {
-                    window.localStorage.setItem(ledgerKey(), JSON.stringify(entries.slice(0, 30)));
-                } catch (error) {
-                    console.warn('[Economy] Failed to persist ledger', error);
-                }
-            }
-
-            function loadReforgedSet() {
-                if (typeof window === 'undefined' || !window.localStorage) {
-                    return new Set();
-                }
-                try {
-                    const raw = window.localStorage.getItem(reforgeKey());
-                    if (!raw) return new Set();
-                    const parsed = JSON.parse(raw);
-                    const today = new Date().toISOString().split('T')[0];
-                    if (!parsed || parsed.date !== today) {
-                        return new Set();
+                } else {
+                    const wallet = appState.wallet;
+                    if (!Array.isArray(wallet.ledger)) {
+                        stateStore.setState({ wallet: { ...wallet, ledger: [] } }, 'economy:normalize-ledger');
                     }
-                    return new Set(parsed.keys || []);
-                } catch (error) {
-                    console.warn('[Economy] Failed to load reforge cache', error);
-                    return new Set();
+                    if (wallet.metadata === undefined) {
+                        stateStore.setState({ wallet: { ...wallet, metadata: {} } }, 'economy:normalize-metadata');
+                    }
+                }
+
+                if (!appState.economySummary) {
+                    stateStore.setState({
+                        economySummary: {
+                            dailyIncome: 0,
+                            tradePower: 0,
+                            barterScore: 0
+                        }
+                    }, 'economy:init-summary');
                 }
             }
 
-            function persistReforgedSet(set) {
-                if (typeof window === 'undefined' || !window.localStorage) return;
-                try {
-                    window.localStorage.setItem(reforgeKey(), JSON.stringify({
-                        date: new Date().toISOString().split('T')[0],
-                        keys: Array.from(set)
-                    }));
-                } catch (error) {
-                    console.warn('[Economy] Failed to persist reforge cache', error);
-                }
+            function mapLedgerRow(row) {
+                if (!row) return null;
+                return {
+                    id: row.id || `${row.entry_type || row.type}-${row.created_at || Date.now()}`,
+                    type: row.entry_type || row.type || 'entry',
+                    description: row.description || '',
+                    delta: {
+                        gold: row.delta_gold ?? row.delta?.gold ?? 0,
+                        gems: row.delta_gems ?? row.delta?.gems ?? 0,
+                        dust: row.delta_dust ?? row.delta?.dust ?? 0
+                    },
+                    metadata: row.metadata || {},
+                    created_at: row.created_at || row.inserted_at || new Date().toISOString()
+                };
+            }
+
+            function currentLedger() {
+                return Array.isArray(appState.wallet?.ledger) ? appState.wallet.ledger : [];
             }
 
             function baseFromCollectibles() {
@@ -2987,11 +3205,11 @@ const emojiCategories = {
             }
 
             function computeSummary(balances) {
-                const tradePower = Math.round(balances.gold * 1.5 + balances.gems * 120 + balances.dust * 5);
+                const tradePower = Math.round((balances.gold || 0) * 1.5 + (balances.gems || 0) * 120 + (balances.dust || 0) * 5);
                 return {
                     dailyIncome: Math.round(tradePower * 0.05),
                     tradePower,
-                    barterScore: Math.min(999, Math.round(balances.gems * 15 + balances.dust * 2))
+                    barterScore: Math.min(999, Math.round((balances.gems || 0) * 15 + (balances.dust || 0) * 2))
                 };
             }
 
@@ -3010,23 +3228,9 @@ const emojiCategories = {
                 };
             }
 
-            function appendLedger(entry, options = {}) {
-                const existing = appState.wallet?.ledger && appState.wallet.ledger.length
-                    ? appState.wallet.ledger
-                    : loadLedger();
-                const ledger = [entry, ...existing].slice(0, 30);
-                persistLedger(ledger);
-                stateStore.setState({
-                    wallet: {
-                        ...appState.wallet,
-                        ledger
-                    }
-                }, `economy:ledger:${entry.type}`);
-                sync({ reason: options.reason || entry.type });
-                return entry;
-            }
+            async function hydrateWallet(options = {}) {
+                ensureWalletState();
 
-            function sync(options = {}) {
                 if (!appState.currentUser) {
                     stateStore.setState({
                         wallet: {
@@ -3034,48 +3238,129 @@ const emojiCategories = {
                             gems: 0,
                             dust: 0,
                             cap: 250000,
-                            ledger: []
+                            ledger: [],
+                            metadata: {},
+                            last_stipend_at: null,
+                            synced: true
                         },
                         economySummary: {
                             dailyIncome: 0,
                             tradePower: 0,
                             barterScore: 0
                         }
-                    }, 'economy:reset');
-                    return {
-                        balances: appState.wallet,
-                        summary: appState.economySummary
-                    };
+                    }, 'economy:guest');
+                    return appState.wallet;
                 }
 
-                ensureWallet();
+                if (appState.wallet.synced && !options.force) {
+                    return appState.wallet;
+                }
+
+                if (hydratePromise && !options.force) {
+                    return hydratePromise;
+                }
+
+                const bridge = getBridge();
+
+                hydratePromise = (async () => {
+                    const [walletRow, ledgerRows] = await Promise.all([
+                        bridge.fetchWallet(appState.currentUser.id),
+                        bridge.fetchLedger(appState.currentUser.id)
+                    ]);
+
+                    const ledger = (ledgerRows || [])
+                        .map(mapLedgerRow)
+                        .filter(Boolean)
+                        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                        .slice(0, 50);
+
+                    const walletData = {
+                        gold: walletRow?.gold ?? 0,
+                        gems: walletRow?.gems ?? 0,
+                        dust: walletRow?.dust ?? 0,
+                        cap: walletRow?.cap ?? 250000,
+                        metadata: walletRow?.metadata || {},
+                        last_stipend_at: walletRow?.last_stipend_at || null,
+                        ledger,
+                        synced: true
+                    };
+
+                    stateStore.setState({
+                        wallet: {
+                            ...appState.wallet,
+                            ...walletData
+                        }
+                    }, 'economy:hydrate');
+
+                    await recalcAndPersist('economy:hydrate');
+                    return appState.wallet;
+                })().finally(() => {
+                    hydratePromise = null;
+                });
+
+                return hydratePromise;
+            }
+
+            async function recalcAndPersist(description = 'economy:recalc') {
+                ensureWalletState();
+
                 const baseBalances = baseFromCollectibles();
-                const ledger = loadLedger();
+                const ledger = currentLedger();
                 const totals = aggregateLedger(baseBalances, ledger);
-                const summary = computeSummary(totals);
+
+                const walletUpdate = {
+                    ...appState.wallet,
+                    gold: Math.max(0, Math.min(appState.wallet.cap || 250000, Math.round(totals.gold))),
+                    gems: Math.max(0, Math.round(totals.gems)),
+                    dust: Math.max(0, Math.round(totals.dust)),
+                    ledger,
+                    synced: true
+                };
+
+                const summary = computeSummary(walletUpdate);
+
+                stateStore.setState({
+                    wallet: walletUpdate,
+                    economySummary: summary
+                }, description);
+
+                if (appState.currentUser) {
+                    await getBridge().upsertWallet(appState.currentUser.id, walletUpdate);
+                }
+
+                return { balances: walletUpdate, summary };
+            }
+
+            async function appendLedger(entry, options = {}) {
+                await hydrateWallet();
+
+                const ledger = [entry, ...currentLedger()]
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .slice(0, 50);
 
                 stateStore.setState({
                     wallet: {
                         ...appState.wallet,
-                        gold: Math.max(0, Math.min(appState.wallet.cap || 250000, Math.round(totals.gold))),
-                        gems: Math.max(0, Math.round(totals.gems)),
-                        dust: Math.max(0, Math.round(totals.dust)),
-                        ledger: ledger.slice(0, 30)
-                    },
-                    economySummary: summary
-                }, `economy:sync${options.reason ? `:${options.reason}` : ''}`);
+                        ledger
+                    }
+                }, `economy:ledger:${options.reason || entry.type}`);
 
-                persistLedger(appState.wallet.ledger || []);
+                if (appState.currentUser) {
+                    await getBridge().appendLedgerEntry(appState.currentUser.id, entry);
+                }
 
-                return {
-                    balances: appState.wallet,
-                    summary
-                };
+                const result = await recalcAndPersist(`economy:ledger:${options.reason || entry.type}`);
+                return { entry, ...result };
             }
 
-            function rewardForRedemption(code) {
+            async function sync(options = {}) {
+                await hydrateWallet(options);
+                return recalcAndPersist(`economy:sync${options.reason ? `:${options.reason}` : ''}`);
+            }
+
+            async function rewardForRedemption(code) {
                 if (!appState.currentUser) return null;
-                ensureWallet();
+                await hydrateWallet();
                 const values = rarityValues[code.rarity] || rarityValues.common;
                 const entry = createLedgerEntry(
                     'reward',
@@ -3091,27 +3376,20 @@ const emojiCategories = {
                         code: code.code
                     }
                 );
-                return appendLedger(entry, { reason: 'redeem' });
+                await appendLedger(entry, { reason: 'redeem' });
+                return entry;
             }
 
-            function grantDailyStipend() {
+            async function grantDailyStipend() {
                 if (!appState.currentUser) {
                     return { success: false, reason: 'not-signed-in' };
                 }
 
-                ensureWallet();
+                await hydrateWallet();
 
                 const todayKey = new Date().toISOString().split('T')[0];
-                if (typeof window !== 'undefined' && window.localStorage) {
-                    try {
-                        const claimed = window.localStorage.getItem(stipendKey());
-                        if (claimed === todayKey) {
-                            return { success: false, reason: 'already-claimed' };
-                        }
-                        window.localStorage.setItem(stipendKey(), todayKey);
-                    } catch (error) {
-                        console.warn('[Economy] Unable to persist stipend state', error);
-                    }
+                if (appState.wallet.last_stipend_at === todayKey) {
+                    return { success: false, reason: 'already-claimed' };
                 }
 
                 const progression = appState.progression || { level: 1, streak: 0 };
@@ -3121,17 +3399,31 @@ const emojiCategories = {
                     dust: 35
                 };
 
+                stateStore.setState({
+                    wallet: {
+                        ...appState.wallet,
+                        last_stipend_at: todayKey
+                    }
+                }, 'economy:stipend-mark');
+
+                await getBridge().upsertWallet(appState.currentUser.id, {
+                    ...appState.wallet,
+                    last_stipend_at: todayKey,
+                    metadata: appState.wallet.metadata
+                });
+
                 const entry = createLedgerEntry('stipend', 'Daily realm stipend', reward);
-                appendLedger(entry, { reason: 'stipend' });
+                await appendLedger(entry, { reason: 'stipend' });
                 return { success: true, entry };
             }
 
-            function convertDuplicatesToDust() {
+            async function convertDuplicatesToDust() {
                 if (!appState.currentUser) {
                     return { success: false, reason: 'not-signed-in' };
                 }
 
-                ensureWallet();
+                await hydrateWallet();
+
                 const duplicates = new Map();
 
                 (appState.collectibles || []).forEach(item => {
@@ -3141,10 +3433,15 @@ const emojiCategories = {
                     duplicates.set(key, record);
                 });
 
-                const processed = loadReforgedSet();
+                const todayKey = new Date().toISOString().split('T')[0];
+                const metadata = { ...(appState.wallet.metadata || {}) };
+                const processedRecord = metadata.reforge && metadata.reforge.date === todayKey
+                    ? new Set(metadata.reforge.keys || [])
+                    : new Set();
+
                 const entries = Array.from(duplicates.entries())
                     .filter(([, entry]) => entry.copies > 1)
-                    .filter(([key]) => !processed.has(key));
+                    .filter(([key]) => !processedRecord.has(key));
 
                 if (!entries.length) {
                     return { success: false, reason: 'no-duplicates' };
@@ -3152,11 +3449,26 @@ const emojiCategories = {
 
                 const dustAward = entries.reduce((sum, [key, entry]) => {
                     const values = rarityValues[entry.reference.rarity] || rarityValues.common;
-                    processed.add(key);
+                    processedRecord.add(key);
                     return sum + (entry.copies - 1) * Math.round(values.dust * 1.5);
                 }, 0);
 
-                persistReforgedSet(processed);
+                metadata.reforge = {
+                    date: todayKey,
+                    keys: Array.from(processedRecord)
+                };
+
+                stateStore.setState({
+                    wallet: {
+                        ...appState.wallet,
+                        metadata
+                    }
+                }, 'economy:reforge-metadata');
+
+                await getBridge().upsertWallet(appState.currentUser.id, {
+                    ...appState.wallet,
+                    metadata
+                });
 
                 const ledgerEntry = createLedgerEntry(
                     'reforge',
@@ -3164,7 +3476,7 @@ const emojiCategories = {
                     { dust: dustAward }
                 );
 
-                appendLedger(ledgerEntry, { reason: 'duplicate-conversion' });
+                await appendLedger(ledgerEntry, { reason: 'duplicate-conversion' });
                 return {
                     success: true,
                     entry: ledgerEntry,
@@ -3173,12 +3485,13 @@ const emojiCategories = {
                 };
             }
 
-            function spend(cost = {}, metadata = {}) {
+            async function spend(cost = {}, metadata = {}) {
                 if (!appState.currentUser) {
                     return { success: false, reason: 'not-signed-in' };
                 }
 
-                ensureWallet();
+                await hydrateWallet();
+
                 const shortages = [];
                 if ((cost.gold || 0) > (appState.wallet.gold || 0)) shortages.push('gold');
                 if ((cost.gems || 0) > (appState.wallet.gems || 0)) shortages.push('gems');
@@ -3199,12 +3512,13 @@ const emojiCategories = {
                     { ...metadata, cost }
                 );
 
-                appendLedger(entry, { reason: 'spend' });
+                await appendLedger(entry, { reason: 'spend' });
                 return { success: true, entry };
             }
 
-            function rewardForListing(listing) {
+            async function rewardForListing(listing) {
                 if (!appState.currentUser) return null;
+                await hydrateWallet();
                 const values = rarityValues[listing.rarity] || rarityValues.common;
                 const reward = {
                     gold: Math.min(150, Math.round((listing.price || values.gold) * 0.1 + 40)),
@@ -3216,7 +3530,8 @@ const emojiCategories = {
                     reward,
                     { listingId: listing.id, rarity: listing.rarity }
                 );
-                return appendLedger(entry, { reason: 'listing' });
+                await appendLedger(entry, { reason: 'listing' });
+                return entry;
             }
 
             function estimateValue(item, { duplicates = 0 } = {}) {
@@ -3226,11 +3541,13 @@ const emojiCategories = {
                 const values = rarityValues[item.rarity] || rarityValues.common;
                 const demandBoost = appState.journeyInsights?.favouriteEmojiKey === item.item_graphic ? 1.1 : 1;
                 const duplicateBoost = 1 + Math.min(duplicates * 0.12, 0.5);
-                const streakBoost = 1 + Math.min((appState.progression?.streak || 0) / 50, 0.25);
-                const gold = Math.round(values.gold * 1.4 * duplicateBoost * demandBoost * streakBoost);
-                const gems = values.gems ? Math.max(1, Math.round((values.gems + duplicates) * demandBoost * 0.8)) : 0;
-                const dust = Math.round(values.dust * duplicateBoost);
-                return { gold, gems, dust };
+                const rarityBoost = 1 + (['rare', 'epic', 'legendary', 'mythic'].indexOf(item.rarity) + 1) * 0.08;
+
+                return {
+                    gold: Math.round(values.gold * demandBoost * duplicateBoost * rarityBoost),
+                    gems: Math.round(values.gems * demandBoost * duplicateBoost * 1.1),
+                    dust: Math.round(values.dust * demandBoost * duplicateBoost * 0.9)
+                };
             }
 
             return {
@@ -3240,13 +3557,11 @@ const emojiCategories = {
                 convertDuplicatesToDust,
                 spend,
                 rewardForListing,
-                estimateValue
+                estimateValue,
+                ensureWalletReady: hydrateWallet
             };
         });
-
-        // ==================== Module: Marketplace Systems ====================
         const Marketplace = AppModules.define('marketplace', () => {
-            const PLAYER_LISTINGS_KEY = 'collectibleRealm::market::';
             const rarityOrder = { common: 1, uncommon: 2, rare: 3, epic: 4, legendary: 5, mythic: 6 };
 
             const curatedCatalog = [
@@ -3284,26 +3599,26 @@ const emojiCategories = {
                     demand: 'Steady'
                 },
                 {
-                    id: 'global-rune-of-embers',
-                    item_name: 'Rune of Embers',
+                    id: 'global-ember-signet',
+                    item_name: 'Ember Signet',
                     item_graphic: 'fire',
                     rarity: 'epic',
-                    price: 2900,
+                    price: 0,
                     currency: 'gems',
-                    altPrice: 0,
-                    seller: 'Emberwright Guild',
+                    altPrice: 7,
+                    seller: 'Forgewardens',
                     demand: 'High'
                 },
                 {
-                    id: 'global-luminary-seed',
-                    item_name: 'Luminary Seed',
-                    item_graphic: 'seedling',
-                    rarity: 'uncommon',
-                    price: 620,
+                    id: 'global-lumina-quartz',
+                    item_name: 'Lumina Quartz',
+                    item_graphic: 'gem_stone',
+                    rarity: 'rare',
+                    price: 1960,
                     currency: 'gold',
-                    altPrice: 0,
-                    seller: 'Verdant Exchange',
-                    demand: 'Emerging'
+                    altPrice: 4,
+                    seller: 'Radiant Consortium',
+                    demand: 'Steady'
                 }
             ];
 
@@ -3320,7 +3635,9 @@ const emojiCategories = {
                     stats: {
                         totalListings: 0,
                         highestValue: null,
-                        demandSegments: []
+                        demandSegments: [],
+                        recentVolume: 0,
+                        topCurrency: null
                     }
                 };
             }
@@ -3331,58 +3648,58 @@ const emojiCategories = {
                 }
             }
 
-            function storageKey() {
-                return `${PLAYER_LISTINGS_KEY}${appState.currentUser?.id || 'guest'}`;
+            function normalizeListing(row) {
+                if (!row) return null;
+                const primaryCurrency = row.currency_primary || (row.price_gold && !row.price_gems ? 'gold' : 'gems');
+                const altCurrency = primaryCurrency === 'gold' ? 'gems' : 'gold';
+                const pricePrimary = primaryCurrency === 'gold' ? row.price_gold : row.price_gems;
+                const priceAlt = primaryCurrency === 'gold' ? row.price_gems : row.price_gold;
+
+                return {
+                    id: row.id,
+                    item_name: row.item_name,
+                    item_graphic: row.item_graphic,
+                    rarity: row.rarity,
+                    price: pricePrimary || 0,
+                    currency: primaryCurrency,
+                    altPrice: priceAlt || 0,
+                    seller: row.seller_display_name || row.seller || row.seller_id || 'Marketplace',
+                    seller_id: row.seller_id || null,
+                    demand: row.demand || 'Steady',
+                    created_at: row.created_at || new Date().toISOString(),
+                    status: row.status || 'available',
+                    origin: row.origin || (row.seller_id ? 'player' : 'global'),
+                    metadata: row.metadata || {}
+                };
             }
 
-            function loadPlayerListings() {
-                if (typeof window === 'undefined' || !window.localStorage) {
-                    return appState.marketplace?.playerListings || [];
-                }
-                try {
-                    const raw = window.localStorage.getItem(storageKey());
-                    if (!raw) return appState.marketplace?.playerListings || [];
-                    const parsed = JSON.parse(raw);
-                    return Array.isArray(parsed) ? parsed : [];
-                } catch (error) {
-                    console.warn('[Marketplace] Failed to parse stored listings', error);
-                    return appState.marketplace?.playerListings || [];
-                }
-            }
-
-            function persistPlayerListings(listings) {
-                if (typeof window === 'undefined' || !window.localStorage) return;
-                try {
-                    window.localStorage.setItem(storageKey(), JSON.stringify(listings));
-                } catch (error) {
-                    console.warn('[Marketplace] Failed to persist listings', error);
-                }
-            }
-
-            function curatedListings() {
+            function curatedListings(existing = []) {
+                const existingIds = new Set(existing.map(entry => entry.id));
                 const economy = AppModules.use('economy');
-                const previous = new Map((appState.marketplace?.globalListings || []).map(entry => [entry.id, entry]));
-                return curatedCatalog.map(item => {
-                    const existing = previous.get(item.id);
-                    const estimate = economy.estimateValue({ rarity: item.rarity, item_graphic: item.item_graphic });
-                    const price = item.currency === 'gold'
-                        ? Math.max(item.price, estimate.gold)
-                        : item.price;
-                    const altPrice = item.currency === 'gold'
-                        ? (item.altPrice || Math.max(1, Math.round(price / 600)))
-                        : Math.max(item.altPrice || estimate.gems || 0, 0);
-                    return {
-                        ...item,
-                        price,
-                        altPrice,
-                        created_at: existing?.created_at || new Date().toISOString(),
-                        status: existing?.status === 'purchased' ? 'purchased' : 'available',
-                        origin: 'global'
-                    };
-                });
+                return curatedCatalog
+                    .filter(item => !existingIds.has(item.id))
+                    .map(item => {
+                        const estimate = economy.estimateValue({ rarity: item.rarity, item_graphic: item.item_graphic });
+                        const price = item.currency === 'gold'
+                            ? Math.max(item.price, estimate.gold)
+                            : Math.max(item.price, estimate.gems || 0);
+                        const altPrice = item.currency === 'gold'
+                            ? Math.max(item.altPrice || estimate.gems || 0, 0)
+                            : Math.max(item.altPrice || estimate.gold || 0, 0);
+                        return {
+                            ...item,
+                            price,
+                            altPrice,
+                            status: 'available',
+                            origin: 'global',
+                            created_at: new Date().toISOString(),
+                            metadata: { curated: true }
+                        };
+                    });
             }
 
-            function computeSuggestions() {
+            function computeSuggestions(playerListings) {
+                const suggestions = [];
                 const duplicates = new Map();
                 (appState.collectibles || []).forEach(item => {
                     const key = `${item.item_name}::${item.rarity}::${item.item_graphic}`;
@@ -3392,78 +3709,101 @@ const emojiCategories = {
                 });
 
                 const economy = AppModules.use('economy');
-                const suggestions = [];
-
                 duplicates.forEach(entry => {
                     if (entry.count > 1) {
                         const duplicatesCount = entry.count - 1;
                         const pricing = economy.estimateValue(entry.reference, { duplicates: duplicatesCount });
                         suggestions.push({
-                            id: `suggestion-${entry.reference.id || Math.random().toString(36).slice(2, 8)}`,
+                            id: `${entry.reference.id || entry.reference.item_name}-${duplicatesCount}-${Date.now()}`,
                             item_name: entry.reference.item_name,
                             item_graphic: entry.reference.item_graphic,
                             rarity: entry.reference.rarity,
-                            quantity: duplicatesCount,
-                            price: pricing.gold,
-                            altPrice: pricing.gems,
+                            price: Math.max(pricing.gold, 120),
                             currency: 'gold',
-                            demand: entry.reference.rarity === 'legendary' || entry.reference.rarity === 'mythic' ? 'High' : 'Steady'
+                            altPrice: Math.max(pricing.gems, duplicatesCount > 2 ? 2 : 0),
+                            quantity: duplicatesCount,
+                            demand: 'Collector',
+                            seller: appState.userProfile?.username || 'You',
+                            metadata: {
+                                duplicates: duplicatesCount,
+                                recommended: true
+                            }
                         });
                     }
                 });
 
-                return suggestions.sort((a, b) => (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0));
+                const existingIds = new Set((playerListings || []).map(listing => listing.item_name));
+                return suggestions.filter(entry => !existingIds.has(entry.item_name)).slice(0, 6);
             }
 
-            function buildStats(listings) {
-                if (!listings.length) {
-                    return { totalListings: 0, highestValue: null, demandSegments: [] };
-                }
-
-                const totalListings = listings.length;
-                const highestValue = listings.reduce((best, listing) => {
-                    if (listing.status === 'purchased') return best;
-                    if (!best) return listing;
-                    const bestPrice = best.currency === 'gems' ? best.price * 750 : best.price;
-                    const currentPrice = listing.currency === 'gems' ? listing.price * 750 : listing.price;
-                    return currentPrice > bestPrice ? listing : best;
+            function deriveStats(listings, snapshot) {
+                const active = listings.filter(entry => entry.status !== 'purchased');
+                const highestValue = active.reduce((best, entry) => {
+                    if (!best || (entry.price || 0) > (best.price || 0)) {
+                        return entry;
+                    }
+                    return best;
                 }, null);
 
-                const segments = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic']
-                    .map(rarity => ({
-                        rarity,
-                        count: listings.filter(listing => listing.rarity === rarity && listing.status !== 'purchased').length
-                    }))
-                    .filter(segment => segment.count > 0);
+                const demandCounts = active.reduce((acc, entry) => {
+                    const key = entry.demand || 'Steady';
+                    acc[key] = (acc[key] || 0) + 1;
+                    return acc;
+                }, {});
+                const demandSegments = Object.entries(demandCounts)
+                    .map(([label, count]) => ({ label, count }))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, 4);
+
+                const currencyCounts = active.reduce((acc, entry) => {
+                    acc[entry.currency] = (acc[entry.currency] || 0) + 1;
+                    return acc;
+                }, {});
+                const topCurrency = Object.entries(currencyCounts)
+                    .sort((a, b) => b[1] - a[1])[0]?.[0] || snapshot?.top_currency || null;
+
+                const recentVolume = snapshot?.recent_volume_gold ?? active
+                    .filter(entry => entry.currency === 'gold')
+                    .reduce((sum, entry) => sum + (entry.price || 0), 0);
 
                 return {
-                    totalListings,
-                    highestValue,
-                    demandSegments: segments
+                    totalListings: active.length,
+                    highestValue: highestValue
+                        ? { name: highestValue.item_name, value: highestValue.price, currency: highestValue.currency }
+                        : null,
+                    demandSegments,
+                    recentVolume,
+                    topCurrency
                 };
             }
 
-            function sync(options = {}) {
-                if (!appState.currentUser) {
-                    stateStore.setState({ marketplace: baseState() }, 'marketplace:reset');
-                    return baseState();
-                }
-
+            async function sync(options = {}) {
                 ensureState();
-                const playerListings = loadPlayerListings();
-                const globalListings = curatedListings();
-                const suggestedListings = computeSuggestions();
-                const stats = buildStats([
-                    ...globalListings.filter(entry => entry.status !== 'purchased'),
-                    ...playerListings
-                ]);
+                const bridge = AppModules.use('supabaseBridge');
+                const economy = AppModules.use('economy');
+                await economy.ensureWalletReady();
+
+                const { playerListings, globalListings } = await bridge.fetchMarketplaceListings({
+                    userId: appState.currentUser?.id,
+                    includeGlobal: true
+                });
+
+                const normalizedPlayer = (playerListings || []).map(normalizeListing).filter(Boolean);
+                const normalizedGlobal = (globalListings || []).map(normalizeListing).filter(Boolean);
+                const curated = curatedListings(normalizedGlobal);
+                const mergedGlobal = [...normalizedGlobal, ...curated]
+                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+                const suggestions = options.skipSuggestions ? (appState.marketplace?.suggestedListings || []) : computeSuggestions(normalizedPlayer);
+                const statsSnapshot = await bridge.fetchMarketplaceStats();
+                const stats = deriveStats([...normalizedPlayer, ...mergedGlobal], statsSnapshot);
 
                 stateStore.setState({
                     marketplace: {
                         ...appState.marketplace,
-                        playerListings,
-                        globalListings,
-                        suggestedListings,
+                        playerListings: normalizedPlayer,
+                        globalListings: mergedGlobal,
+                        suggestedListings: suggestions,
                         stats
                     }
                 }, `marketplace:sync${options.reason ? `:${options.reason}` : ''}`);
@@ -3471,85 +3811,95 @@ const emojiCategories = {
                 return appState.marketplace;
             }
 
-            function postListing(suggestion) {
+            async function postListing(suggestion) {
+                ensureState();
                 if (!appState.currentUser) {
                     return { success: false, reason: 'not-signed-in' };
                 }
 
-                ensureState();
+                const economy = AppModules.use('economy');
+                await economy.ensureWalletReady();
+
                 const listing = {
-                    id: `player-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-                    seller: appState.userProfile?.username || 'You',
+                    id: suggestion.id || `listing-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
                     item_name: suggestion.item_name,
                     item_graphic: suggestion.item_graphic,
                     rarity: suggestion.rarity,
-                    price: Math.max(80, Math.round(suggestion.price || 100)),
-                    altPrice: suggestion.altPrice,
-                    currency: suggestion.altPrice && suggestion.altPrice > 0 ? 'gold' : 'gold',
-                    quantity: suggestion.quantity || 1,
-                    demand: suggestion.demand || 'Balanced',
-                    status: 'listed',
+                    price: suggestion.price,
+                    currency: suggestion.currency || 'gold',
+                    altPrice: suggestion.altPrice || 0,
+                    seller: appState.userProfile?.username || appState.currentUser.email,
+                    seller_id: appState.currentUser.id,
+                    seller_display_name: appState.userProfile?.username || null,
+                    demand: suggestion.demand || 'Steady',
+                    origin: 'player',
+                    status: 'available',
                     created_at: new Date().toISOString(),
-                    origin: 'player'
+                    metadata: suggestion.metadata || {}
                 };
 
-                const listings = [listing, ...(appState.marketplace.playerListings || [])];
-                persistPlayerListings(listings);
-                stateStore.setState({ marketplace: { ...appState.marketplace, playerListings: listings } }, 'marketplace:post');
+                const bridge = AppModules.use('supabaseBridge');
+                const saved = await bridge.upsertMarketplaceListing(listing);
 
-                try {
-                    AppModules.use('economy').rewardForListing(listing);
-                } catch (error) {
-                    console.warn('[Marketplace] Failed to reward listing', error);
+                if (!saved) {
+                    return { success: false, reason: 'persistence-failed' };
                 }
 
-                sync({ reason: 'post' });
+                await economy.rewardForListing(listing);
+                await sync({ reason: 'post-listing' });
                 return { success: true, listing };
             }
 
-            function removeListing(id) {
-                const listings = (appState.marketplace.playerListings || []).filter(listing => listing.id !== id);
-                persistPlayerListings(listings);
-                stateStore.setState({ marketplace: { ...appState.marketplace, playerListings: listings } }, 'marketplace:remove');
-                sync({ reason: 'remove' });
-                return listings;
+            async function removeListing(listingId) {
+                ensureState();
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                const listing = (appState.marketplace.playerListings || []).find(entry => entry.id === listingId);
+                if (!listing) {
+                    return { success: false, reason: 'not-found' };
+                }
+
+                const bridge = AppModules.use('supabaseBridge');
+                const removed = await bridge.removeMarketplaceListing(listingId);
+                if (!removed) {
+                    return { success: false, reason: 'persistence-failed' };
+                }
+
+                await sync({ reason: 'remove-listing', skipSuggestions: true });
+                return { success: true };
             }
 
-            function updateFilters(filters) {
+            function updateFilters(nextFilters = {}) {
                 ensureState();
                 stateStore.setState({
                     marketplace: {
                         ...appState.marketplace,
                         filters: {
                             ...appState.marketplace.filters,
-                            ...filters
+                            ...nextFilters
                         }
                     }
                 }, 'marketplace:filters');
-                return appState.marketplace.filters;
             }
 
             function getFilteredListings() {
                 ensureState();
-                const filters = appState.marketplace.filters || baseState().filters;
-                const combined = [
-                    ...(appState.marketplace.playerListings || []).map(entry => ({ ...entry, source: 'player' })),
-                    ...(appState.marketplace.globalListings || []).map(entry => ({ ...entry, source: 'global' }))
-                ].filter(entry => entry.status !== 'purchased');
+                const filters = appState.marketplace.filters || {};
+                const listings = [
+                    ...(appState.marketplace.playerListings || []),
+                    ...(appState.marketplace.globalListings || [])
+                ];
 
-                let filtered = combined;
+                let filtered = listings.filter(entry => entry.status !== 'purchased');
 
-                if (filters.rarity !== 'all') {
+                if (filters.rarity && filters.rarity !== 'all') {
                     filtered = filtered.filter(entry => entry.rarity === filters.rarity);
                 }
 
-                if (filters.currency !== 'all') {
-                    filtered = filtered.filter(entry => {
-                        if (filters.currency === 'premium') {
-                            return entry.currency === 'gems';
-                        }
-                        return entry.currency === filters.currency;
-                    });
+                if (filters.currency && filters.currency !== 'all') {
+                    filtered = filtered.filter(entry => entry.currency === filters.currency);
                 }
 
                 if (filters.sort === 'value') {
@@ -3563,18 +3913,20 @@ const emojiCategories = {
                 return filtered;
             }
 
-            function purchase(listingId) {
+            async function purchase(listingId) {
+                ensureState();
                 if (!appState.currentUser) {
                     return { success: false, reason: 'not-signed-in' };
                 }
 
-                ensureState();
                 const economy = AppModules.use('economy');
+                await economy.ensureWalletReady();
+
                 const playerListing = (appState.marketplace.playerListings || []).find(listing => listing.id === listingId);
                 const globalListing = (appState.marketplace.globalListings || []).find(listing => listing.id === listingId);
                 const listing = playerListing || globalListing;
 
-                if (!listing) {
+                if (!listing || listing.status === 'purchased') {
                     return { success: false, reason: 'not-found' };
                 }
 
@@ -3582,7 +3934,7 @@ const emojiCategories = {
                     ? { gems: listing.price, gold: listing.altPrice || 0 }
                     : { gold: listing.price, gems: listing.altPrice || 0 };
 
-                const spendResult = economy.spend(cost, {
+                const spendResult = await economy.spend(cost, {
                     listingId: listing.id,
                     seller: listing.seller,
                     rarity: listing.rarity,
@@ -3593,17 +3945,34 @@ const emojiCategories = {
                     return { success: false, reason: 'insufficient', shortages: spendResult.shortages };
                 }
 
-                if (playerListing) {
-                    removeListing(listing.id);
-                } else {
-                    const updated = (appState.marketplace.globalListings || []).map(entry =>
-                        entry.id === listing.id ? { ...entry, status: 'purchased' } : entry
-                    );
-                    stateStore.setState({ marketplace: { ...appState.marketplace, globalListings: updated } }, 'marketplace:purchase-global');
+                const bridge = AppModules.use('supabaseBridge');
+                await bridge.markListingStatus(listing.id, 'purchased');
+
+                await bridge.recordMarketplaceTransaction({
+                    id: listing.transaction_id || `txn-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+                    listing_id: listing.id,
+                    buyer_id: appState.currentUser.id,
+                    seller_id: listing.seller_id || null,
+                    price_gold: cost.gold || 0,
+                    price_gems: cost.gems || 0,
+                    currency_primary: listing.currency,
+                    currency_secondary: listing.currency === 'gold' ? 'gems' : 'gold',
+                    description: `Marketplace purchase of ${listing.item_name}`,
+                    metadata: listing.metadata || {}
+                });
+
+                await sync({ reason: 'purchase', skipSuggestions: true });
+                return { success: true, listing };
+            }
+
+            async function loadPlayerListings() {
+                ensureState();
+                if (!appState.currentUser) {
+                    return [];
                 }
 
-                sync({ reason: 'purchase' });
-                return { success: true, listing };
+                await sync({ reason: 'load-player', skipSuggestions: true });
+                return appState.marketplace.playerListings || [];
             }
 
             return {
@@ -3616,7 +3985,6 @@ const emojiCategories = {
                 loadPlayerListings
             };
         });
-
         // Supabase API functions
         async function createUserProfile(user, username) {
             try {
@@ -3986,7 +4354,7 @@ const emojiCategories = {
             document.getElementById('totalCollectibles').textContent = collectibles.length;
             document.getElementById('redeemedCollectibles').textContent = collectibles.length;
 
-            Economy.sync({ reason: 'dashboard' });
+            await Economy.sync({ reason: 'dashboard' });
             const wallet = appState.wallet || {};
             const goldNode = document.getElementById('realmGoldBalance');
             const gemNode = document.getElementById('stellarGemBalance');
@@ -4363,10 +4731,10 @@ const emojiCategories = {
             }
 
             const demandBreakdown = stats.demandSegments
-                .map(segment => `${segment.count} ${segment.rarity}`)
+                .map(segment => `${segment.count} ${segment.label}`)
                 .join(' • ');
             const highlight = stats.highestValue
-                ? `${stats.highestValue.item_name} (${stats.highestValue.rarity})`
+                ? `${stats.highestValue.name} (${formatNumber(stats.highestValue.value)} ${stats.highestValue.currency})`
                 : 'No premium listings yet';
 
             summaryNode.textContent = `${stats.totalListings} listings live • Top item: ${highlight}${demandBreakdown ? ` • Demand: ${demandBreakdown}` : ''}`;
@@ -4407,15 +4775,15 @@ const emojiCategories = {
             `).join('');
 
             container.querySelectorAll('[data-market-action="post"]').forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const id = button.getAttribute('data-suggestion-id');
                     const suggestion = (appState.marketplace?.suggestedListings || []).find(item => item.id === id);
                     if (!suggestion) return;
-                    const result = Marketplace.postListing(suggestion);
+                    const result = await Marketplace.postListing(suggestion);
                     if (result.success) {
                         showNotification(`${suggestion.item_name} posted to the marketplace!`, 'success');
                         renderMarketplaceView();
-                        updateDashboardStats();
+                        await updateDashboardStats();
                     } else {
                         showNotification('Unable to post listing at this time.', 'error');
                     }
@@ -4458,11 +4826,15 @@ const emojiCategories = {
             `).join('');
 
             container.querySelectorAll('[data-market-action="remove"]').forEach(button => {
-                button.addEventListener('click', () => {
+                button.addEventListener('click', async () => {
                     const id = button.getAttribute('data-listing-id');
-                    Marketplace.removeListing(id);
-                    showNotification('Listing removed. You can repost it anytime.');
-                    renderMarketplaceView();
+                    const result = await Marketplace.removeListing(id);
+                    if (result.success) {
+                        showNotification('Listing removed. You can repost it anytime.');
+                        renderMarketplaceView();
+                    } else {
+                        showNotification('Unable to remove listing right now.', 'error');
+                    }
                 });
             });
         }
@@ -4486,9 +4858,11 @@ const emojiCategories = {
                 const priceLabel = listing.currency === 'gems'
                     ? `${formatNumber(listing.price)} gems`
                     : `${formatNumber(listing.price)} gold`;
-                const altLabel = listing.altPrice ? ` • ${formatNumber(listing.altPrice)} gems` : '';
-                const actionLabel = listing.source === 'player' ? 'Manage Listing' : 'Purchase';
-                const action = listing.source === 'player' ? 'manage' : 'purchase';
+                const altCurrencyLabel = listing.currency === 'gems' ? 'gold' : 'gems';
+                const altLabel = listing.altPrice ? ` • ${formatNumber(listing.altPrice)} ${altCurrencyLabel}` : '';
+                const isPlayerListing = listing.origin === 'player' && listing.seller_id === appState.currentUser.id;
+                const actionLabel = isPlayerListing ? 'Manage Listing' : 'Purchase';
+                const action = isPlayerListing ? 'manage' : 'purchase';
                 return `
                     <article class="relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-6 shadow-sm transition-transform transform hover:-translate-y-1 hover:shadow-lg">
                         <div class="flex items-start justify-between gap-3">
@@ -4510,52 +4884,70 @@ const emojiCategories = {
             }).join('');
 
             container.querySelectorAll('[data-market-action="purchase"]').forEach(button => {
-                button.addEventListener('click', () => {
-                    const id = button.getAttribute('data-listing-id');
-                    const result = Marketplace.purchase(id);
-                    if (!result.success) {
-                        if (result.reason === 'insufficient') {
-                            showNotification('Not enough currency for this purchase.', 'error');
-                        } else {
-                            showNotification('Unable to complete purchase right now.', 'error');
+                button.addEventListener('click', async () => {
+                    try {
+                        const id = button.getAttribute('data-listing-id');
+                        const result = await Marketplace.purchase(id);
+                        if (!result.success) {
+                            if (result.reason === 'insufficient') {
+                                showNotification('Not enough currency for this purchase.', 'error');
+                            } else {
+                                showNotification('Unable to complete purchase right now.', 'error');
+                            }
+                            return;
                         }
-                        return;
+
+                        const listing = result.listing;
+                        const timestamp = new Date().toISOString();
+                        const collectibleRecord = {
+                            user_id: appState.currentUser.id,
+                            item_name: listing.item_name,
+                            item_graphic: listing.item_graphic,
+                            rarity: listing.rarity,
+                            acquired_date: timestamp,
+                            code_id: null,
+                            origin: 'marketplace',
+                            metadata: { listing_id: listing.id }
+                        };
+
+                        await createCollectible(collectibleRecord);
+                        appState.collectibles.push({
+                            ...collectibleRecord,
+                            id: `market-${Date.now()}`
+                        });
+
+                        const activityData = {
+                            user_id: appState.currentUser.id,
+                            action: 'traded',
+                            item_name: listing.item_name,
+                            item_rarity: listing.rarity,
+                            created_at: timestamp
+                        };
+
+                        await createActivity(activityData);
+                        appState.activities.unshift({
+                            ...activityData,
+                            id: `market-activity-${Date.now()}`
+                        });
+
+                        Engagement.sync();
+                        Engagement.renderAll();
+                        renderActivityFeed();
+                        renderUserCollectionStats();
+                        const activeFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
+                        renderCollection(activeFilter);
+                        await Economy.sync({ reason: 'market-purchase' });
+                        renderWalletSummaryCards();
+                        renderEconomyPulse();
+                        renderLedgerEntries();
+                        renderMarketplaceView();
+                        await updateDashboardStats();
+
+                        showNotification(`${listing.item_name} secured! It has been added to your collection.`, 'success');
+                    } catch (error) {
+                        console.error('Error completing marketplace purchase', error);
+                        showNotification('Unable to complete purchase right now.', 'error');
                     }
-
-                    const listing = result.listing;
-                    const mintedCollectible = {
-                        id: `market-${Date.now()}`,
-                        user_id: appState.currentUser.id,
-                        item_name: listing.item_name,
-                        item_graphic: listing.item_graphic,
-                        rarity: listing.rarity,
-                        acquired_date: new Date().toISOString(),
-                        code_id: null
-                    };
-
-                    appState.collectibles.push(mintedCollectible);
-                    appState.activities.unshift({
-                        id: `market-activity-${Date.now()}`,
-                        action: 'traded',
-                        item_name: listing.item_name,
-                        item_rarity: listing.rarity,
-                        created_at: new Date().toISOString()
-                    });
-
-                    Engagement.sync();
-                    Engagement.renderAll();
-                    renderActivityFeed();
-                    renderUserCollectionStats();
-                    const activeFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
-                    renderCollection(activeFilter);
-                    Economy.sync({ reason: 'market-purchase' });
-                    renderWalletSummaryCards();
-                    renderEconomyPulse();
-                    renderLedgerEntries();
-                    renderMarketplaceView();
-                    updateDashboardStats();
-
-                    showNotification(`${listing.item_name} secured! It has been added to your collection.`, 'success');
                 });
             });
 
@@ -5157,8 +5549,8 @@ const emojiCategories = {
                 renderActivityFeed();
                 renderFeaturedCollectibles();
             } else if (view === 'marketplace') {
-                Economy.sync({ reason: 'view-marketplace' });
-                Marketplace.sync({ reason: 'view' });
+                await Economy.sync({ reason: 'view-marketplace' });
+                await Marketplace.sync({ reason: 'view' });
                 renderMarketplaceView();
             } else if (view === 'redeemCode') {
                 renderRedemptionHistory();
@@ -5199,8 +5591,8 @@ const emojiCategories = {
                 }
 
                 Engagement.sync();
-                Economy.sync({ reason: 'load' });
-                Marketplace.sync({ reason: 'load' });
+                await Economy.sync({ reason: 'load' });
+                await Marketplace.sync({ reason: 'load' });
                 renderMarketplaceView();
 
                 return true;
@@ -5566,9 +5958,9 @@ const emojiCategories = {
                         created_at: new Date().toISOString()
                     });
 
-                    Economy.rewardForRedemption(code);
-                    Economy.sync({ reason: 'redeem' });
-                    Marketplace.sync({ reason: 'redeem' });
+                    await Economy.rewardForRedemption(code);
+                    await Economy.sync({ reason: 'redeem' });
+                    await Marketplace.sync({ reason: 'redeem' });
                     renderMarketplaceView();
 
                     Engagement.sync();
@@ -5923,8 +6315,8 @@ const emojiCategories = {
                             };
 
                             Engagement.sync();
-                            Economy.sync({ reason: 'clear-data' });
-                            Marketplace.sync({ reason: 'clear-data' });
+                            await Economy.sync({ reason: 'clear-data' });
+                            await Marketplace.sync({ reason: 'clear-data' });
                             renderMarketplaceView();
                             Engagement.renderAll();
                             await updateDashboardStats();
@@ -5956,13 +6348,13 @@ const emojiCategories = {
 
             const claimStipendButton = document.getElementById('claimStipendButton');
             if (claimStipendButton) {
-                claimStipendButton.addEventListener('click', () => {
-                    const result = Economy.grantDailyStipend();
+                claimStipendButton.addEventListener('click', async () => {
+                    const result = await Economy.grantDailyStipend();
                     if (result.success) {
                         showNotification('Daily stipend claimed! Check your wallet for the boost.', 'success');
-                        Economy.sync({ reason: 'stipend' });
+                        await Economy.sync({ reason: 'stipend' });
                         renderMarketplaceView();
-                        updateDashboardStats();
+                        await updateDashboardStats();
                     } else if (result.reason === 'already-claimed') {
                         showNotification('Daily stipend already claimed. Come back tomorrow.', 'error');
                     } else {
@@ -5973,12 +6365,13 @@ const emojiCategories = {
 
             const convertDuplicatesButton = document.getElementById('convertDuplicatesButton');
             if (convertDuplicatesButton) {
-                convertDuplicatesButton.addEventListener('click', () => {
-                    const result = Economy.convertDuplicatesToDust();
+                convertDuplicatesButton.addEventListener('click', async () => {
+                    const result = await Economy.convertDuplicatesToDust();
                     if (result.success) {
                         showNotification(`Converted ${result.duplicatesProcessed} duplicate sets into ${formatNumber(result.dustAward)} dust.`, 'success');
+                        await Marketplace.sync({ reason: 'duplicate-conversion' });
                         renderMarketplaceView();
-                        updateDashboardStats();
+                        await updateDashboardStats();
                     } else if (result.reason === 'no-duplicates') {
                         showNotification('No duplicates available for conversion yet.', 'error');
                     } else {
@@ -5989,8 +6382,8 @@ const emojiCategories = {
 
             const refreshSuggestionsButton = document.getElementById('refreshMarketplaceSuggestions');
             if (refreshSuggestionsButton) {
-                refreshSuggestionsButton.addEventListener('click', () => {
-                    Marketplace.sync({ reason: 'refresh-suggestions' });
+                refreshSuggestionsButton.addEventListener('click', async () => {
+                    await Marketplace.sync({ reason: 'refresh-suggestions' });
                     renderMarketplaceSuggestions();
                 });
             }
@@ -6069,8 +6462,8 @@ const emojiCategories = {
                 };
 
                 Engagement.sync();
-                Economy.sync({ reason: 'logout' });
-                Marketplace.sync({ reason: 'logout' });
+                await Economy.sync({ reason: 'logout' });
+                await Marketplace.sync({ reason: 'logout' });
                 renderMarketplaceView();
                 Engagement.renderAll();
                 await updateDashboardStats();
@@ -6154,6 +6547,86 @@ const emojiCategories = {
 
         // Start the app after a short delay to simulate loading
         setTimeout(initApp, 1000);
+    </script>
+
+    <script type="application/sql" id="supabase-schema">
+create extension if not exists "uuid-ossp";
+
+create table if not exists user_wallets (
+    user_id uuid primary key references user_profiles(id) on delete cascade,
+    gold numeric default 0,
+    gems numeric default 0,
+    dust numeric default 0,
+    cap numeric default 250000,
+    last_stipend_at date,
+    metadata jsonb default '{}'::jsonb,
+    updated_at timestamptz default now()
+);
+
+create table if not exists wallet_ledger (
+    id uuid primary key default uuid_generate_v4(),
+    user_id uuid references user_profiles(id) on delete cascade,
+    entry_type text not null,
+    description text not null,
+    delta_gold numeric default 0,
+    delta_gems numeric default 0,
+    delta_dust numeric default 0,
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now()
+);
+
+create index if not exists wallet_ledger_user_created_idx on wallet_ledger(user_id, created_at desc);
+
+create table if not exists marketplace_listings (
+    id uuid primary key default uuid_generate_v4(),
+    seller_id uuid references user_profiles(id) on delete set null,
+    seller_display_name text,
+    item_name text not null,
+    item_graphic text not null,
+    rarity text not null,
+    price_gold numeric default 0,
+    price_gems numeric default 0,
+    currency_primary text not null default 'gold',
+    currency_secondary text not null default 'gems',
+    demand text,
+    status text not null default 'available',
+    origin text not null default 'player',
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now(),
+    updated_at timestamptz default now()
+);
+
+create index if not exists marketplace_listings_seller_idx on marketplace_listings(seller_id, created_at desc);
+create index if not exists marketplace_listings_origin_status_idx on marketplace_listings(origin, status);
+
+create table if not exists marketplace_transactions (
+    id uuid primary key default uuid_generate_v4(),
+    listing_id uuid references marketplace_listings(id) on delete set null,
+    buyer_id uuid references user_profiles(id) on delete set null,
+    seller_id uuid references user_profiles(id) on delete set null,
+    price_gold numeric default 0,
+    price_gems numeric default 0,
+    currency_primary text not null,
+    currency_secondary text not null,
+    description text,
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now()
+);
+
+create view if not exists marketplace_transactions_view as
+select
+    coalesce(sum(price_gold), 0) as recent_volume_gold,
+    coalesce(sum(price_gems), 0) as recent_volume_gems,
+    (select currency_primary from marketplace_transactions group by currency_primary order by count(*) desc limit 1) as top_currency
+from marketplace_transactions
+where created_at > now() - interval '7 days';
+
+alter table collectibles
+    add column if not exists origin text default 'code',
+    add column if not exists metadata jsonb default '{}'::jsonb;
+
+alter table user_wallets
+    add column if not exists metadata jsonb default '{}'::jsonb;
     </script>
 </body>
 </html>
