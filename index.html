@@ -472,6 +472,7 @@
                             <a href="#" id="nav-dashboard" class="border-primary-500 text-gray-900 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a>
                             <a href="#" id="nav-collection" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">My Collection</a>
                             <a href="#" id="nav-redeem" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Redeem Code</a>
+                            <a href="#" id="nav-marketplace" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Marketplace</a>
                         </nav>
                     </div>
                     <div class="hidden md:ml-6 md:flex md:items-center">
@@ -518,6 +519,7 @@
                     <a href="#" id="mobile-nav-dashboard" class="bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-300 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Dashboard</a>
                     <a href="#" id="mobile-nav-collection" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">My Collection</a>
                     <a href="#" id="mobile-nav-redeem" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Redeem Code</a>
+                    <a href="#" id="mobile-nav-marketplace" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Marketplace</a>
                 </div>
                 <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                     <div class="flex items-center px-4">
@@ -556,7 +558,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Dashboard</h1>
                     <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Chart your journey across the realm with live progress, quests, and seasonal highlights.</p>
-                    <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
                             <div class="px-4 py-5 sm:p-6">
                                 <div class="flex items-center">
@@ -570,6 +572,44 @@
                                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Collectibles</dt>
                                             <dd>
                                                 <div id="totalCollectibles" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
+                            <div class="px-4 py-5 sm:p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-yellow-100 dark:bg-yellow-900 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zm0 2c-3.314 0-6 2.239-6 5v2h12v-2c0-2.761-2.686-5-6-5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Realm Gold</dt>
+                                            <dd>
+                                                <div id="realmGoldBalance" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
+                            <div class="px-4 py-5 sm:p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-purple-100 dark:bg-purple-900 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-purple-600 dark:text-purple-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3zm0 2c-3.314 0-6 2.239-6 5v1h12v-1c0-2.761-2.686-5-6-5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Stellar Gems</dt>
+                                            <dd>
+                                                <div id="stellarGemBalance" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
                                             </dd>
                                         </dl>
                                     </div>
@@ -798,6 +838,103 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketplace View -->
+            <div id="marketplaceView" class="py-6 hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div>
+                            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Marketplace &amp; Economy</h1>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your currencies, post listings, and scout rare finds across the realm.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <button id="claimStipendButton" class="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-primary-600 text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 transition-colors">
+                                Claim Daily Stipend
+                            </button>
+                            <button id="convertDuplicatesButton" class="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 transition-colors">
+                                Convert Duplicates
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="walletSummaryCards" class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                        <!-- Wallet summary cards will be rendered here -->
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <section id="economyPulsePanel" class="lg:col-span-2 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">Economy data will appear once your profile loads.</div>
+                        </section>
+                        <section class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Ledger</h2>
+                                <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Latest 20</span>
+                            </div>
+                            <div id="economyLedger" class="mt-4 space-y-4 max-h-80 overflow-y-auto pr-1">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Complete actions to populate your ledger.</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 xl:grid-cols-3 gap-8">
+                        <section class="xl:col-span-2">
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                    <div>
+                                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Active Listings</h2>
+                                        <p id="marketStatsSummary" class="text-sm text-gray-500 dark:text-gray-400">Marketplace insights appear after syncing.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-3">
+                                        <select id="marketFilterRarity" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="all">All Rarities</option>
+                                            <option value="common">Common</option>
+                                            <option value="uncommon">Uncommon</option>
+                                            <option value="rare">Rare</option>
+                                            <option value="epic">Epic</option>
+                                            <option value="legendary">Legendary</option>
+                                            <option value="mythic">Mythic</option>
+                                        </select>
+                                        <select id="marketFilterCurrency" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="all">All Currencies</option>
+                                            <option value="gold">Realm Gold</option>
+                                            <option value="gems">Stellar Gems</option>
+                                            <option value="premium">Premium Offers</option>
+                                        </select>
+                                        <select id="marketFilterSort" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="recent">Newest</option>
+                                            <option value="value">Highest Value</option>
+                                            <option value="rarity">Rarity</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="marketplaceListings" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                                    <div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">Marketplace listings will populate soon.</div>
+                                </div>
+                            </div>
+                        </section>
+                        <aside class="space-y-6">
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Listable Duplicates</h3>
+                                    <button id="refreshMarketplaceSuggestions" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none">Refresh</button>
+                                </div>
+                                <div id="suggestedListings" class="mt-4 space-y-4">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Redeem or trade to discover duplicates ready for the market.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Your Listings</h3>
+                                    <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Local preview</span>
+                                </div>
+                                <div id="playerListings" class="mt-4 space-y-4">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Post a duplicate to start your trading career.</p>
+                                </div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>
@@ -3021,11 +3158,22 @@ const emojiCategories = {
 
         async function updateDashboardStats() {
             if (!appState.currentUser) return;
-            
+
             const collectibles = appState.collectibles;
             document.getElementById('totalCollectibles').textContent = collectibles.length;
             document.getElementById('redeemedCollectibles').textContent = collectibles.length;
-            
+
+            await Economy.sync({ reason: 'dashboard' });
+            const wallet = appState.wallet || {};
+            const goldNode = document.getElementById('realmGoldBalance');
+            const gemNode = document.getElementById('stellarGemBalance');
+            if (goldNode) {
+                goldNode.textContent = formatNumber(wallet.gold || 0);
+            }
+            if (gemNode) {
+                gemNode.textContent = formatNumber(wallet.gems || 0);
+            }
+
             // Find rarest collectible
             const rarityOrder = {
                 'common': 1,
@@ -3103,7 +3251,7 @@ const emojiCategories = {
 
         function renderFeaturedCollectibles() {
             const featuredContainer = document.getElementById('featuredCollectibles');
-            
+
             if (!appState.isAdmin) {
                 featuredContainer.innerHTML = `
                     <div class="col-span-full flex flex-col sm:flex-row gap-6 justify-center">
@@ -3226,9 +3374,412 @@ const emojiCategories = {
             });
         }
 
+        function renderWalletSummaryCards() {
+            const container = document.getElementById('walletSummaryCards');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">
+                        Sign in and redeem a few codes to unlock your realm economy overview.
+                    </div>
+                `;
+                return;
+            }
+
+            const wallet = appState.wallet || {};
+            const summary = appState.economySummary || {};
+            const cards = [
+                {
+                    title: 'Realm Gold',
+                    value: formatNumber(wallet.gold || 0),
+                    subtitle: 'Spendable currency',
+                    icon: '🪙',
+                    accent: 'from-yellow-400/40 to-amber-500/30',
+                    aria: 'Realm gold balance'
+                },
+                {
+                    title: 'Stellar Gems',
+                    value: formatNumber(wallet.gems || 0),
+                    subtitle: 'Premium shards',
+                    icon: '💎',
+                    accent: 'from-purple-400/40 to-indigo-500/30',
+                    aria: 'Stellar gem balance'
+                },
+                {
+                    title: 'Aether Dust',
+                    value: formatNumber(wallet.dust || 0),
+                    subtitle: 'Crafting resource',
+                    icon: '✨',
+                    accent: 'from-sky-400/40 to-blue-500/30',
+                    aria: 'Aether dust balance'
+                },
+                {
+                    title: 'Daily Income',
+                    value: `${formatNumber(summary.dailyIncome || 0)} / day`,
+                    subtitle: 'Projected at current momentum',
+                    icon: '📈',
+                    accent: 'from-emerald-400/40 to-teal-500/30',
+                    aria: 'Projected daily income'
+                }
+            ];
+
+            container.innerHTML = cards.map(card => `
+                <article class="relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 shadow transition-transform transform hover:-translate-y-1 hover:shadow-lg" aria-label="${card.aria}">
+                    <div class="absolute inset-0 bg-gradient-to-br ${card.accent} opacity-40 pointer-events-none"></div>
+                    <div class="relative p-6 flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-3xl">${card.icon}</span>
+                            <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">${card.subtitle}</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">${card.title}</p>
+                            <p class="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">${card.value}</p>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderEconomyPulse() {
+            const panel = document.getElementById('economyPulsePanel');
+            if (!panel) return;
+
+            if (!appState.currentUser) {
+                panel.innerHTML = `<div class="text-sm text-gray-500 dark:text-gray-400">Sign in to monitor your trading pulse.</div>`;
+                return;
+            }
+
+            const summary = appState.economySummary || { dailyIncome: 0, tradePower: 0, barterScore: 0 };
+            const wallet = appState.wallet || {};
+            const completion = Math.min(100, Math.round((wallet.gold || 0) / (wallet.cap || 1) * 100));
+
+            panel.innerHTML = `
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Economy Pulse</h2>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Live snapshot of your trading influence across the realm.</p>
+                    </div>
+                    <dl class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-lg bg-primary-50 dark:bg-primary-900/40 border border-primary-100 dark:border-primary-800/60">
+                            <dt class="text-xs uppercase tracking-wide text-primary-600 dark:text-primary-300">Trade Power</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${formatNumber(summary.tradePower || 0)}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">Combined value of currency and rare holdings</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Barter Score</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${formatNumber(summary.barterScore || 0)}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">Higher scores unlock premium trading posts</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Vault Capacity</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${completion}%</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">${formatNumber(wallet.gold || 0)} / ${formatNumber(wallet.cap || 0)} gold stored</dd>
+                        </div>
+                    </dl>
+                    <div>
+                        <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-3 rounded-full bg-gradient-to-r from-primary-500 to-primary-400" style="width: ${completion}%;"></div>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Reach 100% to unlock vault expansion blueprints.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLedgerEntries() {
+            const ledgerContainer = document.getElementById('economyLedger');
+            if (!ledgerContainer) return;
+
+            const ledger = (appState.wallet?.ledger || []).slice(0, 20);
+            if (!ledger.length) {
+                ledgerContainer.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Complete redemptions, trades, or listings to build your ledger history.</p>`;
+                return;
+            }
+
+            const typeIcons = {
+                reward: '🎁',
+                stipend: '🏦',
+                purchase: '🛒',
+                listing: '📣',
+                reforge: '⚒️'
+            };
+
+            ledgerContainer.innerHTML = ledger.map(entry => {
+                const delta = entry.delta || {};
+                const gold = delta.gold ? `<span class="text-yellow-600 dark:text-yellow-300">${formatDelta(delta.gold, 'g')}</span>` : '';
+                const gems = delta.gems ? `<span class="text-purple-600 dark:text-purple-300">${formatDelta(delta.gems, 'gem')}</span>` : '';
+                const dust = delta.dust ? `<span class="text-blue-600 dark:text-blue-300">${formatDelta(delta.dust, 'dust')}</span>` : '';
+                const changes = [gold, gems, dust].filter(Boolean).join(' · ') || '<span class="text-gray-400">0</span>';
+                return `
+                    <article class="flex items-start gap-3">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-lg">${typeIcons[entry.type] || '💠'}</div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">${entry.description}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">${formatRelativeTime(entry.created_at)}</p>
+                        </div>
+                        <div class="text-xs font-medium">${changes}</div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderMarketplaceStatsSummary() {
+            const summaryNode = document.getElementById('marketStatsSummary');
+            if (!summaryNode) return;
+
+            const stats = appState.marketplace?.stats;
+            if (!appState.currentUser) {
+                summaryNode.textContent = 'Sign in to browse live offers and trading insights.';
+                return;
+            }
+
+            if (!stats || !stats.totalListings) {
+                summaryNode.textContent = 'Marketplace insights appear after syncing.';
+                return;
+            }
+
+            const demandBreakdown = stats.demandSegments
+                .map(segment => `${segment.count} ${segment.label}`)
+                .join(' • ');
+            const highlight = stats.highestValue
+                ? `${stats.highestValue.name} (${formatNumber(stats.highestValue.value)} ${stats.highestValue.currency})`
+                : 'No premium listings yet';
+
+            summaryNode.textContent = `${stats.totalListings} listings live • Top item: ${highlight}${demandBreakdown ? ` • Demand: ${demandBreakdown}` : ''}`;
+        }
+
+        function renderMarketplaceSuggestions() {
+            const container = document.getElementById('suggestedListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Sign in to surface duplicates ready for trading.</p>`;
+                return;
+            }
+
+            const suggestions = appState.marketplace?.suggestedListings || [];
+            if (!suggestions.length) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">No duplicates detected yet. Redeem more codes or trade to discover listable items.</p>`;
+                return;
+            }
+
+            container.innerHTML = suggestions.map(suggestion => `
+                <div class="rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">${renderEmoji(suggestion.item_graphic, 'text-2xl')}</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">${suggestion.item_name}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">${suggestion.quantity} duplicate${suggestion.quantity > 1 ? 's' : ''} available</p>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">Suggested price: ${formatNumber(suggestion.price)} gold${suggestion.altPrice ? ` • ${formatNumber(suggestion.altPrice)} gems` : ''}</p>
+                        </div>
+                        <span class="badge-${suggestion.rarity} rarity-badge">${suggestion.rarity}</span>
+                    </div>
+                    <button data-market-action="post" data-suggestion-id="${suggestion.id}" class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">List for ${formatNumber(suggestion.price)} gold</button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('[data-market-action="post"]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const id = button.getAttribute('data-suggestion-id');
+                    const suggestion = (appState.marketplace?.suggestedListings || []).find(item => item.id === id);
+                    if (!suggestion) return;
+                    const result = await Marketplace.postListing(suggestion);
+                    if (result.success) {
+                        showNotification(`${suggestion.item_name} posted to the marketplace!`, 'success');
+                        renderMarketplaceView();
+                        await updateDashboardStats();
+                    } else {
+                        showNotification('Unable to post listing at this time.', 'error');
+                    }
+                });
+            });
+        }
+
+        function renderPlayerListings() {
+            const container = document.getElementById('playerListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Sign in to manage your listings.</p>`;
+                return;
+            }
+
+            const listings = appState.marketplace?.playerListings || [];
+            if (!listings.length) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Post a duplicate to start your trading career.</p>`;
+                return;
+            }
+
+            container.innerHTML = listings.map(listing => `
+                <div class="rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">${renderEmoji(listing.item_graphic, 'text-2xl')}</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">${listing.item_name}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">${formatDate(listing.created_at)}</p>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Asking ${formatNumber(listing.price)} gold${listing.altPrice ? ` • ${formatNumber(listing.altPrice)} gems` : ''}</p>
+                        </div>
+                        <span class="badge-${listing.rarity} rarity-badge">${listing.rarity}</span>
+                    </div>
+                    <button data-market-action="remove" data-listing-id="${listing.id}" class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">Remove Listing</button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('[data-market-action="remove"]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const id = button.getAttribute('data-listing-id');
+                    const result = await Marketplace.removeListing(id);
+                    if (result.success) {
+                        showNotification('Listing removed. You can repost it anytime.');
+                        renderMarketplaceView();
+                    } else {
+                        showNotification('Unable to remove listing right now.', 'error');
+                    }
+                });
+            });
+        }
+
+        function renderMarketplaceListings() {
+            const container = document.getElementById('marketplaceListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">Sign in to browse live marketplace offers.</div>`;
+                return;
+            }
+
+            const listings = Marketplace.getFilteredListings();
+            if (!listings.length) {
+                container.innerHTML = `<div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">No listings match your current filters. Adjust the filters or create a new listing.</div>`;
+                return;
+            }
+
+            container.innerHTML = listings.map(listing => {
+                const priceLabel = listing.currency === 'gems'
+                    ? `${formatNumber(listing.price)} gems`
+                    : `${formatNumber(listing.price)} gold`;
+                const altCurrencyLabel = listing.currency === 'gems' ? 'gold' : 'gems';
+                const altLabel = listing.altPrice ? ` • ${formatNumber(listing.altPrice)} ${altCurrencyLabel}` : '';
+                const isPlayerListing = listing.origin === 'player' && listing.seller_id === appState.currentUser.id;
+                const actionLabel = isPlayerListing ? 'Manage Listing' : 'Purchase';
+                const action = isPlayerListing ? 'manage' : 'purchase';
+                return `
+                    <article class="relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-6 shadow-sm transition-transform transform hover:-translate-y-1 hover:shadow-lg">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-3xl">${renderEmoji(listing.item_graphic, 'text-3xl')}</span>
+                                    <div>
+                                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">${listing.item_name}</h3>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">${formatRelativeTime(listing.created_at)} • ${listing.seller || 'Market Broker'}</p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">${priceLabel}${altLabel}</p>
+                            </div>
+                            <span class="badge-${listing.rarity} rarity-badge">${listing.rarity}</span>
+                        </div>
+                        <button data-market-action="${action}" data-listing-id="${listing.id}" class="mt-6 w-full inline-flex items-center justify-center px-4 py-2 border ${action === 'purchase' ? 'border-transparent text-white bg-primary-600 hover:bg-primary-700' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700'} text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">${actionLabel}</button>
+                    </article>
+                `;
+            }).join('');
+
+            container.querySelectorAll('[data-market-action="purchase"]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    try {
+                        const id = button.getAttribute('data-listing-id');
+                        const result = await Marketplace.purchase(id);
+                        if (!result.success) {
+                            if (result.reason === 'insufficient') {
+                                showNotification('Not enough currency for this purchase.', 'error');
+                            } else {
+                                showNotification('Unable to complete purchase right now.', 'error');
+                            }
+                            return;
+                        }
+
+                        const listing = result.listing;
+                        const timestamp = new Date().toISOString();
+                        const collectibleRecord = {
+                            user_id: appState.currentUser.id,
+                            item_name: listing.item_name,
+                            item_graphic: listing.item_graphic,
+                            rarity: listing.rarity,
+                            acquired_date: timestamp,
+                            code_id: null,
+                            origin: 'marketplace',
+                            metadata: { listing_id: listing.id }
+                        };
+
+                        await createCollectible(collectibleRecord);
+                        appState.collectibles.push({
+                            ...collectibleRecord,
+                            id: `market-${Date.now()}`
+                        });
+
+                        const activityData = {
+                            user_id: appState.currentUser.id,
+                            action: 'traded',
+                            item_name: listing.item_name,
+                            item_rarity: listing.rarity,
+                            created_at: timestamp
+                        };
+
+                        await createActivity(activityData);
+                        appState.activities.unshift({
+                            ...activityData,
+                            id: `market-activity-${Date.now()}`
+                        });
+
+                        Engagement.sync();
+                        Engagement.renderAll();
+                        renderActivityFeed();
+                        renderUserCollectionStats();
+                        const activeFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
+                        renderCollection(activeFilter);
+                        await Economy.sync({ reason: 'market-purchase' });
+                        renderWalletSummaryCards();
+                        renderEconomyPulse();
+                        renderLedgerEntries();
+                        renderMarketplaceView();
+                        await updateDashboardStats();
+
+                        showNotification(`${listing.item_name} secured! It has been added to your collection.`, 'success');
+                    } catch (error) {
+                        console.error('Error completing marketplace purchase', error);
+                        showNotification('Unable to complete purchase right now.', 'error');
+                    }
+                });
+            });
+
+            container.querySelectorAll('[data-market-action="manage"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('playerListings')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        }
+
+        function renderMarketplaceView() {
+            renderWalletSummaryCards();
+            renderEconomyPulse();
+            renderLedgerEntries();
+            renderMarketplaceStatsSummary();
+            renderMarketplaceSuggestions();
+            renderPlayerListings();
+            renderMarketplaceListings();
+        }
+
         function renderRedemptionHistory() {
             if (!appState.currentUser) return;
-            
+
             const history = appState.redemptionHistory;
             const historyTable = document.getElementById('redemptionHistory');
             
@@ -3764,6 +4315,7 @@ const emojiCategories = {
             document.getElementById('dashboardView').classList.add('hidden');
             document.getElementById('collectionView').classList.add('hidden');
             document.getElementById('redeemCodeView').classList.add('hidden');
+            document.getElementById('marketplaceView').classList.add('hidden');
             document.getElementById('adminPanelView').classList.add('hidden');
             document.getElementById('profileView').classList.add('hidden');
             document.getElementById('settingsView').classList.add('hidden');
@@ -3777,7 +4329,7 @@ const emojiCategories = {
                 link.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-300');
             });
             
-            if (['dashboard', 'collection', 'redeem'].includes(view)) {
+            if (['dashboard', 'collection', 'redeem', 'marketplace'].includes(view)) {
                 document.getElementById(`nav-${view}`).classList.remove('border-transparent', 'text-gray-500', 'dark:text-gray-300');
                 document.getElementById(`nav-${view}`).classList.add('border-primary-500', 'text-gray-900', 'dark:text-white');
             }
@@ -3788,7 +4340,7 @@ const emojiCategories = {
                 link.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-300');
             });
             
-            if (['dashboard', 'collection', 'redeem'].includes(view)) {
+            if (['dashboard', 'collection', 'redeem', 'marketplace'].includes(view)) {
                 document.getElementById(`mobile-nav-${view}`).classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-300');
                 document.getElementById(`mobile-nav-${view}`).classList.add('bg-primary-50', 'dark:bg-primary-900', 'border-primary-500', 'text-primary-700', 'dark:text-primary-300');
             }
@@ -3805,6 +4357,10 @@ const emojiCategories = {
                 Engagement.renderAll();
                 renderActivityFeed();
                 renderFeaturedCollectibles();
+            } else if (view === 'marketplace') {
+                await Economy.sync({ reason: 'view-marketplace' });
+                await Marketplace.sync({ reason: 'view' });
+                renderMarketplaceView();
             } else if (view === 'redeemCode') {
                 renderRedemptionHistory();
             } else if (view === 'adminPanel') {
@@ -3881,11 +4437,19 @@ const emojiCategories = {
                 e.preventDefault();
                 switchView('collection');
             });
-            
+
             document.getElementById('nav-redeem').addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('redeemCode');
             });
+
+            const marketplaceNav = document.getElementById('nav-marketplace');
+            if (marketplaceNav) {
+                marketplaceNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchView('marketplace');
+                });
+            }
             
             // Mobile navigation
             document.getElementById('mobile-nav-dashboard').addEventListener('click', (e) => {
@@ -3905,6 +4469,15 @@ const emojiCategories = {
                 switchView('redeemCode');
                 document.getElementById('mobileMenu').classList.add('hidden');
             });
+
+            const mobileMarketNav = document.getElementById('mobile-nav-marketplace');
+            if (mobileMarketNav) {
+                mobileMarketNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchView('marketplace');
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                });
+            }
             
             // Mobile menu toggle
             document.getElementById('mobileMenuButton').addEventListener('click', () => {
@@ -4481,6 +5054,13 @@ const emojiCategories = {
                         collectibles: appState.collectibles,
                         redemptionHistory: appState.redemptionHistory,
                         activities: appState.activities,
+                        wallet: appState.wallet,
+                        economySummary: appState.economySummary,
+                        marketplace: {
+                            playerListings: appState.marketplace.playerListings,
+                            suggestedListings: appState.marketplace.suggestedListings,
+                            filters: appState.marketplace.filters
+                        },
                         exportDate: new Date().toISOString()
                     };
                     
@@ -4536,6 +5116,74 @@ const emojiCategories = {
                 e.preventDefault();
                 await logout();
             });
+
+            const claimStipendButton = document.getElementById('claimStipendButton');
+            if (claimStipendButton) {
+                claimStipendButton.addEventListener('click', async () => {
+                    const result = await Economy.grantDailyStipend();
+                    if (result.success) {
+                        showNotification('Daily stipend claimed! Check your wallet for the boost.', 'success');
+                        await Economy.sync({ reason: 'stipend' });
+                        renderMarketplaceView();
+                        await updateDashboardStats();
+                    } else if (result.reason === 'already-claimed') {
+                        showNotification('Daily stipend already claimed. Come back tomorrow.', 'error');
+                    } else {
+                        showNotification('Unable to grant stipend right now.', 'error');
+                    }
+                });
+            }
+
+            const convertDuplicatesButton = document.getElementById('convertDuplicatesButton');
+            if (convertDuplicatesButton) {
+                convertDuplicatesButton.addEventListener('click', async () => {
+                    const result = await Economy.convertDuplicatesToDust();
+                    if (result.success) {
+                        showNotification(`Converted ${result.duplicatesProcessed} duplicate sets into ${formatNumber(result.dustAward)} dust.`, 'success');
+                        await Marketplace.sync({ reason: 'duplicate-conversion' });
+                        renderMarketplaceView();
+                        await updateDashboardStats();
+                    } else if (result.reason === 'no-duplicates') {
+                        showNotification('No duplicates available for conversion yet.', 'error');
+                    } else {
+                        showNotification('Unable to convert duplicates at this time.', 'error');
+                    }
+                });
+            }
+
+            const refreshSuggestionsButton = document.getElementById('refreshMarketplaceSuggestions');
+            if (refreshSuggestionsButton) {
+                refreshSuggestionsButton.addEventListener('click', async () => {
+                    await Marketplace.sync({ reason: 'refresh-suggestions' });
+                    renderMarketplaceSuggestions();
+                });
+            }
+
+            const marketFilterRarity = document.getElementById('marketFilterRarity');
+            if (marketFilterRarity) {
+                marketFilterRarity.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ rarity: event.target.value });
+                    renderMarketplaceListings();
+                    renderMarketplaceStatsSummary();
+                });
+            }
+
+            const marketFilterCurrency = document.getElementById('marketFilterCurrency');
+            if (marketFilterCurrency) {
+                marketFilterCurrency.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ currency: event.target.value });
+                    renderMarketplaceListings();
+                    renderMarketplaceStatsSummary();
+                });
+            }
+
+            const marketFilterSort = document.getElementById('marketFilterSort');
+            if (marketFilterSort) {
+                marketFilterSort.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ sort: event.target.value });
+                    renderMarketplaceListings();
+                });
+            }
         }
 
         async function logout() {
@@ -4640,6 +5288,86 @@ const emojiCategories = {
 
         // Start the app after a short delay to simulate loading
         setTimeout(initApp, 1000);
+    </script>
+
+    <script type="application/sql" id="supabase-schema">
+create extension if not exists "uuid-ossp";
+
+create table if not exists user_wallets (
+    user_id uuid primary key references user_profiles(id) on delete cascade,
+    gold numeric default 0,
+    gems numeric default 0,
+    dust numeric default 0,
+    cap numeric default 250000,
+    last_stipend_at date,
+    metadata jsonb default '{}'::jsonb,
+    updated_at timestamptz default now()
+);
+
+create table if not exists wallet_ledger (
+    id uuid primary key default uuid_generate_v4(),
+    user_id uuid references user_profiles(id) on delete cascade,
+    entry_type text not null,
+    description text not null,
+    delta_gold numeric default 0,
+    delta_gems numeric default 0,
+    delta_dust numeric default 0,
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now()
+);
+
+create index if not exists wallet_ledger_user_created_idx on wallet_ledger(user_id, created_at desc);
+
+create table if not exists marketplace_listings (
+    id uuid primary key default uuid_generate_v4(),
+    seller_id uuid references user_profiles(id) on delete set null,
+    seller_display_name text,
+    item_name text not null,
+    item_graphic text not null,
+    rarity text not null,
+    price_gold numeric default 0,
+    price_gems numeric default 0,
+    currency_primary text not null default 'gold',
+    currency_secondary text not null default 'gems',
+    demand text,
+    status text not null default 'available',
+    origin text not null default 'player',
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now(),
+    updated_at timestamptz default now()
+);
+
+create index if not exists marketplace_listings_seller_idx on marketplace_listings(seller_id, created_at desc);
+create index if not exists marketplace_listings_origin_status_idx on marketplace_listings(origin, status);
+
+create table if not exists marketplace_transactions (
+    id uuid primary key default uuid_generate_v4(),
+    listing_id uuid references marketplace_listings(id) on delete set null,
+    buyer_id uuid references user_profiles(id) on delete set null,
+    seller_id uuid references user_profiles(id) on delete set null,
+    price_gold numeric default 0,
+    price_gems numeric default 0,
+    currency_primary text not null,
+    currency_secondary text not null,
+    description text,
+    metadata jsonb default '{}'::jsonb,
+    created_at timestamptz default now()
+);
+
+create view if not exists marketplace_transactions_view as
+select
+    coalesce(sum(price_gold), 0) as recent_volume_gold,
+    coalesce(sum(price_gems), 0) as recent_volume_gems,
+    (select currency_primary from marketplace_transactions group by currency_primary order by count(*) desc limit 1) as top_currency
+from marketplace_transactions
+where created_at > now() - interval '7 days';
+
+alter table collectibles
+    add column if not exists origin text default 'code',
+    add column if not exists metadata jsonb default '{}'::jsonb;
+
+alter table user_wallets
+    add column if not exists metadata jsonb default '{}'::jsonb;
     </script>
 </body>
 </html>
