@@ -472,6 +472,7 @@
                             <a href="#" id="nav-dashboard" class="border-primary-500 text-gray-900 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Dashboard</a>
                             <a href="#" id="nav-collection" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">My Collection</a>
                             <a href="#" id="nav-redeem" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Redeem Code</a>
+                            <a href="#" id="nav-marketplace" class="border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Marketplace</a>
                         </nav>
                     </div>
                     <div class="hidden md:ml-6 md:flex md:items-center">
@@ -518,6 +519,7 @@
                     <a href="#" id="mobile-nav-dashboard" class="bg-primary-50 dark:bg-primary-900 border-primary-500 text-primary-700 dark:text-primary-300 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Dashboard</a>
                     <a href="#" id="mobile-nav-collection" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">My Collection</a>
                     <a href="#" id="mobile-nav-redeem" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Redeem Code</a>
+                    <a href="#" id="mobile-nav-marketplace" class="border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-white block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Marketplace</a>
                 </div>
                 <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
                     <div class="flex items-center px-4">
@@ -555,7 +557,8 @@
             <div id="dashboardView" class="py-6">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Dashboard</h1>
-                    <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Chart your journey across the realm with live progress, quests, and seasonal highlights.</p>
+                    <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
                             <div class="px-4 py-5 sm:p-6">
                                 <div class="flex items-center">
@@ -569,6 +572,44 @@
                                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Collectibles</dt>
                                             <dd>
                                                 <div id="totalCollectibles" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
+                            <div class="px-4 py-5 sm:p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-yellow-100 dark:bg-yellow-900 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-yellow-600 dark:text-yellow-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zm0 2c-3.314 0-6 2.239-6 5v2h12v-2c0-2.761-2.686-5-6-5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Realm Gold</dt>
+                                            <dd>
+                                                <div id="realmGoldBalance" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg transition-all duration-300 hover:shadow-xl">
+                            <div class="px-4 py-5 sm:p-6">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 bg-purple-100 dark:bg-purple-900 rounded-md p-3">
+                                        <svg class="h-6 w-6 text-purple-600 dark:text-purple-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3zm0 2c-3.314 0-6 2.239-6 5v1h12v-1c0-2.761-2.686-5-6-5z" />
+                                        </svg>
+                                    </div>
+                                    <div class="ml-5 w-0 flex-1">
+                                        <dl>
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Stellar Gems</dt>
+                                            <dd>
+                                                <div id="stellarGemBalance" class="text-lg font-medium text-gray-900 dark:text-white">0</div>
                                             </dd>
                                         </dl>
                                     </div>
@@ -616,11 +657,54 @@
                     </div>
                     
                     <div class="mt-8">
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-white">Recent Activity</h2>
-                        <div class="mt-2 bg-white dark:bg-gray-800 shadow overflow-hidden rounded-lg">
-                            <ul id="activityFeed" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <li class="px-4 py-4 flex text-gray-500 dark:text-gray-400 italic">No recent activity to display</li>
-                            </ul>
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-medium text-gray-900 dark:text-white">Realm Progression</h2>
+                            <span id="progressionSummary" class="text-sm text-gray-500 dark:text-gray-400 hidden"></span>
+                        </div>
+                        <div id="progressionOverviewCard" class="mt-4 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">Progress data will appear once you start redeeming codes.</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-1 xl:grid-cols-3 gap-6">
+                        <div class="xl:col-span-2 space-y-8">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-lg font-medium text-gray-900 dark:text-white">Daily Quest Board</h2>
+                                    <span id="questResetCountdown" class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Resets in --:--</span>
+                                </div>
+                                <div id="questBoard" class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">
+                                        Daily quests refresh with tasks tailored to your playstyle. Redeem codes to see them here.
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-white">Achievement Showcase</h2>
+                                <div id="achievementShowcase" class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">
+                                        Earn achievements by collecting items, keeping streaks, and discovering rare treasures.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-8">
+                            <div>
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-white">Recent Activity</h2>
+                                <div class="mt-2 bg-white dark:bg-gray-800 shadow overflow-hidden rounded-lg">
+                                    <ul id="activityFeed" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <li class="px-4 py-4 flex text-gray-500 dark:text-gray-400 italic">No recent activity to display</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-white">Seasonal Spotlight</h2>
+                                <div id="seasonShowcase" class="mt-2 space-y-4">
+                                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">
+                                        Seasonal events and spotlights will appear here to guide your next adventure.
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -754,6 +838,103 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketplace View -->
+            <div id="marketplaceView" class="py-6 hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div>
+                            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Marketplace &amp; Economy</h1>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your currencies, post listings, and scout rare finds across the realm.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <button id="claimStipendButton" class="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-primary-600 text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 transition-colors">
+                                Claim Daily Stipend
+                            </button>
+                            <button id="convertDuplicatesButton" class="inline-flex items-center px-4 py-2 rounded-md text-sm font-medium bg-white text-gray-700 dark:bg-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800 transition-colors">
+                                Convert Duplicates
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="walletSummaryCards" class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                        <!-- Wallet summary cards will be rendered here -->
+                    </div>
+
+                    <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <section id="economyPulsePanel" class="lg:col-span-2 bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                            <div class="text-sm text-gray-500 dark:text-gray-400">Economy data will appear once your profile loads.</div>
+                        </section>
+                        <section class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Ledger</h2>
+                                <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Latest 20</span>
+                            </div>
+                            <div id="economyLedger" class="mt-4 space-y-4 max-h-80 overflow-y-auto pr-1">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Complete actions to populate your ledger.</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 xl:grid-cols-3 gap-8">
+                        <section class="xl:col-span-2">
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                    <div>
+                                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Active Listings</h2>
+                                        <p id="marketStatsSummary" class="text-sm text-gray-500 dark:text-gray-400">Marketplace insights appear after syncing.</p>
+                                    </div>
+                                    <div class="flex flex-wrap gap-3">
+                                        <select id="marketFilterRarity" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="all">All Rarities</option>
+                                            <option value="common">Common</option>
+                                            <option value="uncommon">Uncommon</option>
+                                            <option value="rare">Rare</option>
+                                            <option value="epic">Epic</option>
+                                            <option value="legendary">Legendary</option>
+                                            <option value="mythic">Mythic</option>
+                                        </select>
+                                        <select id="marketFilterCurrency" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="all">All Currencies</option>
+                                            <option value="gold">Realm Gold</option>
+                                            <option value="gems">Stellar Gems</option>
+                                            <option value="premium">Premium Offers</option>
+                                        </select>
+                                        <select id="marketFilterSort" class="block w-full sm:w-auto rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 text-sm focus:ring-primary-500 focus:border-primary-500">
+                                            <option value="recent">Newest</option>
+                                            <option value="value">Highest Value</option>
+                                            <option value="rarity">Rarity</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="marketplaceListings" class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                                    <div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">Marketplace listings will populate soon.</div>
+                                </div>
+                            </div>
+                        </section>
+                        <aside class="space-y-6">
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Listable Duplicates</h3>
+                                    <button id="refreshMarketplaceSuggestions" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 focus:outline-none">Refresh</button>
+                                </div>
+                                <div id="suggestedListings" class="mt-4 space-y-4">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Redeem or trade to discover duplicates ready for the market.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Your Listings</h3>
+                                    <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Local preview</span>
+                                </div>
+                                <div id="playerListings" class="mt-4 space-y-4">
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Post a duplicate to start your trading career.</p>
+                                </div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>
@@ -1124,6 +1305,220 @@
 
         // Initialize Supabase client
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ==================== Module: Registry ====================
+        const AppModules = (() => {
+            const modules = new Map();
+
+            return {
+                define(name, factory) {
+                    if (modules.has(name)) {
+                        console.warn(`[AppModules] Module "${name}" already defined. Returning existing instance.`);
+                        return modules.get(name);
+                    }
+
+                    const module = typeof factory === 'function' ? factory() : factory;
+                    modules.set(name, module);
+                    return module;
+                },
+                use(name) {
+                    if (!modules.has(name)) {
+                        throw new Error(`[AppModules] Unknown module: ${name}`);
+                    }
+                    return modules.get(name);
+                },
+                list() {
+                    return Array.from(modules.keys());
+                }
+            };
+        })();
+
+        window.__APP_MODULES__ = AppModules;
+
+        // ==================== Module: State Store ====================
+        function createReactiveState(initialState = {}) {
+            const listeners = new Set();
+            const proxyCache = new WeakMap();
+            let activeDescription = null;
+
+            const notify = (path, value, previousValue) => {
+                const payload = {
+                    path,
+                    value,
+                    previous: previousValue,
+                    state: rootProxy,
+                    description: activeDescription || 'mutation'
+                };
+
+                listeners.forEach(listener => {
+                    try {
+                        listener(payload);
+                    } catch (error) {
+                        console.error('[AppState] Subscriber error', error);
+                    }
+                });
+            };
+
+            const wrap = (target, path = []) => {
+                if (target && typeof target === 'object') {
+                    if (proxyCache.has(target)) {
+                        return proxyCache.get(target);
+                    }
+
+                    const proxy = new Proxy(target, {
+                        get(obj, prop, receiver) {
+                            const value = Reflect.get(obj, prop, receiver);
+                            if (value && typeof value === 'object') {
+                                return wrap(value, [...path, prop]);
+                            }
+                            return value;
+                        },
+                        set(obj, prop, value) {
+                            const previousValue = obj[prop];
+                            if (previousValue === value) {
+                                return true;
+                            }
+
+                            const wrappedValue = value && typeof value === 'object'
+                                ? wrap(value, [...path, prop])
+                                : value;
+
+                            obj[prop] = wrappedValue;
+                            notify([...path, prop], wrappedValue, previousValue);
+                            return true;
+                        },
+                        deleteProperty(obj, prop) {
+                            if (!(prop in obj)) {
+                                return true;
+                            }
+                            const previousValue = obj[prop];
+                            delete obj[prop];
+                            notify([...path, prop], undefined, previousValue);
+                            return true;
+                        }
+                    });
+
+                    proxyCache.set(target, proxy);
+                    return proxy;
+                }
+                return target;
+            };
+
+            const rootProxy = wrap(initialState);
+
+            return {
+                state: rootProxy,
+                subscribe(listener) {
+                    listeners.add(listener);
+                    return () => listeners.delete(listener);
+                },
+                setState(updater, description = 'update') {
+                    activeDescription = description;
+                    const partialState = typeof updater === 'function' ? updater(rootProxy) : updater;
+                    if (partialState && typeof partialState === 'object') {
+                        Object.entries(partialState).forEach(([key, value]) => {
+                            rootProxy[key] = value;
+                        });
+                    }
+                    activeDescription = null;
+                    return rootProxy;
+                }
+            };
+        }
+
+        const prefersDarkScheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+        const initialTheme = (prefersDarkScheme && prefersDarkScheme.matches) ? 'dark' : 'light';
+        document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+
+        const stateStore = createReactiveState({
+            currentUser: null,
+            userProfile: null,
+            codes: [],
+            collectibles: [],
+            currentView: 'dashboard',
+            isAdmin: false,
+            activities: [],
+            redemptionHistory: [],
+            users: [],
+            theme: initialTheme,
+            progression: null,
+            quests: [],
+            achievements: [],
+            seasonEvents: [],
+            journeyInsights: null,
+            wallet: {
+                gold: 0,
+                gems: 0,
+                dust: 0,
+                cap: 250000,
+                ledger: []
+            },
+            economySummary: {
+                dailyIncome: 0,
+                tradePower: 0,
+                barterScore: 0
+            },
+            marketplace: {
+                suggestedListings: [],
+                playerListings: [],
+                globalListings: [],
+                filters: {
+                    rarity: 'all',
+                    currency: 'all',
+                    sort: 'recent'
+                },
+                stats: {
+                    totalListings: 0,
+                    highestValue: null,
+                    demandSegments: []
+                }
+            }
+        });
+
+        const appState = stateStore.state;
+
+        if (prefersDarkScheme) {
+            prefersDarkScheme.addEventListener('change', event => {
+                stateStore.setState({ theme: event.matches ? 'dark' : 'light' }, 'theme:prefers-scheme');
+            });
+        }
+
+        const Diagnostics = AppModules.define('diagnostics', () => {
+            const history = [];
+            const maxEntries = 50;
+
+            function record(change) {
+                history.push({ ...change, timestamp: Date.now() });
+                if (history.length > maxEntries) {
+                    history.shift();
+                }
+
+                if (window.__APP_DEBUG__) {
+                    const label = change.path.length ? change.path.join('.') : '(root)';
+                    console.info(`[AppState] ${change.description}`, label, change.value);
+                }
+            }
+
+            function getHistory() {
+                return [...history];
+            }
+
+            return {
+                record,
+                getHistory
+            };
+        });
+
+        stateStore.subscribe(change => {
+            Diagnostics.record(change);
+
+            if (change.path[0] === 'theme' && change.path.length === 1 && change.value !== change.previous) {
+                document.documentElement.classList.toggle('dark', change.value === 'dark');
+            }
+        });
+
+        window.__APP_STORE__ = stateStore;
+        window.__APP_DEBUG__ = window.__APP_DEBUG__ ?? false;
 
 // WhatsApp-style Emoji Categories (compatible set)
 // Structure preserved: { name, emoji, value }
@@ -1502,141 +1897,1725 @@ const emojiCategories = {
 // Example: export default emojiCategories;
 
         
-        // Helper function to get emoji by value
-        function getEmojiByValue(value) {
-            for (const category in emojiCategories) {
-                const emoji = emojiCategories[category].find(e => e.value === value);
-                if (emoji) return emoji.emoji;
+        // ==================== Module: Utilities ====================
+        const Utilities = AppModules.define('utilities', () => {
+            function getEmojiByValue(value) {
+                for (const category in emojiCategories) {
+                    const emoji = emojiCategories[category].find(e => e.value === value);
+                    if (emoji) return emoji.emoji;
+                }
+                return "❓"; // Default fallback emoji
             }
-            return "❓"; // Default fallback emoji
-        }
-        
-        // Function to render emoji as HTML
-        function renderEmoji(value, size = 'text-3xl') {
-            return `<span class="${size} emoji-icon">${getEmojiByValue(value)}</span>`;
-        }
 
-        // Initialize dark mode
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+            function renderEmoji(value, size = 'text-3xl') {
+                return `<span class="${size} emoji-icon">${getEmojiByValue(value)}</span>`;
             }
+
+            function formatDate(date) {
+                return new Date(date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+
+            function formatNumber(value) {
+                const number = typeof value === 'number' ? value : Number(value) || 0;
+                return new Intl.NumberFormat('en-US').format(Math.round(number));
+            }
+
+            function formatDelta(value, unit = '') {
+                const numeric = typeof value === 'number' ? value : Number(value) || 0;
+                const prefix = numeric >= 0 ? '+' : '−';
+                const absolute = formatNumber(Math.abs(numeric));
+                return `${prefix}${absolute}${unit ? ` ${unit}` : ''}`.trim();
+            }
+
+            function formatRelativeTime(date) {
+                if (!date) return 'just now';
+                const target = new Date(date);
+                const diff = Date.now() - target.getTime();
+                const minutes = Math.round(diff / 60000);
+                if (minutes < 1) return 'just now';
+                if (minutes < 60) return `${minutes}m ago`;
+                const hours = Math.round(minutes / 60);
+                if (hours < 24) return `${hours}h ago`;
+                const days = Math.round(hours / 24);
+                if (days < 7) return `${days}d ago`;
+                return formatDate(date);
+            }
+
+            return {
+                getEmojiByValue,
+                renderEmoji,
+                formatDate,
+                formatNumber,
+                formatDelta,
+                formatRelativeTime
+            };
         });
 
-        // Main application state
-        const appState = {
-            currentUser: null,
-            userProfile: null,
-            codes: [],
-            collectibles: [],
-            currentView: 'dashboard',
-            isAdmin: false,
-            activities: [],
-            redemptionHistory: [],
-            users: []
-        };
+        const { getEmojiByValue, renderEmoji, formatDate, formatNumber, formatDelta, formatRelativeTime } = Utilities;
 
-        // Utility functions
-        function formatDate(date) {
-            return new Date(date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
-        }
+        // ==================== Module: Notifications ====================
+        const Notifications = AppModules.define('notifications', () => {
+            function showNotification(message, type = 'success') {
+                const id = Date.now().toString();
+                const colors = type === 'success'
+                    ? 'bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-100'
+                    : 'bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
 
-        function showNotification(message, type = 'success') {
-            const id = Date.now().toString();
-            const colors = type === 'success' ? 
-                'bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-100' : 
-                'bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-100';
-            
-            const iconColors = type === 'success' ? 
-                'text-green-400 dark:text-green-300' : 
-                'text-red-400 dark:text-red-300';
-            
-            const icon = type === 'success' ? 
-                `<svg class="h-5 w-5 ${iconColors}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>` : 
-                `<svg class="h-5 w-5 ${iconColors}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
-            
-            const notification = document.createElement('div');
-            notification.id = `notification-${id}`;
-            notification.className = `max-w-sm w-full ${colors} shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden transform transition-all duration-300 ease-in-out translate-y-2 opacity-0`;
-            notification.innerHTML = `
-                <div class="p-4">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0">
-                            ${icon}
-                        </div>
-                        <div class="ml-3 w-0 flex-1 pt-0.5">
-                            <p class="text-sm font-medium">${message}</p>
-                        </div>
-                        <div class="ml-4 flex-shrink-0 flex">
-                            <button class="bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                <span class="sr-only">Close</span>
-                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
+                const iconColors = type === 'success'
+                    ? 'text-green-400 dark:text-green-300'
+                    : 'text-red-400 dark:text-red-300';
+
+                const icon = type === 'success'
+                    ? `<svg class="h-5 w-5 ${iconColors}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`
+                    : `<svg class="h-5 w-5 ${iconColors}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
+
+                const notification = document.createElement('div');
+                notification.id = `notification-${id}`;
+                notification.className = `max-w-sm w-full ${colors} shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden transform transition-all duration-300 ease-in-out translate-y-2 opacity-0`;
+                notification.innerHTML = `
+                    <div class="p-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                ${icon}
+                            </div>
+                            <div class="ml-3 w-0 flex-1 pt-0.5">
+                                <p class="text-sm font-medium">${message}</p>
+                            </div>
+                            <div class="ml-4 flex-shrink-0 flex">
+                                <button class="bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    <span class="sr-only">Close</span>
+                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            
-            const container = document.getElementById('notificationContainer');
-            container.appendChild(notification);
-            
-            // Animate in
-            setTimeout(() => {
-                notification.classList.remove('translate-y-2', 'opacity-0');
-            }, 10);
-            
-            // Remove after duration
-            setTimeout(() => {
-                notification.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 5000);
-            
-            // Handle close button
-            notification.querySelector('button').addEventListener('click', () => {
-                notification.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            });
-        }
+                `;
 
-        function showConfirmation(title, message, confirmText, callback) {
-            const modalTitle = document.getElementById('confirmation-modal-title');
-            const modalMessage = document.getElementById('confirmation-modal-message');
-            const confirmButton = document.getElementById('confirmActionButton');
-            
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            confirmButton.textContent = confirmText;
-            
-            document.getElementById('confirmationModal').classList.remove('hidden');
-            
-            const handleConfirm = () => {
-                callback();
-                document.getElementById('confirmationModal').classList.add('hidden');
-                confirmButton.removeEventListener('click', handleConfirm);
+                const container = document.getElementById('notificationContainer');
+                container.appendChild(notification);
+
+                // Animate in
+                setTimeout(() => {
+                    notification.classList.remove('translate-y-2', 'opacity-0');
+                }, 10);
+
+                // Remove after duration
+                setTimeout(() => {
+                    notification.classList.add('translate-y-2', 'opacity-0');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 5000);
+
+                // Handle close button
+                notification.querySelector('button').addEventListener('click', () => {
+                    notification.classList.add('translate-y-2', 'opacity-0');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                });
+            }
+
+            function showConfirmation(title, message, confirmText, callback) {
+                const modalTitle = document.getElementById('confirmation-modal-title');
+                const modalMessage = document.getElementById('confirmation-modal-message');
+                const confirmButton = document.getElementById('confirmActionButton');
+
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+                confirmButton.textContent = confirmText;
+
+                document.getElementById('confirmationModal').classList.remove('hidden');
+
+                const handleConfirm = () => {
+                    callback();
+                    document.getElementById('confirmationModal').classList.add('hidden');
+                    confirmButton.removeEventListener('click', handleConfirm);
+                };
+
+                confirmButton.addEventListener('click', handleConfirm);
+
+                document.getElementById('cancelActionButton').addEventListener('click', function() {
+                    document.getElementById('confirmationModal').classList.add('hidden');
+                    confirmButton.removeEventListener('click', handleConfirm);
+                }, { once: true });
+            }
+
+            return {
+                showNotification,
+                showConfirmation
             };
-            
-            confirmButton.addEventListener('click', handleConfirm);
-            
-            document.getElementById('cancelActionButton').addEventListener('click', function() {
-                document.getElementById('confirmationModal').classList.add('hidden');
-                confirmButton.removeEventListener('click', handleConfirm);
-            }, { once: true });
-        }
+        });
+
+        const { showNotification, showConfirmation } = Notifications;
+
+        // ==================== Module: Engagement Systems ====================
+        const Engagement = AppModules.define('engagement', () => {
+            const QUEST_STORAGE_PREFIX = 'collectibleRealm::quests::';
+            const rarityOrder = {
+                common: 1,
+                uncommon: 2,
+                rare: 3,
+                epic: 4,
+                legendary: 5,
+                mythic: 6
+            };
+
+            function dateKey(value = new Date()) {
+                const date = new Date(value);
+                date.setHours(0, 0, 0, 0);
+                return date.toISOString().split('T')[0];
+            }
+
+            function xpThreshold(level) {
+                return 200 + (level - 1) * 140;
+            }
+
+            function computeStreakStats(activities = []) {
+                if (!activities || activities.length === 0) {
+                    return { streak: 0, longestStreak: 0, lastActive: null, bonusXp: 0 };
+                }
+
+                const uniqueDays = Array.from(new Set(
+                    activities
+                        .map(activity => activity?.created_at ? dateKey(activity.created_at) : null)
+                        .filter(Boolean)
+                )).sort();
+
+                if (uniqueDays.length === 0) {
+                    return { streak: 0, longestStreak: 0, lastActive: null, bonusXp: 0 };
+                }
+
+                const datesAsc = uniqueDays.map(value => {
+                    const date = new Date(value);
+                    date.setHours(0, 0, 0, 0);
+                    return date;
+                });
+
+                const datesDesc = [...datesAsc].sort((a, b) => b - a);
+
+                let currentStreak = 1;
+                for (let i = 1; i < datesDesc.length; i++) {
+                    const diff = Math.round((datesDesc[i - 1] - datesDesc[i]) / 86400000);
+                    if (diff === 1) {
+                        currentStreak += 1;
+                    } else {
+                        break;
+                    }
+                }
+
+                const latest = datesDesc[0];
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const diffToToday = Math.round((today - latest) / 86400000);
+                if (diffToToday > 1) {
+                    currentStreak = 0;
+                }
+
+                let longestStreak = 1;
+                let running = 1;
+                for (let i = 1; i < datesAsc.length; i++) {
+                    const diff = Math.round((datesAsc[i] - datesAsc[i - 1]) / 86400000);
+                    if (diff === 1) {
+                        running += 1;
+                        longestStreak = Math.max(longestStreak, running);
+                    } else {
+                        running = 1;
+                    }
+                }
+
+                const bonusXp = currentStreak * 15;
+
+                return {
+                    streak: currentStreak,
+                    longestStreak,
+                    lastActive: latest,
+                    bonusXp
+                };
+            }
+
+            function calculateProgression() {
+                const collectibles = appState.collectibles || [];
+                const activities = appState.activities || [];
+                const streakStats = computeStreakStats(activities);
+
+                const rarityWeights = {
+                    common: 25,
+                    uncommon: 35,
+                    rare: 55,
+                    epic: 80,
+                    legendary: 120,
+                    mythic: 160
+                };
+
+                const collectibleXp = collectibles.reduce((sum, item) => sum + (rarityWeights[item.rarity] || 25), 0);
+                const activityXp = Math.min(activities.length * 12, 360);
+                const totalXp = Math.round(collectibleXp + activityXp + streakStats.bonusXp);
+
+                let level = 1;
+                let xpForNextLevel = xpThreshold(level);
+                let xpRemaining = totalXp;
+
+                while (xpRemaining >= xpForNextLevel) {
+                    xpRemaining -= xpForNextLevel;
+                    level += 1;
+                    xpForNextLevel = xpThreshold(level);
+                }
+
+                const progressPercent = xpForNextLevel
+                    ? Math.min(100, Math.round((xpRemaining / xpForNextLevel) * 100))
+                    : 0;
+
+                const rareCount = collectibles.filter(item => rarityOrder[item.rarity] >= rarityOrder.rare).length;
+
+                return {
+                    xp: totalXp,
+                    level,
+                    xpIntoLevel: xpRemaining,
+                    xpForNextLevel,
+                    progressPercent,
+                    streak: streakStats.streak,
+                    longestStreak: streakStats.longestStreak,
+                    lastActiveDate: streakStats.lastActive,
+                    bonusXp: streakStats.bonusXp,
+                    rareCount,
+                    totalCollectibles: collectibles.length
+                };
+            }
+
+            function getQuestPool() {
+                return [
+                    {
+                        id: 'redeem_two',
+                        title: 'Redeem Two Codes',
+                        description: 'Redeem two different codes today.',
+                        type: 'redeem',
+                        target: 2,
+                        rewardXp: 120,
+                        icon: '🗝️'
+                    },
+                    {
+                        id: 'collection_growth',
+                        title: 'Expand Your Vault',
+                        description: 'Reach a collection size of 15 items.',
+                        type: 'collectionSize',
+                        target: 15,
+                        rewardXp: 140,
+                        icon: '📦'
+                    },
+                    {
+                        id: 'rare_hunter',
+                        title: 'Rare Hunter',
+                        description: 'Own at least one rare or better collectible.',
+                        type: 'rarity',
+                        rarity: 'rare',
+                        target: 1,
+                        rewardXp: 160,
+                        icon: '💠'
+                    },
+                    {
+                        id: 'legendary_track',
+                        title: 'Legendary Aspirations',
+                        description: 'Secure a legendary or mythic collectible.',
+                        type: 'rarity',
+                        rarity: 'legendary',
+                        target: 1,
+                        rewardXp: 220,
+                        icon: '🌟'
+                    },
+                    {
+                        id: 'activity_stream',
+                        title: 'Keep the Feed Alive',
+                        description: 'Log three activities today.',
+                        type: 'activityCount',
+                        target: 3,
+                        rewardXp: 90,
+                        icon: '📣'
+                    },
+                    {
+                        id: 'streak_keeper',
+                        title: 'Maintain the Flame',
+                        description: 'Hold a streak of three days or more.',
+                        type: 'streak',
+                        target: 3,
+                        rewardXp: 150,
+                        icon: '🔥'
+                    },
+                    {
+                        id: 'welcome_back',
+                        title: 'Realm Check-In',
+                        description: 'Log in today to refresh your journey.',
+                        type: 'login',
+                        target: 1,
+                        rewardXp: 60,
+                        icon: '👋'
+                    },
+                    {
+                        id: 'epic_collection',
+                        title: 'Epic Ensemble',
+                        description: 'Collect three epic or better artifacts.',
+                        type: 'rarity',
+                        rarity: 'epic',
+                        target: 3,
+                        rewardXp: 180,
+                        icon: '🛡️'
+                    }
+                ];
+            }
+
+            function seedFromString(input) {
+                let hash = 0;
+                for (let i = 0; i < input.length; i++) {
+                    hash = ((hash << 5) - hash) + input.charCodeAt(i);
+                    hash |= 0;
+                }
+                return Math.abs(hash);
+            }
+
+            function loadQuestCache(userId) {
+                if (typeof localStorage === 'undefined') return null;
+                try {
+                    const raw = localStorage.getItem(`${QUEST_STORAGE_PREFIX}${userId}`);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (error) {
+                    console.warn('Unable to load quest cache', error);
+                    return null;
+                }
+            }
+
+            function saveQuestCache(userId, payload) {
+                if (typeof localStorage === 'undefined') return;
+                try {
+                    localStorage.setItem(`${QUEST_STORAGE_PREFIX}${userId}`, JSON.stringify(payload));
+                } catch (error) {
+                    console.warn('Unable to persist quest cache', error);
+                }
+            }
+
+            function selectQuestsForToday(userId, { reroll = false } = {}) {
+                if (!userId) return [];
+                const today = dateKey();
+                let cache = reroll ? null : loadQuestCache(userId);
+
+                if (!cache || cache.date !== today) {
+                    const pool = getQuestPool();
+                    const selected = [];
+                    let seed = seedFromString(`${userId}-${today}`);
+
+                    while (selected.length < Math.min(3, pool.length)) {
+                        seed = (seed * 9301 + 49297) % 233280;
+                        const index = seed % pool.length;
+                        const candidate = pool[index];
+                        if (!selected.some(item => item.id === candidate.id)) {
+                            selected.push(candidate);
+                        }
+                    }
+
+                    cache = { date: today, quests: selected.map(q => q.id) };
+                    saveQuestCache(userId, cache);
+                }
+
+                const poolMap = new Map(getQuestPool().map(item => [item.id, item]));
+                return (cache.quests || [])
+                    .map(id => poolMap.get(id))
+                    .filter(Boolean);
+            }
+
+            function evaluateQuest(definition, progression) {
+                if (!definition) return null;
+
+                const today = dateKey();
+                let progress = 0;
+
+                switch (definition.type) {
+                    case 'redeem':
+                        progress = appState.activities.filter(activity =>
+                            activity.action === 'redeemed' &&
+                            activity.created_at &&
+                            dateKey(activity.created_at) === today
+                        ).length;
+                        break;
+                    case 'activityCount':
+                        progress = appState.activities.filter(activity =>
+                            activity.created_at &&
+                            dateKey(activity.created_at) === today
+                        ).length;
+                        break;
+                    case 'collectionSize':
+                        progress = appState.collectibles.length;
+                        break;
+                    case 'rarity':
+                        progress = appState.collectibles.filter(item =>
+                            rarityOrder[item.rarity] >= rarityOrder[definition.rarity]
+                        ).length;
+                        break;
+                    case 'streak':
+                        progress = progression?.streak ?? 0;
+                        break;
+                    case 'login':
+                        progress = appState.currentUser ? 1 : 0;
+                        break;
+                    default:
+                        progress = 0;
+                }
+
+                const clamped = Math.min(progress, definition.target);
+                const percent = definition.target
+                    ? Math.min(100, Math.round((clamped / definition.target) * 100))
+                    : 0;
+
+                return {
+                    ...definition,
+                    progress: clamped,
+                    completed: progress >= definition.target,
+                    progressPercent: percent
+                };
+            }
+
+            function evaluateAchievements(progression) {
+                const definitions = [
+                    {
+                        id: 'first_relic',
+                        title: 'First Relic',
+                        description: 'Redeem your first collectible.',
+                        target: 1,
+                        icon: '🔓',
+                        progress: () => appState.collectibles.length
+                    },
+                    {
+                        id: 'vault_keeper',
+                        title: 'Vault Keeper',
+                        description: 'Own 10 collectibles.',
+                        target: 10,
+                        icon: '🏰',
+                        progress: () => appState.collectibles.length
+                    },
+                    {
+                        id: 'legendary_finder',
+                        title: 'Legendary Finder',
+                        description: 'Secure a legendary or mythic collectible.',
+                        target: 1,
+                        icon: '🌠',
+                        progress: () => appState.collectibles.filter(item => rarityOrder[item.rarity] >= rarityOrder.legendary).length
+                    },
+                    {
+                        id: 'streak_master',
+                        title: 'Streak Guardian',
+                        description: 'Maintain a 5-day streak of activity.',
+                        target: 5,
+                        icon: '🔥',
+                        progress: () => progression?.longestStreak ?? 0
+                    },
+                    {
+                        id: 'diversity_collector',
+                        title: 'Curator of Realms',
+                        description: 'Collect items from four different rarity tiers.',
+                        target: 4,
+                        icon: '🧭',
+                        progress: () => new Set(appState.collectibles.map(item => item.rarity)).size
+                    }
+                ];
+
+                return definitions.map(def => {
+                    const progressValue = def.progress();
+                    const clamped = Math.min(progressValue, def.target);
+                    const percent = def.target
+                        ? Math.min(100, Math.round((clamped / def.target) * 100))
+                        : 0;
+
+                    return {
+                        id: def.id,
+                        name: def.title,
+                        description: def.description,
+                        target: def.target,
+                        progress: clamped,
+                        progressPercent: percent,
+                        completed: progressValue >= def.target,
+                        icon: def.icon
+                    };
+                });
+            }
+
+            function deriveInsights() {
+                const counts = {
+                    common: 0,
+                    uncommon: 0,
+                    rare: 0,
+                    epic: 0,
+                    legendary: 0,
+                    mythic: 0
+                };
+
+                const motifTally = new Map();
+
+                appState.collectibles.forEach(item => {
+                    if (counts[item.rarity] !== undefined) {
+                        counts[item.rarity] += 1;
+                    }
+                    if (item.item_graphic) {
+                        motifTally.set(item.item_graphic, (motifTally.get(item.item_graphic) || 0) + 1);
+                    }
+                });
+
+                const rarityEntries = Object.entries(counts)
+                    .filter(([, count]) => count > 0)
+                    .sort((a, b) => {
+                        if (rarityOrder[b[0]] === rarityOrder[a[0]]) {
+                            return counts[b[0]] - counts[a[0]];
+                        }
+                        return rarityOrder[b[0]] - rarityOrder[a[0]];
+                    });
+
+                const favouriteMotif = Array.from(motifTally.entries())
+                    .sort((a, b) => b[1] - a[1])[0] || null;
+
+                return {
+                    counts,
+                    total: appState.collectibles.length,
+                    uniqueRarities: rarityEntries.length,
+                    topRarity: rarityEntries[0]?.[0] || null,
+                    topRarityCount: rarityEntries[0]?.[1] || 0,
+                    favouriteEmoji: favouriteMotif ? getEmojiByValue(favouriteMotif[0]) : null,
+                    favouriteEmojiKey: favouriteMotif ? favouriteMotif[0] : null
+                };
+            }
+
+            function buildSeasonEvents(progression, insights) {
+                const events = [];
+                const resetDate = new Date();
+                resetDate.setHours(24, 0, 0, 0);
+
+                const rarest = [...(appState.collectibles || [])]
+                    .sort((a, b) => {
+                        const rarityDiff = (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0);
+                        if (rarityDiff !== 0) return rarityDiff;
+                        return new Date(b.acquired_date || 0) - new Date(a.acquired_date || 0);
+                    })[0];
+
+                if (rarest) {
+                    events.push({
+                        id: 'rarest-spotlight',
+                        title: `Spotlight: ${rarest.item_name}`,
+                        description: `Your ${rarest.rarity} discovery is shining bright. Relive the moment from ${formatDate(rarest.acquired_date || new Date())}.`,
+                        tag: 'Spotlight',
+                        icon: getEmojiByValue(rarest.item_graphic)
+                    });
+                }
+
+                events.push({
+                    id: 'season-reset',
+                    title: 'Aurora Season Countdown',
+                    description: progression
+                        ? `Earn ${Math.max(progression.xpForNextLevel - progression.xpIntoLevel, 0)} XP to reach level ${progression.level + 1} before the daily reset.`
+                        : 'Level up before the next reset to unlock seasonal rewards.',
+                    tag: 'Season Quest',
+                    icon: '⏳',
+                    resetDate
+                });
+
+                if (insights?.favouriteEmoji) {
+                    const label = insights.favouriteEmojiKey
+                        ? insights.favouriteEmojiKey.split('_').join(' ')
+                        : 'favourite motif';
+                    events.push({
+                        id: 'motif-highlight',
+                        title: 'Motif of the Day',
+                        description: `You've collected ${insights.favouriteEmoji} ${label} more than any other. Share it in the community!`,
+                        tag: 'Community',
+                        icon: insights.favouriteEmoji
+                    });
+                }
+
+                return events;
+            }
+
+            function sync(options = {}) {
+                if (!appState.currentUser) {
+                    stateStore.setState({
+                        progression: null,
+                        quests: [],
+                        achievements: [],
+                        seasonEvents: [],
+                        journeyInsights: null
+                    }, 'engagement:reset');
+                    return {
+                        progression: null,
+                        quests: [],
+                        achievements: [],
+                        seasonEvents: [],
+                        insights: null
+                    };
+                }
+
+                const progression = calculateProgression();
+                const insights = deriveInsights();
+                const questDefinitions = selectQuestsForToday(appState.currentUser.id, { reroll: options.rerollQuests });
+                const quests = questDefinitions
+                    .map(def => evaluateQuest(def, progression))
+                    .filter(Boolean);
+                const achievements = evaluateAchievements(progression);
+                const seasonEvents = buildSeasonEvents(progression, insights);
+
+                stateStore.setState({
+                    progression,
+                    quests,
+                    achievements,
+                    seasonEvents,
+                    journeyInsights: insights
+                }, 'engagement:sync');
+
+                return { progression, quests, achievements, seasonEvents, insights };
+            }
+
+            function favouriteLabel(insights) {
+                if (!insights?.favouriteEmoji) return 'Redeem more to reveal trends.';
+                const label = insights.favouriteEmojiKey
+                    ? insights.favouriteEmojiKey.split('_').join(' ')
+                    : 'favourite motif';
+                return `Favoured motif ${insights.favouriteEmoji} ${label}`.trim();
+            }
+
+            function renderProgressionOverview() {
+                const container = document.getElementById('progressionOverviewCard');
+                const summary = document.getElementById('progressionSummary');
+
+                if (!container) return;
+
+                if (!appState.currentUser) {
+                    container.innerHTML = `<div class="text-sm text-gray-500 dark:text-gray-400">Sign in to begin tracking your progress.</div>`;
+                    if (summary) summary.classList.add('hidden');
+                    return;
+                }
+
+                const data = appState.progression;
+                if (!data) {
+                    container.innerHTML = `<div class="text-sm text-gray-500 dark:text-gray-400">Redeem a code to unlock your progression journey.</div>`;
+                    if (summary) summary.classList.add('hidden');
+                    return;
+                }
+
+                const insights = appState.journeyInsights;
+                const xpRemaining = Math.max(data.xpForNextLevel - data.xpIntoLevel, 0);
+                const lastActive = data.lastActiveDate ? formatDate(data.lastActiveDate) : 'No activity yet';
+
+                if (summary) {
+                    summary.textContent = `Level ${data.level} • ${data.xp} XP earned`;
+                    summary.classList.remove('hidden');
+                }
+
+                container.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+                        <div>
+                            <p class="text-xs font-semibold text-primary-500 uppercase tracking-wide">Level ${data.level}</p>
+                            <h3 class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">${appState.userProfile?.username || 'Explorer'}</h3>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Only ${xpRemaining} XP to reach level ${data.level + 1}.</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative">
+                                <div class="h-16 w-16 rounded-full bg-gradient-to-br from-primary-500 to-primary-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg">${data.level}</div>
+                                <span class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Rank</span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Current Streak</p>
+                                <p class="text-xl font-semibold text-gray-900 dark:text-white">${data.streak} days</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Longest streak: ${data.longestStreak} days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-3 rounded-full bg-gradient-to-r from-primary-500 to-primary-400" style="width: ${data.progressPercent}%;"></div>
+                        </div>
+                        <div class="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <span>${data.xpIntoLevel} / ${data.xpForNextLevel} XP this level</span>
+                            <span>${data.progressPercent}%</span>
+                        </div>
+                    </div>
+                    <dl class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        <div class="p-4 rounded-lg bg-primary-50 dark:bg-primary-900/40 border border-primary-100 dark:border-primary-800/60">
+                            <dt class="text-xs font-semibold text-primary-600 dark:text-primary-300 uppercase tracking-wide">Rarest Tier</dt>
+                            <dd class="mt-2 text-lg font-semibold text-gray-900 dark:text-white">${insights?.topRarity ? insights.topRarity.charAt(0).toUpperCase() + insights.topRarity.slice(1) : 'None yet'}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">${insights?.topRarityCount ? `${insights.topRarityCount} discovered` : 'Redeem a code to discover one.'}</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Last Active</dt>
+                            <dd class="mt-2 text-lg font-semibold text-gray-900 dark:text-white">${lastActive}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">Bonus XP: +${data.bonusXp}</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Collection Insights</dt>
+                            <dd class="mt-2 text-lg font-semibold text-gray-900 dark:text-white">${insights?.total || 0} items</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">${favouriteLabel(insights)}</dd>
+                        </div>
+                    </dl>
+                `;
+            }
+
+            function getQuestCountdown() {
+                const now = new Date();
+                const reset = new Date();
+                reset.setHours(24, 0, 0, 0);
+                const diff = reset - now;
+
+                if (diff <= 0) {
+                    return '0h 00m';
+                }
+
+                const hours = Math.floor(diff / 3600000);
+                const minutes = Math.floor((diff % 3600000) / 60000);
+
+                return `${hours}h ${minutes.toString().padStart(2, '0')}m`;
+            }
+
+            function renderQuestBoard() {
+                const container = document.getElementById('questBoard');
+                const countdown = document.getElementById('questResetCountdown');
+
+                if (!container) return;
+
+                if (countdown) {
+                    countdown.textContent = `Resets in ${getQuestCountdown()}`;
+                }
+
+                if (!appState.currentUser) {
+                    container.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">Sign in to receive your personalised quest board.</div>`;
+                    return;
+                }
+
+                const quests = appState.quests || [];
+                if (!quests.length) {
+                    container.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">No quests available yet. Redeem codes to unlock new objectives.</div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                quests.forEach(quest => {
+                    const percent = quest.progressPercent ?? (quest.target ? Math.min(100, Math.round((quest.progress / quest.target) * 100)) : 0);
+                    const statusColor = quest.completed
+                        ? 'text-green-600 dark:text-green-300'
+                        : 'text-gray-500 dark:text-gray-400';
+
+                    const card = document.createElement('article');
+                    card.className = 'bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-100 dark:border-gray-700/60 transition-transform transform hover:-translate-y-1 hover:shadow-lg';
+
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">${quest.icon || '🎯'} Quest</p>
+                                <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">${quest.title}</h3>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">${quest.description}</p>
+                            </div>
+                            <span class="ml-4 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-200">${quest.rewardXp} XP</span>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-2.5 rounded-full ${quest.completed ? 'bg-green-500' : 'bg-gradient-to-r from-primary-500 to-primary-400'}" style="width: ${quest.completed ? 100 : percent}%;"></div>
+                            </div>
+                            <div class="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                                <span>${quest.progress}/${quest.target}</span>
+                                <span class="${statusColor}">${quest.completed ? 'Reward Ready' : 'In Progress'}</span>
+                            </div>
+                        </div>
+                        ${quest.completed
+                            ? `<button data-quest-claim="${quest.id}" class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">Claim Reward</button>`
+                            : `<button class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800" disabled>Keep going</button>`}
+                    `;
+
+                    container.appendChild(card);
+                });
+
+                container.querySelectorAll('[data-quest-claim]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        showNotification('Quest reward tracked! XP bonuses will sync once backend rewards are enabled.');
+                    });
+                });
+            }
+
+            function renderAchievementShowcase() {
+                const container = document.getElementById('achievementShowcase');
+
+                if (!container) return;
+
+                if (!appState.currentUser) {
+                    container.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">Sign in to start unlocking achievements.</div>`;
+                    return;
+                }
+
+                const achievements = (appState.achievements || [])
+                    .slice()
+                    .sort((a, b) => {
+                        if (a.completed === b.completed) {
+                            return (b.progressPercent || 0) - (a.progressPercent || 0);
+                        }
+                        return a.completed ? -1 : 1;
+                    })
+                    .slice(0, 4);
+
+                if (!achievements.length) {
+                    container.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">Earn achievements by redeeming codes, keeping streaks, and diversifying your collection.</div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                achievements.forEach(achievement => {
+                    const percent = achievement.progressPercent ?? 0;
+                    const badgeClasses = achievement.completed
+                        ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200'
+                        : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-200';
+
+                    const article = document.createElement('article');
+                    article.className = 'relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-6 shadow transition-transform transform hover:-translate-y-1 hover:shadow-lg';
+
+                    article.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-3xl">${achievement.icon || '🏆'}</span>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">${achievement.name}</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">${achievement.description}</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${badgeClasses}">${achievement.completed ? 'Unlocked' : `${percent}%`}</span>
+                        </div>
+                        <div class="mt-4">
+                            <div class="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                <div class="h-2.5 rounded-full ${achievement.completed ? 'bg-green-500' : 'bg-primary-400'}" style="width: ${achievement.completed ? 100 : percent}%;"></div>
+                            </div>
+                            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">${achievement.progress}/${achievement.target} completed</p>
+                        </div>
+                    `;
+
+                    container.appendChild(article);
+                });
+            }
+
+            function renderSeasonShowcase() {
+                const container = document.getElementById('seasonShowcase');
+
+                if (!container) return;
+
+                const events = appState.seasonEvents || [];
+
+                if (!events.length) {
+                    container.innerHTML = `<div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">No seasonal highlights right now. Check back soon for live events.</div>`;
+                    return;
+                }
+
+                container.innerHTML = '';
+
+                events.forEach(event => {
+                    const article = document.createElement('article');
+                    article.className = 'relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-6 shadow transition-transform transform hover:-translate-y-1 hover:shadow-lg';
+
+                    const resetLabel = event.resetDate ? `Ends ${formatDate(event.resetDate)}` : '';
+
+                    article.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide ${event.tag ? 'text-primary-500 dark:text-primary-300' : 'text-gray-400 dark:text-gray-500'}">${event.tag || 'Event'}</p>
+                                <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">${event.title}</h3>
+                            </div>
+                            ${event.icon ? `<span class="text-3xl">${event.icon}</span>` : ''}
+                        </div>
+                        <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">${event.description}</p>
+                        ${resetLabel ? `<p class="mt-3 text-xs text-gray-400 dark:text-gray-500">${resetLabel}</p>` : ''}
+                    `;
+
+                    container.appendChild(article);
+                });
+            }
+
+            function renderAll() {
+                renderProgressionOverview();
+                renderQuestBoard();
+                renderAchievementShowcase();
+                renderSeasonShowcase();
+            }
+
+            return {
+                sync,
+                renderAll,
+                renderProgressionOverview,
+                renderQuestBoard,
+                renderAchievementShowcase,
+                renderSeasonShowcase
+            };
+        });
+
+        // ==================== Module: Economy Systems ====================
+        const Economy = AppModules.define('economy', () => {
+            const LEDGER_STORAGE_KEY = 'collectibleRealm::ledger::';
+            const STIPEND_STORAGE_KEY = 'collectibleRealm::stipend::';
+            const REFORGE_STORAGE_KEY = 'collectibleRealm::reforge::';
+
+            const rarityValues = {
+                common: { gold: 45, gems: 0, dust: 6 },
+                uncommon: { gold: 70, gems: 1, dust: 10 },
+                rare: { gold: 120, gems: 2, dust: 18 },
+                epic: { gold: 220, gems: 4, dust: 30 },
+                legendary: { gold: 360, gems: 7, dust: 48 },
+                mythic: { gold: 520, gems: 11, dust: 70 }
+            };
+
+            function ensureWallet() {
+                if (!appState.wallet) {
+                    stateStore.setState({
+                        wallet: {
+                            gold: 0,
+                            gems: 0,
+                            dust: 0,
+                            cap: 250000,
+                            ledger: []
+                        }
+                    }, 'economy:init');
+                }
+            }
+
+            function ledgerKey() {
+                return `${LEDGER_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
+            }
+
+            function stipendKey() {
+                return `${STIPEND_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
+            }
+
+            function reforgeKey() {
+                return `${REFORGE_STORAGE_KEY}${appState.currentUser?.id || 'guest'}`;
+            }
+
+            function loadLedger() {
+                if (typeof window === 'undefined' || !window.localStorage) {
+                    return (appState.wallet?.ledger || []).slice(0, 30);
+                }
+                try {
+                    const raw = window.localStorage.getItem(ledgerKey());
+                    if (!raw) return (appState.wallet?.ledger || []).slice(0, 30);
+                    const parsed = JSON.parse(raw);
+                    return Array.isArray(parsed) ? parsed.slice(0, 30) : [];
+                } catch (error) {
+                    console.warn('[Economy] Failed to parse ledger cache', error);
+                    return (appState.wallet?.ledger || []).slice(0, 30);
+                }
+            }
+
+            function persistLedger(entries) {
+                if (typeof window === 'undefined' || !window.localStorage) return;
+                try {
+                    window.localStorage.setItem(ledgerKey(), JSON.stringify(entries.slice(0, 30)));
+                } catch (error) {
+                    console.warn('[Economy] Failed to persist ledger', error);
+                }
+            }
+
+            function loadReforgedSet() {
+                if (typeof window === 'undefined' || !window.localStorage) {
+                    return new Set();
+                }
+                try {
+                    const raw = window.localStorage.getItem(reforgeKey());
+                    if (!raw) return new Set();
+                    const parsed = JSON.parse(raw);
+                    const today = new Date().toISOString().split('T')[0];
+                    if (!parsed || parsed.date !== today) {
+                        return new Set();
+                    }
+                    return new Set(parsed.keys || []);
+                } catch (error) {
+                    console.warn('[Economy] Failed to load reforge cache', error);
+                    return new Set();
+                }
+            }
+
+            function persistReforgedSet(set) {
+                if (typeof window === 'undefined' || !window.localStorage) return;
+                try {
+                    window.localStorage.setItem(reforgeKey(), JSON.stringify({
+                        date: new Date().toISOString().split('T')[0],
+                        keys: Array.from(set)
+                    }));
+                } catch (error) {
+                    console.warn('[Economy] Failed to persist reforge cache', error);
+                }
+            }
+
+            function baseFromCollectibles() {
+                const base = { gold: 120, gems: 0, dust: 25 };
+
+                (appState.collectibles || []).forEach(item => {
+                    const values = rarityValues[item.rarity] || rarityValues.common;
+                    base.gold += values.gold;
+                    base.gems += values.gems;
+                    base.dust += values.dust;
+                });
+
+                const completedQuests = (appState.quests || []).filter(quest => quest.completed).length;
+                base.gold += completedQuests * 60;
+                base.gems += Math.floor(completedQuests / 2);
+                base.dust += completedQuests * 12;
+
+                const completedAchievements = (appState.achievements || []).filter(achievement => achievement.completed).length;
+                base.gold += completedAchievements * 90;
+                base.gems += completedAchievements * 3;
+                base.dust += completedAchievements * 18;
+
+                const progression = appState.progression;
+                if (progression) {
+                    base.gold += progression.level * 75 + (progression.streak || 0) * 15;
+                    base.gems += Math.max(0, Math.floor((progression.level || 1) / 2));
+                    base.dust += (progression.longestStreak || 0) * 3;
+                }
+
+                base.tradeValue = Math.round(base.gold * 1.35 + base.gems * 80 + base.dust * 4);
+                return base;
+            }
+
+            function aggregateLedger(balances, ledger) {
+                return ledger.reduce((totals, entry) => {
+                    totals.gold += entry?.delta?.gold || 0;
+                    totals.gems += entry?.delta?.gems || 0;
+                    totals.dust += entry?.delta?.dust || 0;
+                    return totals;
+                }, { gold: balances.gold, gems: balances.gems, dust: balances.dust });
+            }
+
+            function computeSummary(balances) {
+                const tradePower = Math.round(balances.gold * 1.5 + balances.gems * 120 + balances.dust * 5);
+                return {
+                    dailyIncome: Math.round(tradePower * 0.05),
+                    tradePower,
+                    barterScore: Math.min(999, Math.round(balances.gems * 15 + balances.dust * 2))
+                };
+            }
+
+            function createLedgerEntry(type, description, delta, metadata = {}) {
+                return {
+                    id: `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+                    type,
+                    description,
+                    delta: {
+                        gold: delta.gold || 0,
+                        gems: delta.gems || 0,
+                        dust: delta.dust || 0
+                    },
+                    metadata,
+                    created_at: new Date().toISOString()
+                };
+            }
+
+            function appendLedger(entry, options = {}) {
+                const existing = appState.wallet?.ledger && appState.wallet.ledger.length
+                    ? appState.wallet.ledger
+                    : loadLedger();
+                const ledger = [entry, ...existing].slice(0, 30);
+                persistLedger(ledger);
+                stateStore.setState({
+                    wallet: {
+                        ...appState.wallet,
+                        ledger
+                    }
+                }, `economy:ledger:${entry.type}`);
+                sync({ reason: options.reason || entry.type });
+                return entry;
+            }
+
+            function sync(options = {}) {
+                if (!appState.currentUser) {
+                    stateStore.setState({
+                        wallet: {
+                            gold: 0,
+                            gems: 0,
+                            dust: 0,
+                            cap: 250000,
+                            ledger: []
+                        },
+                        economySummary: {
+                            dailyIncome: 0,
+                            tradePower: 0,
+                            barterScore: 0
+                        }
+                    }, 'economy:reset');
+                    return {
+                        balances: appState.wallet,
+                        summary: appState.economySummary
+                    };
+                }
+
+                ensureWallet();
+                const baseBalances = baseFromCollectibles();
+                const ledger = loadLedger();
+                const totals = aggregateLedger(baseBalances, ledger);
+                const summary = computeSummary(totals);
+
+                stateStore.setState({
+                    wallet: {
+                        ...appState.wallet,
+                        gold: Math.max(0, Math.min(appState.wallet.cap || 250000, Math.round(totals.gold))),
+                        gems: Math.max(0, Math.round(totals.gems)),
+                        dust: Math.max(0, Math.round(totals.dust)),
+                        ledger: ledger.slice(0, 30)
+                    },
+                    economySummary: summary
+                }, `economy:sync${options.reason ? `:${options.reason}` : ''}`);
+
+                persistLedger(appState.wallet.ledger || []);
+
+                return {
+                    balances: appState.wallet,
+                    summary
+                };
+            }
+
+            function rewardForRedemption(code) {
+                if (!appState.currentUser) return null;
+                ensureWallet();
+                const values = rarityValues[code.rarity] || rarityValues.common;
+                const entry = createLedgerEntry(
+                    'reward',
+                    `Redeemed ${code.item_name}`,
+                    {
+                        gold: Math.round(values.gold * 0.4),
+                        gems: values.gems > 0 ? Math.max(1, values.gems) : 0,
+                        dust: Math.round(values.dust * 0.6)
+                    },
+                    {
+                        rarity: code.rarity,
+                        source: 'redeem',
+                        code: code.code
+                    }
+                );
+                return appendLedger(entry, { reason: 'redeem' });
+            }
+
+            function grantDailyStipend() {
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                ensureWallet();
+
+                const todayKey = new Date().toISOString().split('T')[0];
+                if (typeof window !== 'undefined' && window.localStorage) {
+                    try {
+                        const claimed = window.localStorage.getItem(stipendKey());
+                        if (claimed === todayKey) {
+                            return { success: false, reason: 'already-claimed' };
+                        }
+                        window.localStorage.setItem(stipendKey(), todayKey);
+                    } catch (error) {
+                        console.warn('[Economy] Unable to persist stipend state', error);
+                    }
+                }
+
+                const progression = appState.progression || { level: 1, streak: 0 };
+                const reward = {
+                    gold: 180 + (progression.level || 1) * 20,
+                    gems: Math.max(0, Math.floor((progression.streak || 0) / 4)),
+                    dust: 35
+                };
+
+                const entry = createLedgerEntry('stipend', 'Daily realm stipend', reward);
+                appendLedger(entry, { reason: 'stipend' });
+                return { success: true, entry };
+            }
+
+            function convertDuplicatesToDust() {
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                ensureWallet();
+                const duplicates = new Map();
+
+                (appState.collectibles || []).forEach(item => {
+                    const key = `${item.item_name}::${item.rarity}::${item.item_graphic}`;
+                    const record = duplicates.get(key) || { reference: item, copies: 0 };
+                    record.copies += 1;
+                    duplicates.set(key, record);
+                });
+
+                const processed = loadReforgedSet();
+                const entries = Array.from(duplicates.entries())
+                    .filter(([, entry]) => entry.copies > 1)
+                    .filter(([key]) => !processed.has(key));
+
+                if (!entries.length) {
+                    return { success: false, reason: 'no-duplicates' };
+                }
+
+                const dustAward = entries.reduce((sum, [key, entry]) => {
+                    const values = rarityValues[entry.reference.rarity] || rarityValues.common;
+                    processed.add(key);
+                    return sum + (entry.copies - 1) * Math.round(values.dust * 1.5);
+                }, 0);
+
+                persistReforgedSet(processed);
+
+                const ledgerEntry = createLedgerEntry(
+                    'reforge',
+                    'Converted duplicate collectibles into aether dust',
+                    { dust: dustAward }
+                );
+
+                appendLedger(ledgerEntry, { reason: 'duplicate-conversion' });
+                return {
+                    success: true,
+                    entry: ledgerEntry,
+                    duplicatesProcessed: entries.length,
+                    dustAward
+                };
+            }
+
+            function spend(cost = {}, metadata = {}) {
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                ensureWallet();
+                const shortages = [];
+                if ((cost.gold || 0) > (appState.wallet.gold || 0)) shortages.push('gold');
+                if ((cost.gems || 0) > (appState.wallet.gems || 0)) shortages.push('gems');
+                if ((cost.dust || 0) > (appState.wallet.dust || 0)) shortages.push('dust');
+
+                if (shortages.length) {
+                    return { success: false, reason: 'insufficient', shortages };
+                }
+
+                const entry = createLedgerEntry(
+                    'purchase',
+                    metadata.description || 'Marketplace purchase',
+                    {
+                        gold: -(cost.gold || 0),
+                        gems: -(cost.gems || 0),
+                        dust: -(cost.dust || 0)
+                    },
+                    { ...metadata, cost }
+                );
+
+                appendLedger(entry, { reason: 'spend' });
+                return { success: true, entry };
+            }
+
+            function rewardForListing(listing) {
+                if (!appState.currentUser) return null;
+                const values = rarityValues[listing.rarity] || rarityValues.common;
+                const reward = {
+                    gold: Math.min(150, Math.round((listing.price || values.gold) * 0.1 + 40)),
+                    dust: Math.round(values.dust * 0.5 + 8)
+                };
+                const entry = createLedgerEntry(
+                    'listing',
+                    `Posted ${listing.item_name} to the marketplace`,
+                    reward,
+                    { listingId: listing.id, rarity: listing.rarity }
+                );
+                return appendLedger(entry, { reason: 'listing' });
+            }
+
+            function estimateValue(item, { duplicates = 0 } = {}) {
+                if (!item) {
+                    return { gold: 120, gems: 0, dust: 10 };
+                }
+                const values = rarityValues[item.rarity] || rarityValues.common;
+                const demandBoost = appState.journeyInsights?.favouriteEmojiKey === item.item_graphic ? 1.1 : 1;
+                const duplicateBoost = 1 + Math.min(duplicates * 0.12, 0.5);
+                const streakBoost = 1 + Math.min((appState.progression?.streak || 0) / 50, 0.25);
+                const gold = Math.round(values.gold * 1.4 * duplicateBoost * demandBoost * streakBoost);
+                const gems = values.gems ? Math.max(1, Math.round((values.gems + duplicates) * demandBoost * 0.8)) : 0;
+                const dust = Math.round(values.dust * duplicateBoost);
+                return { gold, gems, dust };
+            }
+
+            return {
+                sync,
+                rewardForRedemption,
+                grantDailyStipend,
+                convertDuplicatesToDust,
+                spend,
+                rewardForListing,
+                estimateValue
+            };
+        });
+
+        // ==================== Module: Marketplace Systems ====================
+        const Marketplace = AppModules.define('marketplace', () => {
+            const PLAYER_LISTINGS_KEY = 'collectibleRealm::market::';
+            const rarityOrder = { common: 1, uncommon: 2, rare: 3, epic: 4, legendary: 5, mythic: 6 };
+
+            const curatedCatalog = [
+                {
+                    id: 'global-aurora-prism',
+                    item_name: 'Aurora Prism',
+                    item_graphic: 'sparkles',
+                    rarity: 'legendary',
+                    price: 4200,
+                    currency: 'gold',
+                    altPrice: 8,
+                    seller: 'Aurora Syndicate',
+                    demand: 'High'
+                },
+                {
+                    id: 'global-starshard-lotus',
+                    item_name: 'Starshard Lotus',
+                    item_graphic: 'lotus_position',
+                    rarity: 'epic',
+                    price: 2650,
+                    currency: 'gold',
+                    altPrice: 5,
+                    seller: 'Nebula Bloomkeepers',
+                    demand: 'Balanced'
+                },
+                {
+                    id: 'global-celestial-compass',
+                    item_name: 'Celestial Compass',
+                    item_graphic: 'compass',
+                    rarity: 'rare',
+                    price: 1480,
+                    currency: 'gold',
+                    altPrice: 3,
+                    seller: 'Voyager Collective',
+                    demand: 'Steady'
+                },
+                {
+                    id: 'global-rune-of-embers',
+                    item_name: 'Rune of Embers',
+                    item_graphic: 'fire',
+                    rarity: 'epic',
+                    price: 2900,
+                    currency: 'gems',
+                    altPrice: 0,
+                    seller: 'Emberwright Guild',
+                    demand: 'High'
+                },
+                {
+                    id: 'global-luminary-seed',
+                    item_name: 'Luminary Seed',
+                    item_graphic: 'seedling',
+                    rarity: 'uncommon',
+                    price: 620,
+                    currency: 'gold',
+                    altPrice: 0,
+                    seller: 'Verdant Exchange',
+                    demand: 'Emerging'
+                }
+            ];
+
+            function baseState() {
+                return {
+                    suggestedListings: [],
+                    playerListings: [],
+                    globalListings: [],
+                    filters: {
+                        rarity: 'all',
+                        currency: 'all',
+                        sort: 'recent'
+                    },
+                    stats: {
+                        totalListings: 0,
+                        highestValue: null,
+                        demandSegments: []
+                    }
+                };
+            }
+
+            function ensureState() {
+                if (!appState.marketplace) {
+                    stateStore.setState({ marketplace: baseState() }, 'marketplace:init');
+                }
+            }
+
+            function storageKey() {
+                return `${PLAYER_LISTINGS_KEY}${appState.currentUser?.id || 'guest'}`;
+            }
+
+            function loadPlayerListings() {
+                if (typeof window === 'undefined' || !window.localStorage) {
+                    return appState.marketplace?.playerListings || [];
+                }
+                try {
+                    const raw = window.localStorage.getItem(storageKey());
+                    if (!raw) return appState.marketplace?.playerListings || [];
+                    const parsed = JSON.parse(raw);
+                    return Array.isArray(parsed) ? parsed : [];
+                } catch (error) {
+                    console.warn('[Marketplace] Failed to parse stored listings', error);
+                    return appState.marketplace?.playerListings || [];
+                }
+            }
+
+            function persistPlayerListings(listings) {
+                if (typeof window === 'undefined' || !window.localStorage) return;
+                try {
+                    window.localStorage.setItem(storageKey(), JSON.stringify(listings));
+                } catch (error) {
+                    console.warn('[Marketplace] Failed to persist listings', error);
+                }
+            }
+
+            function curatedListings() {
+                const economy = AppModules.use('economy');
+                const previous = new Map((appState.marketplace?.globalListings || []).map(entry => [entry.id, entry]));
+                return curatedCatalog.map(item => {
+                    const existing = previous.get(item.id);
+                    const estimate = economy.estimateValue({ rarity: item.rarity, item_graphic: item.item_graphic });
+                    const price = item.currency === 'gold'
+                        ? Math.max(item.price, estimate.gold)
+                        : item.price;
+                    const altPrice = item.currency === 'gold'
+                        ? (item.altPrice || Math.max(1, Math.round(price / 600)))
+                        : Math.max(item.altPrice || estimate.gems || 0, 0);
+                    return {
+                        ...item,
+                        price,
+                        altPrice,
+                        created_at: existing?.created_at || new Date().toISOString(),
+                        status: existing?.status === 'purchased' ? 'purchased' : 'available',
+                        origin: 'global'
+                    };
+                });
+            }
+
+            function computeSuggestions() {
+                const duplicates = new Map();
+                (appState.collectibles || []).forEach(item => {
+                    const key = `${item.item_name}::${item.rarity}::${item.item_graphic}`;
+                    const record = duplicates.get(key) || { reference: item, count: 0 };
+                    record.count += 1;
+                    duplicates.set(key, record);
+                });
+
+                const economy = AppModules.use('economy');
+                const suggestions = [];
+
+                duplicates.forEach(entry => {
+                    if (entry.count > 1) {
+                        const duplicatesCount = entry.count - 1;
+                        const pricing = economy.estimateValue(entry.reference, { duplicates: duplicatesCount });
+                        suggestions.push({
+                            id: `suggestion-${entry.reference.id || Math.random().toString(36).slice(2, 8)}`,
+                            item_name: entry.reference.item_name,
+                            item_graphic: entry.reference.item_graphic,
+                            rarity: entry.reference.rarity,
+                            quantity: duplicatesCount,
+                            price: pricing.gold,
+                            altPrice: pricing.gems,
+                            currency: 'gold',
+                            demand: entry.reference.rarity === 'legendary' || entry.reference.rarity === 'mythic' ? 'High' : 'Steady'
+                        });
+                    }
+                });
+
+                return suggestions.sort((a, b) => (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0));
+            }
+
+            function buildStats(listings) {
+                if (!listings.length) {
+                    return { totalListings: 0, highestValue: null, demandSegments: [] };
+                }
+
+                const totalListings = listings.length;
+                const highestValue = listings.reduce((best, listing) => {
+                    if (listing.status === 'purchased') return best;
+                    if (!best) return listing;
+                    const bestPrice = best.currency === 'gems' ? best.price * 750 : best.price;
+                    const currentPrice = listing.currency === 'gems' ? listing.price * 750 : listing.price;
+                    return currentPrice > bestPrice ? listing : best;
+                }, null);
+
+                const segments = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic']
+                    .map(rarity => ({
+                        rarity,
+                        count: listings.filter(listing => listing.rarity === rarity && listing.status !== 'purchased').length
+                    }))
+                    .filter(segment => segment.count > 0);
+
+                return {
+                    totalListings,
+                    highestValue,
+                    demandSegments: segments
+                };
+            }
+
+            function sync(options = {}) {
+                if (!appState.currentUser) {
+                    stateStore.setState({ marketplace: baseState() }, 'marketplace:reset');
+                    return baseState();
+                }
+
+                ensureState();
+                const playerListings = loadPlayerListings();
+                const globalListings = curatedListings();
+                const suggestedListings = computeSuggestions();
+                const stats = buildStats([
+                    ...globalListings.filter(entry => entry.status !== 'purchased'),
+                    ...playerListings
+                ]);
+
+                stateStore.setState({
+                    marketplace: {
+                        ...appState.marketplace,
+                        playerListings,
+                        globalListings,
+                        suggestedListings,
+                        stats
+                    }
+                }, `marketplace:sync${options.reason ? `:${options.reason}` : ''}`);
+
+                return appState.marketplace;
+            }
+
+            function postListing(suggestion) {
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                ensureState();
+                const listing = {
+                    id: `player-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+                    seller: appState.userProfile?.username || 'You',
+                    item_name: suggestion.item_name,
+                    item_graphic: suggestion.item_graphic,
+                    rarity: suggestion.rarity,
+                    price: Math.max(80, Math.round(suggestion.price || 100)),
+                    altPrice: suggestion.altPrice,
+                    currency: suggestion.altPrice && suggestion.altPrice > 0 ? 'gold' : 'gold',
+                    quantity: suggestion.quantity || 1,
+                    demand: suggestion.demand || 'Balanced',
+                    status: 'listed',
+                    created_at: new Date().toISOString(),
+                    origin: 'player'
+                };
+
+                const listings = [listing, ...(appState.marketplace.playerListings || [])];
+                persistPlayerListings(listings);
+                stateStore.setState({ marketplace: { ...appState.marketplace, playerListings: listings } }, 'marketplace:post');
+
+                try {
+                    AppModules.use('economy').rewardForListing(listing);
+                } catch (error) {
+                    console.warn('[Marketplace] Failed to reward listing', error);
+                }
+
+                sync({ reason: 'post' });
+                return { success: true, listing };
+            }
+
+            function removeListing(id) {
+                const listings = (appState.marketplace.playerListings || []).filter(listing => listing.id !== id);
+                persistPlayerListings(listings);
+                stateStore.setState({ marketplace: { ...appState.marketplace, playerListings: listings } }, 'marketplace:remove');
+                sync({ reason: 'remove' });
+                return listings;
+            }
+
+            function updateFilters(filters) {
+                ensureState();
+                stateStore.setState({
+                    marketplace: {
+                        ...appState.marketplace,
+                        filters: {
+                            ...appState.marketplace.filters,
+                            ...filters
+                        }
+                    }
+                }, 'marketplace:filters');
+                return appState.marketplace.filters;
+            }
+
+            function getFilteredListings() {
+                ensureState();
+                const filters = appState.marketplace.filters || baseState().filters;
+                const combined = [
+                    ...(appState.marketplace.playerListings || []).map(entry => ({ ...entry, source: 'player' })),
+                    ...(appState.marketplace.globalListings || []).map(entry => ({ ...entry, source: 'global' }))
+                ].filter(entry => entry.status !== 'purchased');
+
+                let filtered = combined;
+
+                if (filters.rarity !== 'all') {
+                    filtered = filtered.filter(entry => entry.rarity === filters.rarity);
+                }
+
+                if (filters.currency !== 'all') {
+                    filtered = filtered.filter(entry => {
+                        if (filters.currency === 'premium') {
+                            return entry.currency === 'gems';
+                        }
+                        return entry.currency === filters.currency;
+                    });
+                }
+
+                if (filters.sort === 'value') {
+                    filtered.sort((a, b) => (b.price || 0) - (a.price || 0));
+                } else if (filters.sort === 'rarity') {
+                    filtered.sort((a, b) => (rarityOrder[b.rarity] || 0) - (rarityOrder[a.rarity] || 0));
+                } else {
+                    filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                }
+
+                return filtered;
+            }
+
+            function purchase(listingId) {
+                if (!appState.currentUser) {
+                    return { success: false, reason: 'not-signed-in' };
+                }
+
+                ensureState();
+                const economy = AppModules.use('economy');
+                const playerListing = (appState.marketplace.playerListings || []).find(listing => listing.id === listingId);
+                const globalListing = (appState.marketplace.globalListings || []).find(listing => listing.id === listingId);
+                const listing = playerListing || globalListing;
+
+                if (!listing) {
+                    return { success: false, reason: 'not-found' };
+                }
+
+                const cost = listing.currency === 'gems'
+                    ? { gems: listing.price, gold: listing.altPrice || 0 }
+                    : { gold: listing.price, gems: listing.altPrice || 0 };
+
+                const spendResult = economy.spend(cost, {
+                    listingId: listing.id,
+                    seller: listing.seller,
+                    rarity: listing.rarity,
+                    description: `Purchased ${listing.item_name}`
+                });
+
+                if (!spendResult.success) {
+                    return { success: false, reason: 'insufficient', shortages: spendResult.shortages };
+                }
+
+                if (playerListing) {
+                    removeListing(listing.id);
+                } else {
+                    const updated = (appState.marketplace.globalListings || []).map(entry =>
+                        entry.id === listing.id ? { ...entry, status: 'purchased' } : entry
+                    );
+                    stateStore.setState({ marketplace: { ...appState.marketplace, globalListings: updated } }, 'marketplace:purchase-global');
+                }
+
+                sync({ reason: 'purchase' });
+                return { success: true, listing };
+            }
+
+            return {
+                sync,
+                postListing,
+                removeListing,
+                updateFilters,
+                getFilteredListings,
+                purchase,
+                loadPlayerListings
+            };
+        });
 
         // Supabase API functions
         async function createUserProfile(user, username) {
@@ -2002,11 +3981,22 @@ const emojiCategories = {
 
         async function updateDashboardStats() {
             if (!appState.currentUser) return;
-            
+
             const collectibles = appState.collectibles;
             document.getElementById('totalCollectibles').textContent = collectibles.length;
             document.getElementById('redeemedCollectibles').textContent = collectibles.length;
-            
+
+            Economy.sync({ reason: 'dashboard' });
+            const wallet = appState.wallet || {};
+            const goldNode = document.getElementById('realmGoldBalance');
+            const gemNode = document.getElementById('stellarGemBalance');
+            if (goldNode) {
+                goldNode.textContent = formatNumber(wallet.gold || 0);
+            }
+            if (gemNode) {
+                gemNode.textContent = formatNumber(wallet.gems || 0);
+            }
+
             // Find rarest collectible
             const rarityOrder = {
                 'common': 1,
@@ -2084,7 +4074,7 @@ const emojiCategories = {
 
         function renderFeaturedCollectibles() {
             const featuredContainer = document.getElementById('featuredCollectibles');
-            
+
             if (!appState.isAdmin) {
                 featuredContainer.innerHTML = `
                     <div class="col-span-full flex flex-col sm:flex-row gap-6 justify-center">
@@ -2207,9 +4197,388 @@ const emojiCategories = {
             });
         }
 
+        function renderWalletSummaryCards() {
+            const container = document.getElementById('walletSummaryCards');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-sm text-gray-500 dark:text-gray-400">
+                        Sign in and redeem a few codes to unlock your realm economy overview.
+                    </div>
+                `;
+                return;
+            }
+
+            const wallet = appState.wallet || {};
+            const summary = appState.economySummary || {};
+            const cards = [
+                {
+                    title: 'Realm Gold',
+                    value: formatNumber(wallet.gold || 0),
+                    subtitle: 'Spendable currency',
+                    icon: '🪙',
+                    accent: 'from-yellow-400/40 to-amber-500/30',
+                    aria: 'Realm gold balance'
+                },
+                {
+                    title: 'Stellar Gems',
+                    value: formatNumber(wallet.gems || 0),
+                    subtitle: 'Premium shards',
+                    icon: '💎',
+                    accent: 'from-purple-400/40 to-indigo-500/30',
+                    aria: 'Stellar gem balance'
+                },
+                {
+                    title: 'Aether Dust',
+                    value: formatNumber(wallet.dust || 0),
+                    subtitle: 'Crafting resource',
+                    icon: '✨',
+                    accent: 'from-sky-400/40 to-blue-500/30',
+                    aria: 'Aether dust balance'
+                },
+                {
+                    title: 'Daily Income',
+                    value: `${formatNumber(summary.dailyIncome || 0)} / day`,
+                    subtitle: 'Projected at current momentum',
+                    icon: '📈',
+                    accent: 'from-emerald-400/40 to-teal-500/30',
+                    aria: 'Projected daily income'
+                }
+            ];
+
+            container.innerHTML = cards.map(card => `
+                <article class="relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 shadow transition-transform transform hover:-translate-y-1 hover:shadow-lg" aria-label="${card.aria}">
+                    <div class="absolute inset-0 bg-gradient-to-br ${card.accent} opacity-40 pointer-events-none"></div>
+                    <div class="relative p-6 flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-3xl">${card.icon}</span>
+                            <span class="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">${card.subtitle}</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">${card.title}</p>
+                            <p class="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">${card.value}</p>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderEconomyPulse() {
+            const panel = document.getElementById('economyPulsePanel');
+            if (!panel) return;
+
+            if (!appState.currentUser) {
+                panel.innerHTML = `<div class="text-sm text-gray-500 dark:text-gray-400">Sign in to monitor your trading pulse.</div>`;
+                return;
+            }
+
+            const summary = appState.economySummary || { dailyIncome: 0, tradePower: 0, barterScore: 0 };
+            const wallet = appState.wallet || {};
+            const completion = Math.min(100, Math.round((wallet.gold || 0) / (wallet.cap || 1) * 100));
+
+            panel.innerHTML = `
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Economy Pulse</h2>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Live snapshot of your trading influence across the realm.</p>
+                    </div>
+                    <dl class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-4 rounded-lg bg-primary-50 dark:bg-primary-900/40 border border-primary-100 dark:border-primary-800/60">
+                            <dt class="text-xs uppercase tracking-wide text-primary-600 dark:text-primary-300">Trade Power</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${formatNumber(summary.tradePower || 0)}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">Combined value of currency and rare holdings</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Barter Score</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${formatNumber(summary.barterScore || 0)}</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">Higher scores unlock premium trading posts</dd>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white dark:bg-gray-900/40 border border-gray-100 dark:border-gray-700/60">
+                            <dt class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Vault Capacity</dt>
+                            <dd class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">${completion}%</dd>
+                            <dd class="text-xs text-gray-500 dark:text-gray-400">${formatNumber(wallet.gold || 0)} / ${formatNumber(wallet.cap || 0)} gold stored</dd>
+                        </div>
+                    </dl>
+                    <div>
+                        <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-3 rounded-full bg-gradient-to-r from-primary-500 to-primary-400" style="width: ${completion}%;"></div>
+                        </div>
+                        <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Reach 100% to unlock vault expansion blueprints.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLedgerEntries() {
+            const ledgerContainer = document.getElementById('economyLedger');
+            if (!ledgerContainer) return;
+
+            const ledger = (appState.wallet?.ledger || []).slice(0, 20);
+            if (!ledger.length) {
+                ledgerContainer.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Complete redemptions, trades, or listings to build your ledger history.</p>`;
+                return;
+            }
+
+            const typeIcons = {
+                reward: '🎁',
+                stipend: '🏦',
+                purchase: '🛒',
+                listing: '📣',
+                reforge: '⚒️'
+            };
+
+            ledgerContainer.innerHTML = ledger.map(entry => {
+                const delta = entry.delta || {};
+                const gold = delta.gold ? `<span class="text-yellow-600 dark:text-yellow-300">${formatDelta(delta.gold, 'g')}</span>` : '';
+                const gems = delta.gems ? `<span class="text-purple-600 dark:text-purple-300">${formatDelta(delta.gems, 'gem')}</span>` : '';
+                const dust = delta.dust ? `<span class="text-blue-600 dark:text-blue-300">${formatDelta(delta.dust, 'dust')}</span>` : '';
+                const changes = [gold, gems, dust].filter(Boolean).join(' · ') || '<span class="text-gray-400">0</span>';
+                return `
+                    <article class="flex items-start gap-3">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-lg">${typeIcons[entry.type] || '💠'}</div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 dark:text-white">${entry.description}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">${formatRelativeTime(entry.created_at)}</p>
+                        </div>
+                        <div class="text-xs font-medium">${changes}</div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderMarketplaceStatsSummary() {
+            const summaryNode = document.getElementById('marketStatsSummary');
+            if (!summaryNode) return;
+
+            const stats = appState.marketplace?.stats;
+            if (!appState.currentUser) {
+                summaryNode.textContent = 'Sign in to browse live offers and trading insights.';
+                return;
+            }
+
+            if (!stats || !stats.totalListings) {
+                summaryNode.textContent = 'Marketplace insights appear after syncing.';
+                return;
+            }
+
+            const demandBreakdown = stats.demandSegments
+                .map(segment => `${segment.count} ${segment.rarity}`)
+                .join(' • ');
+            const highlight = stats.highestValue
+                ? `${stats.highestValue.item_name} (${stats.highestValue.rarity})`
+                : 'No premium listings yet';
+
+            summaryNode.textContent = `${stats.totalListings} listings live • Top item: ${highlight}${demandBreakdown ? ` • Demand: ${demandBreakdown}` : ''}`;
+        }
+
+        function renderMarketplaceSuggestions() {
+            const container = document.getElementById('suggestedListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Sign in to surface duplicates ready for trading.</p>`;
+                return;
+            }
+
+            const suggestions = appState.marketplace?.suggestedListings || [];
+            if (!suggestions.length) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">No duplicates detected yet. Redeem more codes or trade to discover listable items.</p>`;
+                return;
+            }
+
+            container.innerHTML = suggestions.map(suggestion => `
+                <div class="rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">${renderEmoji(suggestion.item_graphic, 'text-2xl')}</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">${suggestion.item_name}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">${suggestion.quantity} duplicate${suggestion.quantity > 1 ? 's' : ''} available</p>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">Suggested price: ${formatNumber(suggestion.price)} gold${suggestion.altPrice ? ` • ${formatNumber(suggestion.altPrice)} gems` : ''}</p>
+                        </div>
+                        <span class="badge-${suggestion.rarity} rarity-badge">${suggestion.rarity}</span>
+                    </div>
+                    <button data-market-action="post" data-suggestion-id="${suggestion.id}" class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">List for ${formatNumber(suggestion.price)} gold</button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('[data-market-action="post"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-suggestion-id');
+                    const suggestion = (appState.marketplace?.suggestedListings || []).find(item => item.id === id);
+                    if (!suggestion) return;
+                    const result = Marketplace.postListing(suggestion);
+                    if (result.success) {
+                        showNotification(`${suggestion.item_name} posted to the marketplace!`, 'success');
+                        renderMarketplaceView();
+                        updateDashboardStats();
+                    } else {
+                        showNotification('Unable to post listing at this time.', 'error');
+                    }
+                });
+            });
+        }
+
+        function renderPlayerListings() {
+            const container = document.getElementById('playerListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Sign in to manage your listings.</p>`;
+                return;
+            }
+
+            const listings = appState.marketplace?.playerListings || [];
+            if (!listings.length) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Post a duplicate to start your trading career.</p>`;
+                return;
+            }
+
+            container.innerHTML = listings.map(listing => `
+                <div class="rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-4 shadow-sm">
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl">${renderEmoji(listing.item_graphic, 'text-2xl')}</span>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white">${listing.item_name}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">${formatDate(listing.created_at)}</p>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Asking ${formatNumber(listing.price)} gold${listing.altPrice ? ` • ${formatNumber(listing.altPrice)} gems` : ''}</p>
+                        </div>
+                        <span class="badge-${listing.rarity} rarity-badge">${listing.rarity}</span>
+                    </div>
+                    <button data-market-action="remove" data-listing-id="${listing.id}" class="mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">Remove Listing</button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('[data-market-action="remove"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-listing-id');
+                    Marketplace.removeListing(id);
+                    showNotification('Listing removed. You can repost it anytime.');
+                    renderMarketplaceView();
+                });
+            });
+        }
+
+        function renderMarketplaceListings() {
+            const container = document.getElementById('marketplaceListings');
+            if (!container) return;
+
+            if (!appState.currentUser) {
+                container.innerHTML = `<div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">Sign in to browse live marketplace offers.</div>`;
+                return;
+            }
+
+            const listings = Marketplace.getFilteredListings();
+            if (!listings.length) {
+                container.innerHTML = `<div class="col-span-full text-sm text-gray-500 dark:text-gray-400 text-center py-6">No listings match your current filters. Adjust the filters or create a new listing.</div>`;
+                return;
+            }
+
+            container.innerHTML = listings.map(listing => {
+                const priceLabel = listing.currency === 'gems'
+                    ? `${formatNumber(listing.price)} gems`
+                    : `${formatNumber(listing.price)} gold`;
+                const altLabel = listing.altPrice ? ` • ${formatNumber(listing.altPrice)} gems` : '';
+                const actionLabel = listing.source === 'player' ? 'Manage Listing' : 'Purchase';
+                const action = listing.source === 'player' ? 'manage' : 'purchase';
+                return `
+                    <article class="relative overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-6 shadow-sm transition-transform transform hover:-translate-y-1 hover:shadow-lg">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <div class="flex items-center gap-3">
+                                    <span class="text-3xl">${renderEmoji(listing.item_graphic, 'text-3xl')}</span>
+                                    <div>
+                                        <h3 class="text-base font-semibold text-gray-900 dark:text-white">${listing.item_name}</h3>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">${formatRelativeTime(listing.created_at)} • ${listing.seller || 'Market Broker'}</p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">${priceLabel}${altLabel}</p>
+                            </div>
+                            <span class="badge-${listing.rarity} rarity-badge">${listing.rarity}</span>
+                        </div>
+                        <button data-market-action="${action}" data-listing-id="${listing.id}" class="mt-6 w-full inline-flex items-center justify-center px-4 py-2 border ${action === 'purchase' ? 'border-transparent text-white bg-primary-600 hover:bg-primary-700' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700'} text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-900">${actionLabel}</button>
+                    </article>
+                `;
+            }).join('');
+
+            container.querySelectorAll('[data-market-action="purchase"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-listing-id');
+                    const result = Marketplace.purchase(id);
+                    if (!result.success) {
+                        if (result.reason === 'insufficient') {
+                            showNotification('Not enough currency for this purchase.', 'error');
+                        } else {
+                            showNotification('Unable to complete purchase right now.', 'error');
+                        }
+                        return;
+                    }
+
+                    const listing = result.listing;
+                    const mintedCollectible = {
+                        id: `market-${Date.now()}`,
+                        user_id: appState.currentUser.id,
+                        item_name: listing.item_name,
+                        item_graphic: listing.item_graphic,
+                        rarity: listing.rarity,
+                        acquired_date: new Date().toISOString(),
+                        code_id: null
+                    };
+
+                    appState.collectibles.push(mintedCollectible);
+                    appState.activities.unshift({
+                        id: `market-activity-${Date.now()}`,
+                        action: 'traded',
+                        item_name: listing.item_name,
+                        item_rarity: listing.rarity,
+                        created_at: new Date().toISOString()
+                    });
+
+                    Engagement.sync();
+                    Engagement.renderAll();
+                    renderActivityFeed();
+                    renderUserCollectionStats();
+                    const activeFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
+                    renderCollection(activeFilter);
+                    Economy.sync({ reason: 'market-purchase' });
+                    renderWalletSummaryCards();
+                    renderEconomyPulse();
+                    renderLedgerEntries();
+                    renderMarketplaceView();
+                    updateDashboardStats();
+
+                    showNotification(`${listing.item_name} secured! It has been added to your collection.`, 'success');
+                });
+            });
+
+            container.querySelectorAll('[data-market-action="manage"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.getElementById('playerListings')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        }
+
+        function renderMarketplaceView() {
+            renderWalletSummaryCards();
+            renderEconomyPulse();
+            renderLedgerEntries();
+            renderMarketplaceStatsSummary();
+            renderMarketplaceSuggestions();
+            renderPlayerListings();
+            renderMarketplaceListings();
+        }
+
         function renderRedemptionHistory() {
             if (!appState.currentUser) return;
-            
+
             const history = appState.redemptionHistory;
             const historyTable = document.getElementById('redemptionHistory');
             
@@ -2745,6 +5114,7 @@ const emojiCategories = {
             document.getElementById('dashboardView').classList.add('hidden');
             document.getElementById('collectionView').classList.add('hidden');
             document.getElementById('redeemCodeView').classList.add('hidden');
+            document.getElementById('marketplaceView').classList.add('hidden');
             document.getElementById('adminPanelView').classList.add('hidden');
             document.getElementById('profileView').classList.add('hidden');
             document.getElementById('settingsView').classList.add('hidden');
@@ -2758,7 +5128,7 @@ const emojiCategories = {
                 link.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-300');
             });
             
-            if (['dashboard', 'collection', 'redeem'].includes(view)) {
+            if (['dashboard', 'collection', 'redeem', 'marketplace'].includes(view)) {
                 document.getElementById(`nav-${view}`).classList.remove('border-transparent', 'text-gray-500', 'dark:text-gray-300');
                 document.getElementById(`nav-${view}`).classList.add('border-primary-500', 'text-gray-900', 'dark:text-white');
             }
@@ -2769,21 +5139,27 @@ const emojiCategories = {
                 link.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-300');
             });
             
-            if (['dashboard', 'collection', 'redeem'].includes(view)) {
+            if (['dashboard', 'collection', 'redeem', 'marketplace'].includes(view)) {
                 document.getElementById(`mobile-nav-${view}`).classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-300');
                 document.getElementById(`mobile-nav-${view}`).classList.add('bg-primary-50', 'dark:bg-primary-900', 'border-primary-500', 'text-primary-700', 'dark:text-primary-300');
             }
-            
-            appState.currentView = view;
+
+            stateStore.setState({ currentView: view }, `view:${view}`);
             
             // Perform view-specific initializations
             if (view === 'collection') {
                 renderUserCollectionStats();
                 renderCollection();
             } else if (view === 'dashboard') {
+                Engagement.sync();
                 await updateDashboardStats();
+                Engagement.renderAll();
                 renderActivityFeed();
                 renderFeaturedCollectibles();
+            } else if (view === 'marketplace') {
+                Economy.sync({ reason: 'view-marketplace' });
+                Marketplace.sync({ reason: 'view' });
+                renderMarketplaceView();
             } else if (view === 'redeemCode') {
                 renderRedemptionHistory();
             } else if (view === 'adminPanel') {
@@ -2821,7 +5197,12 @@ const emojiCategories = {
                 if (appState.isAdmin) {
                     appState.users = await getAllUsers();
                 }
-                
+
+                Engagement.sync();
+                Economy.sync({ reason: 'load' });
+                Marketplace.sync({ reason: 'load' });
+                renderMarketplaceView();
+
                 return true;
             } catch (error) {
                 console.error('Error loading user data:', error);
@@ -2842,7 +5223,8 @@ const emojiCategories = {
             darkModeToggles.forEach(toggle => {
                 if (toggle) {
                     toggle.addEventListener('click', () => {
-                        document.documentElement.classList.toggle('dark');
+                        const nextTheme = appState.theme === 'dark' ? 'light' : 'dark';
+                        stateStore.setState({ theme: nextTheme }, 'theme:manual-toggle');
                     });
                 }
             });
@@ -2857,11 +5239,19 @@ const emojiCategories = {
                 e.preventDefault();
                 switchView('collection');
             });
-            
+
             document.getElementById('nav-redeem').addEventListener('click', (e) => {
                 e.preventDefault();
                 switchView('redeemCode');
             });
+
+            const marketplaceNav = document.getElementById('nav-marketplace');
+            if (marketplaceNav) {
+                marketplaceNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchView('marketplace');
+                });
+            }
             
             // Mobile navigation
             document.getElementById('mobile-nav-dashboard').addEventListener('click', (e) => {
@@ -2881,6 +5271,15 @@ const emojiCategories = {
                 switchView('redeemCode');
                 document.getElementById('mobileMenu').classList.add('hidden');
             });
+
+            const mobileMarketNav = document.getElementById('mobile-nav-marketplace');
+            if (mobileMarketNav) {
+                mobileMarketNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchView('marketplace');
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                });
+            }
             
             // Mobile menu toggle
             document.getElementById('mobileMenuButton').addEventListener('click', () => {
@@ -3166,7 +5565,20 @@ const emojiCategories = {
                         id: 'temp-' + Date.now(),
                         created_at: new Date().toISOString()
                     });
-                    
+
+                    Economy.rewardForRedemption(code);
+                    Economy.sync({ reason: 'redeem' });
+                    Marketplace.sync({ reason: 'redeem' });
+                    renderMarketplaceView();
+
+                    Engagement.sync();
+                    Engagement.renderAll();
+                    await updateDashboardStats();
+                    renderActivityFeed();
+                    renderUserCollectionStats();
+                    const activeCollectionFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
+                    renderCollection(activeCollectionFilter);
+
                     // Create glitter elements for legendary and mythic items
                     let glitterHtml = '';
                     if (code.rarity === 'legendary' || code.rarity === 'mythic') {
@@ -3449,6 +5861,13 @@ const emojiCategories = {
                         collectibles: appState.collectibles,
                         redemptionHistory: appState.redemptionHistory,
                         activities: appState.activities,
+                        wallet: appState.wallet,
+                        economySummary: appState.economySummary,
+                        marketplace: {
+                            playerListings: appState.marketplace.playerListings,
+                            suggestedListings: appState.marketplace.suggestedListings,
+                            filters: appState.marketplace.filters
+                        },
                         exportDate: new Date().toISOString()
                     };
                     
@@ -3475,7 +5894,46 @@ const emojiCategories = {
                             appState.collectibles = [];
                             appState.redemptionHistory = [];
                             appState.activities = [];
-                            
+                            appState.wallet = {
+                                gold: 0,
+                                gems: 0,
+                                dust: 0,
+                                cap: 250000,
+                                ledger: []
+                            };
+                            appState.economySummary = {
+                                dailyIncome: 0,
+                                tradePower: 0,
+                                barterScore: 0
+                            };
+                            appState.marketplace = {
+                                suggestedListings: [],
+                                playerListings: [],
+                                globalListings: [],
+                                filters: {
+                                    rarity: 'all',
+                                    currency: 'all',
+                                    sort: 'recent'
+                                },
+                                stats: {
+                                    totalListings: 0,
+                                    highestValue: null,
+                                    demandSegments: []
+                                }
+                            };
+
+                            Engagement.sync();
+                            Economy.sync({ reason: 'clear-data' });
+                            Marketplace.sync({ reason: 'clear-data' });
+                            renderMarketplaceView();
+                            Engagement.renderAll();
+                            await updateDashboardStats();
+                            renderActivityFeed();
+                            renderRedemptionHistory();
+                            renderUserCollectionStats();
+                            const resetCollectionFilter = document.getElementById('collectionFilterRarity')?.value || 'all';
+                            renderCollection(resetCollectionFilter);
+
                             switchView('dashboard');
                             showNotification('All your data has been cleared');
                         } catch (error) {
@@ -3495,6 +5953,73 @@ const emojiCategories = {
                 e.preventDefault();
                 await logout();
             });
+
+            const claimStipendButton = document.getElementById('claimStipendButton');
+            if (claimStipendButton) {
+                claimStipendButton.addEventListener('click', () => {
+                    const result = Economy.grantDailyStipend();
+                    if (result.success) {
+                        showNotification('Daily stipend claimed! Check your wallet for the boost.', 'success');
+                        Economy.sync({ reason: 'stipend' });
+                        renderMarketplaceView();
+                        updateDashboardStats();
+                    } else if (result.reason === 'already-claimed') {
+                        showNotification('Daily stipend already claimed. Come back tomorrow.', 'error');
+                    } else {
+                        showNotification('Unable to grant stipend right now.', 'error');
+                    }
+                });
+            }
+
+            const convertDuplicatesButton = document.getElementById('convertDuplicatesButton');
+            if (convertDuplicatesButton) {
+                convertDuplicatesButton.addEventListener('click', () => {
+                    const result = Economy.convertDuplicatesToDust();
+                    if (result.success) {
+                        showNotification(`Converted ${result.duplicatesProcessed} duplicate sets into ${formatNumber(result.dustAward)} dust.`, 'success');
+                        renderMarketplaceView();
+                        updateDashboardStats();
+                    } else if (result.reason === 'no-duplicates') {
+                        showNotification('No duplicates available for conversion yet.', 'error');
+                    } else {
+                        showNotification('Unable to convert duplicates at this time.', 'error');
+                    }
+                });
+            }
+
+            const refreshSuggestionsButton = document.getElementById('refreshMarketplaceSuggestions');
+            if (refreshSuggestionsButton) {
+                refreshSuggestionsButton.addEventListener('click', () => {
+                    Marketplace.sync({ reason: 'refresh-suggestions' });
+                    renderMarketplaceSuggestions();
+                });
+            }
+
+            const marketFilterRarity = document.getElementById('marketFilterRarity');
+            if (marketFilterRarity) {
+                marketFilterRarity.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ rarity: event.target.value });
+                    renderMarketplaceListings();
+                    renderMarketplaceStatsSummary();
+                });
+            }
+
+            const marketFilterCurrency = document.getElementById('marketFilterCurrency');
+            if (marketFilterCurrency) {
+                marketFilterCurrency.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ currency: event.target.value });
+                    renderMarketplaceListings();
+                    renderMarketplaceStatsSummary();
+                });
+            }
+
+            const marketFilterSort = document.getElementById('marketFilterSort');
+            if (marketFilterSort) {
+                marketFilterSort.addEventListener('change', (event) => {
+                    Marketplace.updateFilters({ sort: event.target.value });
+                    renderMarketplaceListings();
+                });
+            }
         }
 
         async function logout() {
@@ -3510,7 +6035,49 @@ const emojiCategories = {
                 appState.activities = [];
                 appState.redemptionHistory = [];
                 appState.users = [];
-                
+                appState.progression = null;
+                appState.quests = [];
+                appState.achievements = [];
+                appState.seasonEvents = [];
+                appState.journeyInsights = null;
+                appState.wallet = {
+                    gold: 0,
+                    gems: 0,
+                    dust: 0,
+                    cap: 250000,
+                    ledger: []
+                };
+                appState.economySummary = {
+                    dailyIncome: 0,
+                    tradePower: 0,
+                    barterScore: 0
+                };
+                appState.marketplace = {
+                    suggestedListings: [],
+                    playerListings: [],
+                    globalListings: [],
+                    filters: {
+                        rarity: 'all',
+                        currency: 'all',
+                        sort: 'recent'
+                    },
+                    stats: {
+                        totalListings: 0,
+                        highestValue: null,
+                        demandSegments: []
+                    }
+                };
+
+                Engagement.sync();
+                Economy.sync({ reason: 'logout' });
+                Marketplace.sync({ reason: 'logout' });
+                renderMarketplaceView();
+                Engagement.renderAll();
+                await updateDashboardStats();
+                renderActivityFeed();
+                renderRedemptionHistory();
+                renderUserCollectionStats();
+
                 document.getElementById('authScreen').classList.remove('hidden');
                 document.getElementById('authScreen').classList.add('flex');
                 document.getElementById('loginForm').classList.remove('hidden');
