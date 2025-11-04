@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collectible Code System</title>
+    <title>Collectible Realm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
@@ -11,416 +14,156 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                        display: ['Space Grotesk', 'Inter', 'system-ui']
+                    },
                     colors: {
-                        primary: {
-                            50: '#ededfc',
-                            100: '#d0d0f7',
-                            200: '#a7a6ee',
-                            300: '#8180e5',
-                            400: '#7170e2',
-                            500: '#5D5CDE',
-                            600: '#4140d9',
-                            700: '#2f2ec7',
-                            800: '#2625a1',
-                            900: '#1c1c78',
-                        }
+                        midnight: {
+                            50: '#F1F5FF',
+                            100: '#D4DEFF',
+                            200: '#A0B7FF',
+                            300: '#708FFE',
+                            400: '#4B6EFE',
+                            500: '#274DFE',
+                            600: '#1C3ECC',
+                            700: '#142E99',
+                            800: '#0C1F66',
+                            900: '#061133'
+                        },
+                        nebula: '#7F5BFF',
+                        aurora: '#00F5A0',
+                        starlight: '#FF9D66',
+                        obsidian: '#0B1021'
+                    },
+                    boxShadow: {
+                        glow: '0 25px 50px -12px rgba(127, 91, 255, 0.45)',
+                        card: '0 20px 45px -20px rgba(13, 19, 33, 0.45)'
+                    },
+                    backgroundImage: {
+                        'grid-glow': 'radial-gradient(circle at 20% 20%, rgba(127,91,255,0.25), transparent 35%), radial-gradient(circle at 80% 0%, rgba(0,245,160,0.2), transparent 40%), radial-gradient(circle at 50% 80%, rgba(255,157,102,0.2), transparent 45%)'
                     },
                     animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 3s ease-in-out infinite',
-                        'bounce-slow': 'bounce 3s infinite',
+                        gradient: 'gradientShift 18s ease infinite',
+                        float: 'float 6s ease-in-out infinite',
+                        shimmer: 'shimmer 1.8s linear infinite'
+                    },
+                    keyframes: {
+                        gradientShift: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-100% 0' },
+                            '100%': { backgroundPosition: '100% 0' }
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        @keyframes gradientShift {
-            0% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
-            100% { background-position: 0% 50% }
+        :root {
+            color-scheme: light dark;
         }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+
+        body {
+            font-feature-settings: "cv02", "cv03", "cv04", "cv09";
         }
-        
-        @keyframes reveal {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+
+        .glass-surface {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
         }
-        
-        @keyframes glitter {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.5; }
+
+        .dark .glass-surface {
+            background: rgba(13, 19, 33, 0.6);
         }
-        
-        .rarity-common { 
-            background: linear-gradient(135deg, #c0c0c0, #f0f0f0, #c0c0c0);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
+
+        .border-gradient {
+            position: relative;
         }
-        .rarity-uncommon { 
-            background: linear-gradient(135deg, #84cc16, #bef264, #84cc16);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .rarity-rare { 
-            background: linear-gradient(135deg, #2563eb, #60a5fa, #2563eb);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .rarity-epic { 
-            background: linear-gradient(135deg, #9333ea, #c084fc, #9333ea);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .rarity-legendary { 
-            background: linear-gradient(135deg, #f59e0b, #fcd34d, #f59e0b);
-            background-size: 200% 200%;
-            animation: gradientShift 5s ease infinite;
-        }
-        .rarity-mythic { 
-            background: linear-gradient(135deg, #dc2626, #fca5a5, #dc2626);
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
-        }
-        
-        .dark .rarity-common { 
-            background: linear-gradient(135deg, #6b7280, #9ca3af, #6b7280);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .dark .rarity-uncommon { 
-            background: linear-gradient(135deg, #65a30d, #a3e635, #65a30d);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .dark .rarity-rare { 
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6, #1d4ed8);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .dark .rarity-epic { 
-            background: linear-gradient(135deg, #7e22ce, #a855f7, #7e22ce);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-        .dark .rarity-legendary { 
-            background: linear-gradient(135deg, #d97706, #f59e0b, #d97706);
-            background-size: 200% 200%;
-            animation: gradientShift 5s ease infinite;
-        }
-        .dark .rarity-mythic { 
-            background: linear-gradient(135deg, #b91c1c, #ef4444, #b91c1c);
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
-        }
-        
-        .card-shine {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg, 
-                rgba(255,255,255,0) 0%, 
-                rgba(255,255,255,0.1) 45%, 
-                rgba(255,255,255,0.5) 50%, 
-                rgba(255,255,255,0.1) 55%, 
-                rgba(255,255,255,0) 100%
-            );
-            background-size: 200% 200%;
-            background-position: 100% 100%;
-            transition: background-position 0.5s ease-in-out;
-            pointer-events: none;
-            z-index: 2;
-            border-radius: inherit;
-        }
-        
-        .collectible-card:hover .card-shine {
-            background-position: 0% 0%;
-        }
-        
-        .collectible-card {
-            transition: all 0.3s ease;
-            animation: reveal 0.5s ease forwards;
-        }
-        
-        .collectible-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .rarity-mythic .collectible-icon, .rarity-legendary .collectible-icon {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .collectible-glitter {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.8);
-            pointer-events: none;
-            z-index: 3;
-        }
-        
-        .rarity-legendary .collectible-glitter, .rarity-mythic .collectible-glitter {
-            animation: glitter 1.5s ease-in-out infinite;
-        }
-        
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 5px rgba(93, 92, 222, 0.3);
-            }
-            to {
-                box-shadow: 0 0 20px rgba(93, 92, 222, 0.7);
-            }
-        }
-        
-        .collectible-icon {
-            filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.2));
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-        
-        .collectible-card:hover .collectible-icon {
-            filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3));
-            transform: scale(1.05);
-        }
-        
-        .card-border {
+
+        .border-gradient::before {
+            content: '';
             position: absolute;
             inset: 0;
             border-radius: inherit;
             padding: 1px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+            background: linear-gradient(120deg, rgba(127, 91, 255, 0.75), rgba(0, 245, 160, 0.75), rgba(255, 157, 102, 0.75));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
+        }
+
+        .rarity-pill {
+            background: linear-gradient(120deg, rgba(127,91,255,0.18), rgba(0,245,160,0.18));
+        }
+
+        .dark .rarity-pill {
+            background: linear-gradient(120deg, rgba(127,91,255,0.22), rgba(0,245,160,0.22));
+        }
+
+        .grid-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
             pointer-events: none;
-        }
-        
-        .rarity-badge {
-            padding: 0.15rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
-        
-        .badge-common { 
-            background-color: #f3f4f6; 
-            color: #6b7280;
-            border: 1px solid #d1d5db;
-        }
-        .badge-uncommon { 
-            background-color: #ecfccb; 
-            color: #65a30d;
-            border: 1px solid #bef264;
-        }
-        .badge-rare { 
-            background-color: #dbeafe; 
-            color: #2563eb;
-            border: 1px solid #93c5fd;
-        }
-        .badge-epic { 
-            background-color: #f3e8ff; 
-            color: #9333ea;
-            border: 1px solid #d8b4fe;
-        }
-        .badge-legendary { 
-            background-color: #fef3c7; 
-            color: #d97706;
-            border: 1px solid #fcd34d;
-        }
-        .badge-mythic { 
-            background-color: #fee2e2; 
-            color: #dc2626;
-            border: 1px solid #fca5a5;
-        }
-        
-        .dark .badge-common { 
-            background-color: #374151; 
-            color: #d1d5db;
-            border: 1px solid #6b7280;
-        }
-        .dark .badge-uncommon { 
-            background-color: #365314; 
-            color: #a3e635;
-            border: 1px solid #65a30d;
-        }
-        .dark .badge-rare { 
-            background-color: #1e3a8a; 
-            color: #60a5fa;
-            border: 1px solid #2563eb;
-        }
-        .dark .badge-epic { 
-            background-color: #581c87; 
-            color: #c084fc;
-            border: 1px solid #9333ea;
-        }
-        .dark .badge-legendary { 
-            background-color: #78350f; 
-            color: #fcd34d;
-            border: 1px solid #d97706;
-        }
-        .dark .badge-mythic { 
-            background-color: #7f1d1d; 
-            color: #fca5a5;
-            border: 1px solid #dc2626;
-        }
-        
-        .redeemed-collectible {
-            animation: redeemReveal 1s ease-in-out forwards;
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-        }
-        
-        @keyframes redeemReveal {
-            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
-            60% { transform: scale(1.1) translateY(-10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        /* Emoji picker styles */
-        .emoji-picker {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .emoji-category {
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
-        }
-        
-        .emoji-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
-        }
-        
-        .emoji-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .emoji-item:hover {
-            background-color: rgba(243, 244, 246, 0.8);
-        }
-        
-        .dark .emoji-item:hover {
-            background-color: rgba(55, 65, 81, 0.8);
-        }
-        
-        .emoji-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        .emoji-name {
-            font-size: 0.75rem;
-            text-align: center;
-            color: #6b7280;
-        }
-        
-        .dark .emoji-name {
-            color: #9ca3af;
-        }
-        
-        .emoji-search {
-            position: sticky;
-            top: 0;
-            background-color: white;
-            padding: 0.5rem;
-            z-index: 10;
-        }
-        
-        .dark .emoji-search {
-            background-color: #1f2937;
+            opacity: 0.7;
         }
 
-        .loading-spinner {
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
+        .dark .grid-overlay::after {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .shimmer {
+            background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="bg-white dark:bg-gray-900 transition-colors duration-200">
-    <div id="app" class="min-h-screen flex flex-col">
-        <!-- Loading Screen -->
-        <div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex items-center justify-center">
-            <div class="text-center">
-                <svg class="animate-spin h-12 w-12 text-primary-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Loading Collectibles System</h2>
-            </div>
-        </div>
-
-        <!-- Authentication Screens -->
-        <div id="authScreen" class="fixed inset-0 bg-white dark:bg-gray-900 z-40 flex-col items-center justify-center hidden">
-            <div class="absolute top-4 right-4">
-                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-white hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-white block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
-            </div>
-            
-            <div class="max-w-md w-full mx-auto p-6">
-                <div class="text-center mb-8">
-                    <div class="inline-block p-4 rounded-full bg-primary-100 dark:bg-primary-900 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17A3 3 0 015 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd" />
-                            <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
-                        </svg>
+<body class="min-h-full bg-midnight-900 text-slate-100">
+    <div class="min-h-screen bg-grid-glow grid-overlay">
+        <div class="min-h-screen flex flex-col backdrop-blur-xl bg-gradient-to-b from-white/70 via-white/60 to-white/30 dark:from-obsidian/80 dark:via-obsidian/60 dark:to-obsidian/40">
+            <header class="px-6 lg:px-12 py-6">
+                <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-nebula via-starlight to-aurora shadow-glow flex items-center justify-center text-2xl font-display text-obsidian">
+                            ✦
+                        </div>
+                        <div>
+                            <p class="uppercase tracking-[0.35em] text-xs font-semibold text-slate-500 dark:text-slate-400">Collectible Realm</p>
+                            <h1 class="text-3xl lg:text-4xl font-display font-semibold text-obsidian dark:text-white">Master the Multiverse of Treasures</h1>
+                        </div>
                     </div>
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Collectible Realm</h1>
-                    <p class="text-gray-600 dark:text-gray-400 mt-2">Unlock rare digital treasures</p>
-                </div>
-                
-                <!-- Login Form -->
-                <div id="loginForm" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-4">
-                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sign In</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="loginEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                            <input type="email" id="loginEmail" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-gray-700 dark:text-white text-base focus:outline-none focus:ring-primary-500 focus:border-primary-500">
-                        </div>
-                        <div>
-                            <label for="loginPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                            <input type="password" id="loginPassword" class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:bg-gray-700 dark:text-white text-base focus:outline-none focus:ring-primary-500 focus:border-primary-500">
-                        </div>
-                        <button id="loginButton" class="w-full bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors flex items-center justify-center">
-                            <span id="loginButtonText">Sign In</span>
-                            <div id="loginButtonSpinner" class="loading-spinner ml-2 hidden"></div>
+                    <nav class="flex-1">
+                        <ul class="flex flex-wrap items-center gap-2 lg:justify-end">
+                            <li><button data-nav="dashboard" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Dashboard</button></li>
+                            <li><button data-nav="collection" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Collection</button></li>
+                            <li><button data-nav="redeem" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Redeem</button></li>
+                            <li><button data-nav="marketplace" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Marketplace</button></li>
+                            <li><button data-nav="quests" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Quests</button></li>
+                            <li><button data-nav="admin" class="nav-link px-4 py-2 rounded-full font-medium text-sm glass-surface border border-white/10 hover:border-white/40 transition">Admin</button></li>
+                        </ul>
+                    </nav>
+                    <div class="flex items-center gap-3">
+                        <button id="command-palette-toggle" class="hidden lg:inline-flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition">
+                            ⌘K Command Palette
                         </button>
                     </div>
                     <div class="mt-4 text-center text-sm">
@@ -484,32 +227,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                             </svg>
                         </button>
-                        <div class="ml-3 relative">
-                            <div>
-                                <button id="userMenuButton" class="bg-white dark:bg-gray-700 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                    <span class="sr-only">Open user menu</span>
-                                    <div class="h-8 w-8 rounded-full bg-primary-200 dark:bg-primary-800 flex items-center justify-center">
-                                        <span id="userInitial" class="text-primary-700 dark:text-primary-300 font-medium">U</span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div id="userMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden z-10" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                <a href="#" id="menu-profile" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Your Profile</a>
-                                <a href="#" id="menu-settings" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Settings</a>
-                                <a href="#" id="menu-admin-panel" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hidden" role="menuitem">Admin Panel</a>
-                                <a href="#" id="menu-sign-out" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700" role="menuitem">Sign out</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="-mr-2 flex items-center md:hidden">
-                        <button id="mobileMenuButton" class="bg-white dark:bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" aria-expanded="false">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                        <button id="user-menu-trigger" class="px-4 py-2 rounded-full glass-surface border border-white/10 text-sm font-medium flex items-center gap-2 hover:border-white/40 transition">
+                            <span class="user-name">Guest</span>
+                            <span class="text-lg">▼</span>
                         </button>
                     </div>
                 </div>
@@ -1079,181 +799,40 @@
                 </div>
             </div>
 
-            <!-- Settings View -->
-            <div id="settingsView" class="py-6 hidden">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Settings</h1>
-                    
-                    <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Appearance</h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Customize your viewing experience</p>
-                        </div>
-                        <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:px-6">
-                            <div class="space-y-6">
-                                <div class="flex items-center justify-between">
-                                    <span class="flex-1 text-sm font-medium text-gray-700 dark:text-gray-300">Dark Mode</span>
-                                    <button id="settingsDarkModeToggle" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                        <span class="sr-only">Use dark mode</span>
-                                        <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white dark:bg-gray-300 shadow transform ring-0 transition ease-in-out duration-200"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+            <main id="view-container" class="flex-1 px-6 lg:px-12 pb-24">
+                <div class="max-w-7xl mx-auto grid gap-8" id="loading-shell">
+                    <div class="glass-surface border-gradient rounded-3xl p-8 shadow-card">
+                        <div class="h-32 rounded-2xl shimmer bg-white/10"></div>
                     </div>
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <div class="glass-surface border-gradient rounded-3xl p-8 shadow-card h-56"></div>
+                        <div class="glass-surface border-gradient rounded-3xl p-8 shadow-card h-56"></div>
+                    </div>
+                </div>
+            </main>
 
-                    <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Data Management</h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Manage your account data</p>
-                        </div>
-                        <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:px-6">
-                            <div class="space-y-6">
-                                <div>
-                                    <button id="exportDataButton" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-gray-800">
-                                        Export Your Data
-                                    </button>
-                                </div>
-                                <div>
-                                    <button id="clearDataButton" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-gray-800">
-                                        Clear All Data
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+            <footer class="px-6 lg:px-12 py-10">
+                <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+                    <p>&copy; <span id="footer-year"></span> Collectible Realm. Crafted for treasure hunters.</p>
+                    <div class="flex flex-wrap gap-3 items-center">
+                        <span class="glass-surface border border-white/10 rounded-full px-3 py-1">Version <span id="app-version">0.0.0</span></span>
+                        <span class="glass-surface border border-white/10 rounded-full px-3 py-1" id="status-pill">Status pending</span>
                     </div>
                 </div>
-            </div>
-        </main>
-
-        <!-- Modals -->
-        <div id="createCodeModal" class="fixed inset-0 overflow-y-auto hidden z-50">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
-                </div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 dark:bg-primary-900 sm:mx-0 sm:h-10 sm:w-10">
-                                <svg class="h-6 w-6 text-primary-600 dark:text-primary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                            </div>
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white" id="modal-title">
-                                    Create New Redemption Code
-                                </h3>
-                                <div class="mt-4 space-y-4">
-                                    <div>
-                                        <label for="codeInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Code</label>
-                                        <div class="mt-1 relative rounded-md shadow-sm">
-                                            <input type="text" id="codeInput" class="focus:ring-primary-500 focus:border-primary-500 block w-full pr-16 sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md text-base" placeholder="Enter code or generate">
-                                            <div class="absolute inset-y-0 right-0 flex items-center">
-                                                <button id="generateCodeButton" class="h-full px-2 py-0 border border-transparent text-sm font-medium rounded-r-md text-primary-700 dark:text-primary-300 bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800">
-                                                    Generate
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="itemNameInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Item Name</label>
-                                        <input type="text" id="itemNameInput" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md text-base" placeholder="Enter item name">
-                                    </div>
-                                    <div>
-                                        <label for="itemCategorySelect" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Item Category</label>
-                                        <select id="itemCategorySelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-700 dark:text-white">
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Emoji</label>
-                                        <div class="relative">
-                                            <div class="emoji-search mb-2">
-                                                <input type="text" id="emojiSearch" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-white text-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" placeholder="Search emojis...">
-                                            </div>
-                                            <div id="emojiPicker" class="emoji-picker border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 p-2">
-                                                <!-- Emoji categories and selections will go here -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="itemRaritySelect" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Rarity</label>
-                                        <select id="itemRaritySelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-gray-700 dark:text-white">
-                                            <option value="common">Common</option>
-                                            <option value="uncommon">Uncommon</option>
-                                            <option value="rare">Rare</option>
-                                            <option value="epic">Epic</option>
-                                            <option value="legendary">Legendary</option>
-                                            <option value="mythic">Mythic</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="expirationDateInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Expiration Date (Optional)</label>
-                                        <input type="date" id="expirationDateInput" class="mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md text-base">
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <div class="bg-gray-100 dark:bg-gray-900 p-3 rounded-lg">
-                                        <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">Item Preview:</p>
-                                        <div id="itemPreview" class="w-full flex justify-center">
-                                            <div class="collectible-card relative w-32 h-40 rounded-lg overflow-hidden shadow-md">
-                                                <div class="absolute inset-0 rarity-common"></div>
-                                                <div class="card-shine"></div>
-                                                <div class="card-border"></div>
-                                                <div class="relative flex flex-col items-center justify-center h-full p-2">
-                                                    <div class="w-16 h-16 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center">
-                                                        <div class="collectible-icon text-center text-3xl">
-                                                            🛡️
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-2 text-center">
-                                                        <div class="font-medium text-xs text-gray-900 dark:text-white truncate max-w-full">Shield</div>
-                                                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                                            <span class="badge-common rarity-badge">Common</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-900 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button id="createCodeConfirmButton" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            <span id="createCodeConfirmButtonText">Create</span>
-                            <div id="createCodeConfirmButtonSpinner" class="loading-spinner ml-2 hidden"></div>
-                        </button>
-                        <button id="createCodeCancelButton" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            </div>
+            </footer>
         </div>
+    </div>
 
-        <div id="collectibleDetailModal" class="fixed inset-0 overflow-y-auto hidden z-50">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                    <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
-                </div>
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <div class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div id="collectibleDetailContent" class="flex flex-col items-center">
-                            <!-- Content will be dynamically populated -->
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-900 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button id="collectibleDetailCloseButton" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:w-auto sm:text-sm">
-                            Close
-                        </button>
-                    </div>
-                </div>
+    <template id="toast-template">
+        <div class="toast glass-surface border border-white/20 shadow-lg rounded-2xl px-4 py-3 text-sm flex items-start gap-3 w-full max-w-sm">
+            <div class="toast-icon text-lg">✨</div>
+            <div>
+                <p class="toast-title font-semibold"></p>
+                <p class="toast-message text-slate-400"></p>
             </div>
+            <button class="toast-close ml-auto text-xs uppercase tracking-[0.2em] text-slate-400">Close</button>
         </div>
+    </template>
 
         <div id="confirmationModal" class="fixed inset-0 overflow-y-auto hidden z-50">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
